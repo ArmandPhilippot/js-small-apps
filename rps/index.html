@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors - Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="branding">
+    <h1 class="branding__title">Rock Paper Scissors</h1>
+  </header>
+  <main class="game">
+    <div class="scoring">
+      <div class="scoring__body scoring__body--computer">
+        <div class="scoring__user">Computer</div>
+        <div class="scoring__value">0</div>
+      </div>
+      <div class="scoring__body scoring__body--user">
+        <div class="scoring__user">Player</div>
+        <div class="scoring__value">0</div>
+      </div>
+      <div class="scoring__result">Ready? Let's play!</div>
+    </div>
+    <div class="actions">
+      <button type="button" class="actions__body btn btn--action btn--rock">
+        <span class="actions__txt screen-reader-txt">Rock</span>
+        <span class="actions__icon">✊</span>
+      </button>
+      <button type="button" class="actions__body btn btn--action btn--paper">
+        <span class="actions__txt screen-reader-txt">Paper</span>
+        <span class="actions__icon">✋</span>
+      </button>
+      <button type="button" class="actions__body btn btn--action btn--scissors">
+        <span class="actions__txt screen-reader-txt">Scissors</span>
+        <span class="actions__icon">✌️</span>
+      </button>
+    </div>
+    <div class="settings">
+      <button type="reset" class="settings__body btn btn--reset">Reset?</button>
+    </div>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">Rock Paper Scissors. 2021. <img src="https://mirrors.creativecommons.org/presskit/buttons/80x15/svg/by-sa.svg" alt="CC BY SA"> Armand Philippot.</p>
+  </footer>
+  <script src="./app.js" defer></script>
+</body>
+</html>
