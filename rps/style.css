@@ -1,0 +1,232 @@
+/*
+ * Base
+ */
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-flow: column nowrap;
+  background: hsl(180, 29%, 95%);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  line-height: 1.618;
+  min-height: 100vh;
+  max-width: 100vw;
+  padding: 0 1rem;
+}
+
+button {
+  display: block;
+  cursor: pointer;
+  font-family: inherit;
+	font-size: 100%;
+	line-height: 1.15;
+	margin: 0;
+}
+
+/*
+ * Helpers
+ */
+
+.screen-reader-txt {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  word-break: normal;
+  word-wrap: normal !important;
+}
+
+/*
+ * Layout
+ */
+
+.branding {
+  margin: 2rem auto clamp(2rem, 5vh, 5rem);
+}
+
+.branding__title {
+  color: hsl(207, 85%, 47%);
+  font-size: 2.5rem;
+  text-align: center;
+  text-shadow: 1px 1px 1px hsl(207, 85%, 27%);
+}
+
+.game {
+  flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  gap: 3rem;
+  margin: auto;
+  padding: clamp(1rem, 3vh, 2rem) 0;
+}
+
+.scoring {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  column-gap: 2rem;
+  row-gap: clamp(1.5rem, 5vh, 3rem);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.5rem;
+  text-align: center;
+  max-width: 100%;
+}
+
+.scoring__body {
+  flex: 0 0 calc(50% - 1rem);
+  background: hsl(0, 0%, 100%);
+  border: 5px solid hsl(207, 85%, 47%);
+  border-radius: 3px;
+  padding: 1rem 0;
+  position: relative;
+}
+
+
+.scoring__body:first-child {
+  box-shadow: 1px 1px 0 2px hsl(207, 85%, 27%);
+}
+
+.scoring__body:not(:first-child) {
+  box-shadow: -1px 1px 0 2px hsl(207, 85%, 27%);
+}
+
+.scoring__body:first-child::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: -50%;
+  background: hsl(207, 85%, 47%);
+  box-shadow: 0 3px 0 0 hsl(207, 85%, 27%);
+  height: 5px;
+  z-index: -1;
+}
+
+.scoring__user {
+  font-variant: small-caps;
+  letter-spacing: 1px;
+}
+
+.scoring__value  {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.scoring__result {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  height: clamp(3rem, 5vh, 5rem);
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  justify-content: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  font-size: 1.2rem;
+  margin-bottom: clamp(1rem, 3vh, 2rem);
+}
+
+.actions__body {
+  width: clamp(5rem, 15vw, 8rem);
+  height: clamp(5rem, 15vw, 8rem);
+}
+
+.actions__icon {
+  font-size: 3rem;
+}
+
+.settings {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.footer {
+  font-size: 0.9rem;
+  text-align: center;
+  margin: clamp(2rem, 5vh, 4rem) auto 2rem;
+}
+
+/*
+ * Components
+ */
+
+.btn {
+  font-weight: 600;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn--action {
+  background: hsl(207, 71%, 54%);
+  border: 5px solid hsl(207, 86%, 38%);
+  border-radius: 100%;
+  box-shadow: 0 0 0 3px hsl(207, 81%, 28%);
+}
+
+.btn--action:hover, .btn--action:focus {
+  background: hsl(207, 71%, 59%);
+  border-color: hsl(207, 80%, 43%);
+  transform: translateY(-4px);
+}
+
+.btn--action:hover {
+  box-shadow: 0 0 0 3px hsl(207, 81%, 28%), 0 7px 0 0 hsl(207, 81%, 28%);
+}
+
+.btn--action:focus {
+  box-shadow: 0 0 0 3px hsl(207, 81%, 28%), 0 7px 0 0 hsl(207, 81%, 28%), 0 5px 0 6px hsl(204, 42%, 68%);
+}
+
+.btn--action:active {
+  box-shadow: 0 0 0 3px hsl(207, 81%, 28%);
+  transform: translateY(4px);
+}
+
+.btn--reset {
+  border: 2px solid hsl(0, 50%, 45%);
+  border-radius: 0.5rem;
+  color: hsl(0, 50%, 45%);
+  box-shadow: 1px 1px 0 1px hsl(0, 50%, 25%);
+  padding: 0.75rem 1rem;
+}
+
+.btn--reset:hover,.btn--reset:focus {
+  background: hsl(0, 35%, 90%);
+  color: hsl(0, 50%, 25%);
+  transform: translateX(-3px) translateY(-3px);
+}
+
+.btn--reset:hover {
+  box-shadow: 3px 3px 0 1px hsl(0, 50%, 25%);
+}
+
+.btn--reset:focus {
+  box-shadow: 3px 3px 0 1px hsl(0, 50%, 25%), 3px 3px 0 4px hsl(0, 11%, 75%);
+}
+
+.btn--reset:active {
+  background: hsl(204, 14%, 93%);
+  color: hsl(0, 50%, 25%);
+  box-shadow: none;
+  transform: translateX(3px) translateY(3px);
+}
