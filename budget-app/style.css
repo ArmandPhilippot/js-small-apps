@@ -1,0 +1,319 @@
+/*
+ * Base
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: hsl(207, 52%, 95%);
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  line-height: 1.618;
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 100vh;
+  max-width: 100vw;
+}
+
+button {
+  display: block;
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  cursor: pointer;
+}
+
+select {
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+}
+
+/*
+ * Layout
+ */
+
+.branding {
+  background: hsl(207, 35%, 90%);
+  border-bottom: 1px solid hsl(207, 35%, 80%);
+  box-shadow: 0 2px 0 1px hsl(207, 25%, 70%);
+  padding: 2rem 0;
+  margin-bottom: clamp(2rem, 3vw, 4rem);
+}
+
+.branding__title {
+  color: hsl(207, 85%, 27%);
+  font-size: clamp(1.9rem, 5vw, 2.2rem);
+  text-align: center;
+  text-shadow: 0 0 1px hsl(207, 100%, 50%);
+  text-transform: uppercase;
+}
+
+.footer {
+  background: hsl(207, 35%, 90%);
+  border-top: 1px solid hsl(207, 35%, 80%);
+  margin-top: clamp(3rem, 5vw, 4rem);
+  padding: 2rem 0 1.5rem;
+}
+
+.footer .btn--reset {
+  margin-bottom: 2rem;
+}
+
+.footer__copyright {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.app {
+  flex: 1;
+  padding: 0 clamp(1rem, 3vw, 2rem);
+}
+
+.app__title {
+  background: hsl(207, 25%, 92%);
+  border: 1px solid hsl(207, 25%, 70%);
+  box-shadow: 0 2px 0 1px hsl(207, 25%, 70%);
+  grid-column: 1 / -1;
+  color: hsl(207, 85%, 27%);
+  font-size: clamp(1.4rem, 4vw, 1.7rem);
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.app__purchases {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, min(calc(100vw - 2 * 1rem), 21rem));
+  justify-content: center;
+  column-gap: 2rem;
+}
+
+.app__budget {
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+}
+
+.form__fieldset {
+  border: 2px solid hsl(207, 85%, 27%);
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+  padding: 0 1rem 1rem;
+}
+
+.form__legend {
+  background: hsl(207, 85%, 37%);
+  border: 2px solid hsl(207, 85%, 27%);
+  color: #fff;
+  font-weight: 600;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+.form__item:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.form__label {
+  display: block;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 0.1rem;
+}
+
+.form__field,
+.form__select {
+  border: 1px solid hsl(207, 85%, 27%);
+  box-shadow: 2px 2px 0 0 hsl(0, 0%, 20%);
+  font-size: inherit;
+  padding: 0.5rem clamp(0.5rem, 3vw, 0.8rem);
+  width: 100%;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.form__field:hover,
+.form__field:focus,
+.form__select:hover,
+.form__select:focus {
+  transform: scaleX(1.05);
+}
+
+.form__field:focus,
+.form__select:focus {
+  outline: none;
+  box-shadow: 2px 2px 0 0 hsl(0, 0%, 20%), 1px 1px 0 4px hsl(207, 85%, 60%);
+}
+
+.manage-categories .form__item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  column-gap: 1rem;
+}
+
+.manage-categories .form__label {
+  grid-column: 1 / -1;
+}
+
+.manage-categories .form__select,
+.manage-categories .form__field {
+  grid-column: 1;
+}
+
+.manage-categories .form__submit {
+  grid-column: 2;
+}
+
+.table {
+  border: 2px solid hsl(207, 85%, 27%);
+  border-collapse: collapse;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table__header {
+  background: hsl(207, 85%, 37%);
+  color: #fff;
+  font-weight: 600;
+}
+
+.table__item {
+  border: 1px solid hsl(207, 85%, 27%);
+  padding: 0.8rem 1rem;
+}
+
+.table__item--manage .btn {
+  display: inline-flex;
+  margin: 0.5rem;
+}
+
+.app__budget .table__item {
+  font-weight: 600;
+  text-align: center;
+}
+
+.app__budget .table__body {
+  font-size: 1.3rem;
+}
+
+.purchases-history {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.purchases-history .app__title {
+  position: sticky;
+  left: 0;
+}
+
+/*
+ * Components
+ */
+
+.btn {
+  border-radius: 5px;
+  font-weight: 600;
+  margin: auto;
+  padding: 0.6rem 0.8rem;
+  transition: all 0.35s ease-in-out 0s;
+}
+
+.btn:hover,
+.btn:focus {
+  transform: scaleX(1.2) scaleY(1.1);
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.btn--add,
+.btn--update {
+  background: hsl(120, 33%, 84%);
+  border: 2px solid hsl(120, 33%, 34%);
+  box-shadow: 2px 2px 0 0 hsl(120, 33%, 24%);
+}
+
+.btn--add:focus,
+.btn--update:focus {
+  box-shadow: 2px 2px 0 0 hsl(120, 33%, 24%), 1px 1px 0 4px hsl(120, 33%, 81%);
+}
+
+.btn--add:active,
+.btn--update:active {
+  box-shadow: 2px 2px 0 0 hsl(120, 33%, 24%);
+}
+
+.btn--delete,
+.btn--reset {
+  background: hsl(0, 33%, 84%);
+  border: 2px solid hsl(0, 33%, 34%);
+  box-shadow: 2px 2px 0 0 hsl(0, 33%, 24%);
+}
+
+.btn--delete:focus,
+.btn--reset:focus {
+  box-shadow: 2px 2px 0 0 hsl(120, 33%, 24%), 1px 1px 0 4px hsl(0, 33%, 81%);
+}
+
+.btn--delete:active,
+.btn--reset:active {
+  box-shadow: 2px 2px 0 0 hsl(0, 33%, 24%);
+}
+
+.btn--rename,
+.btn--edit {
+  background: hsl(193, 33%, 84%);
+  border: 2px solid hsl(193, 33%, 34%);
+  box-shadow: 2px 2px 0 0 hsl(193, 33%, 24%);
+}
+
+.btn--rename:focus,
+.btn--edit:focus {
+  box-shadow: 2px 2px 0 0 hsl(120, 33%, 24%), 1px 1px 0 4px hsl(193, 33%, 81%);
+}
+
+.btn--delete:active,
+.btn--edit:active {
+  box-shadow: 2px 2px 0 0 hsl(193, 33%, 24%);
+}
+
+/*
+ * Media Queries
+ */
+@media screen and (min-width: 1200px) {
+  .app__management {
+    display: grid;
+    grid-template-columns: 44rem minmax(0, 21rem);
+    gap: 2rem;
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .app {
+    display: grid;
+    grid-template-columns: 67rem minmax(0, 21rem);
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  .app__budget {
+    position: sticky;
+    top: 0;
+    height: max-content;
+  }
+}
