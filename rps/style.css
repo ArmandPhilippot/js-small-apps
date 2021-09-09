@@ -73,23 +73,20 @@ button {
 }
 
 .scoring {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-  column-gap: 2rem;
-  row-gap: clamp(1.5rem, 5vh, 3rem);
   font-family: 'Courier New', Courier, monospace;
   font-size: 1.5rem;
   text-align: center;
-  max-width: 100%;
+  width: 100%;
 }
 
 .scoring__body {
-  flex: 0 0 calc(50% - 1rem);
   background: hsl(0, 0%, 100%);
   border: 5px solid hsl(207, 85%, 47%);
   border-radius: 3px;
+  display: inline-block;
+  margin-bottom: clamp(1.5rem, 5vh, 3rem);
   padding: 1rem 0;
+  width: calc(50% - 1rem);
   position: relative;
 }
 
@@ -100,6 +97,7 @@ button {
 
 .scoring__body:not(:first-child) {
   box-shadow: -1px 1px 0 2px hsl(207, 85%, 27%);
+  margin-left: 1rem;
 }
 
 .scoring__body:first-child::after {
@@ -126,8 +124,7 @@ button {
 }
 
 .scoring__result {
-  display: flex;
-  align-items: center;
+  text-align: center;
   margin-top: 1rem;
   height: clamp(3rem, 5vh, 5rem);
 }
@@ -169,7 +166,7 @@ button {
 
 .btn {
   font-weight: 600;
-  transition: all 0.3s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
 }
 
 .btn:focus {
