@@ -10,8 +10,8 @@ export default class Purchase {
   #category;
   #amount;
 
-  constructor(date, name, category, amount) {
-    this.#id++;
+  constructor(id, date, name, category, amount) {
+    this.#id = id;
     this.#date = date;
     this.#name = name;
     this.#category = category;

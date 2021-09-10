@@ -9,8 +9,8 @@ export default class Income {
   #name;
   #amount;
 
-  constructor(date, name, amount) {
-    this.#id++;
+  constructor(id, date, name, amount) {
+    this.#id = id;
     this.#date = date;
     this.#name = name;
     this.#amount = amount;

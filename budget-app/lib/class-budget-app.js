@@ -13,8 +13,11 @@ export default class Budget_App {
   #id = 0;
   #title = "Budget App";
   #budget = 0;
-  #categories = [new Category("Undefined")];
+  #catID = 1;
+  #categories = [new Category(this.#catID, "Undefined")];
+  #purchaseID = 0;
   #purchases = [];
+  #earningID = 0;
   #earnings = [];
 
   constructor(title, budget) {
@@ -44,7 +47,8 @@ export default class Budget_App {
   }
 
   set categories(category) {
-    this.#categories.push(new Category(category));
+    this.#catID++;
+    this.#categories.push(new Category(this.#catID, category));
   }
 
   get categories() {
@@ -52,7 +56,8 @@ export default class Budget_App {
   }
 
   set purchases(purchase) {
-    this.#purchases.push(new Purchase(purchase));
+    this.#purchaseID++;
+    this.#purchases.push(new Purchase(this.#purchaseID, purchase));
   }
 
   get purchases() {
@@ -60,7 +65,8 @@ export default class Budget_App {
   }
 
   set earnings(income) {
-    this.#earnings.push(new Income(income));
+    this.#earningID++;
+    this.#earnings.push(new Income(this.#earningID, income));
   }
 
   get earnings() {

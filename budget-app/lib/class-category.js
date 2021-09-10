@@ -8,9 +8,9 @@ export default class Category {
   #name;
   #attachments = [];
 
-  constructor(name) {
+  constructor(id, name) {
+    this.#id = id;
     this.#name = name;
-    this.#id++;
   }
 
   set name(name) {
