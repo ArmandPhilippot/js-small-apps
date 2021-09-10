@@ -196,6 +196,10 @@ table {
   margin: 0.5rem;
 }
 
+.app__budget .table {
+  table-layout: fixed;
+}
+
 .app__budget .table__item {
   font-weight: 600;
   text-align: center;
