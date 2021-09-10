@@ -46,9 +46,8 @@ export default class Budget_App {
     return this.#budget;
   }
 
-  set categories(category) {
-    this.#catID++;
-    this.#categories.push(new Category(this.#catID, category));
+  set categories(array) {
+    this.#categories = array;
   }
 
   get categories() {
@@ -73,14 +72,18 @@ export default class Budget_App {
     return this.#earnings;
   }
 
+  addCategory(name) {
+    this.#catID++;
+    this.#categories.push(new Category(this.#catID, name));
+  }
+
   updateBudget(amount) {
     console.log(this.#budget);
   }
 
   removeCategory(id) {
-    this.#categories.filter((category) => {
-      console.log(category);
-    });
+    const index = this.#categories.findIndex((object) => object.id === id);
+    this.categories = this.#categories.splice(index, 1);
   }
 
   renameCategory(oldName, newName) {
