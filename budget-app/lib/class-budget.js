@@ -7,7 +7,7 @@ export default class Budget {
   #amount;
 
   constructor(amount) {
-    this.#amount = amount;
+    this.#amount = Number.parseFloat(amount).toFixed(2);
   }
 
   set amount(number) {

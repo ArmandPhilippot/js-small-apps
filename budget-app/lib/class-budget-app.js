@@ -115,4 +115,27 @@ export default class Budget_App {
       console.log(earning);
     });
   }
+
+  getTotalEarnings() {
+    let total = 0;
+    this.#earnings.forEach((earning) => {
+      total += earning.amount;
+    });
+    return total;
+  }
+
+  getTotalExpenses() {
+    let total = 0;
+    this.#purchases.forEach((purchase) => {
+      total += purchase.amount;
+    });
+    return total;
+  }
+
+  getRemaining() {
+    const incomes = this.getTotalEarnings();
+    const spending = this.getTotalExpenses();
+    const remaining = this.#budget.amount + incomes - spending;
+    return Number.parseFloat(remaining).toFixed(2);
+  }
 }
