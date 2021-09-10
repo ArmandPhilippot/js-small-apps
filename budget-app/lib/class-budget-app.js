@@ -10,7 +10,6 @@ import Purchase from "./class-purchase.js";
  * earnings.
  */
 export default class Budget_App {
-  #id = 0;
   #title = "Budget App";
   #budget = 0;
   #catID = 1;
@@ -21,13 +20,8 @@ export default class Budget_App {
   #earnings = [];
 
   constructor(title, budget) {
-    this.#id++;
     this.#title = title;
     this.#budget = new Budget(budget);
-  }
-
-  get id() {
-    return this.#id;
   }
 
   set title(string) {
@@ -77,19 +71,18 @@ export default class Budget_App {
     this.#categories.push(new Category(this.#catID, name));
   }
 
-  updateBudget(amount) {
-    console.log(this.#budget);
-  }
-
   removeCategory(id) {
     const index = this.#categories.findIndex((object) => object.id === id);
-    this.categories = this.#categories.splice(index, 1);
+    this.#categories.splice(index, 1);
   }
 
-  renameCategory(oldName, newName) {
-    this.#categories.filter((category) => {
-      console.log(category);
-    });
+  renameCategory(id, newName) {
+    const index = this.#categories.findIndex((object) => object.id === id);
+    this.#categories[index].name = newName;
+  }
+
+  updateBudget(amount) {
+    console.log(this.#budget);
   }
 
   editPurchase(id) {
