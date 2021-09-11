@@ -103,9 +103,8 @@ export default class Budget_App {
   }
 
   removePurchase(id) {
-    this.#purchases.filter((purchase) => {
-      console.log(purchase);
-    });
+    const index = this.#purchases.findIndex((object) => object.id === id);
+    this.#purchases.splice(index, 1);
   }
 
   editEarning(id) {
