@@ -13,7 +13,7 @@ export default class Income {
     this.#id = id;
     this.#date = date;
     this.#name = name;
-    this.#amount = Number.parseFloat(amount).toFixed(2);
+    this.#amount = Number.parseFloat(amount);
   }
 
   get id() {
