@@ -96,10 +96,11 @@ export default class Budget_App {
     this.#categories[index].name = newName;
   }
 
-  editPurchase(id) {
-    this.#purchases.filter((purchase) => {
-      console.log(purchase);
-    });
+  editPurchase(purchase) {
+    const index = this.#categories.findIndex(
+      (object) => object.id === purchase.id
+    );
+    this.#purchases[index] = purchase;
   }
 
   removePurchase(id) {
