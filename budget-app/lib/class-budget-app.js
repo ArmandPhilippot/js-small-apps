@@ -50,7 +50,15 @@ export default class Budget_App {
 
   set purchases(purchase) {
     this.#purchaseID++;
-    this.#purchases.push(new Purchase(this.#purchaseID, purchase));
+    this.#purchases.push(
+      new Purchase(
+        this.#purchaseID,
+        purchase.date,
+        purchase.name,
+        purchase.category,
+        purchase.amount
+      )
+    );
   }
 
   get purchases() {
@@ -59,7 +67,9 @@ export default class Budget_App {
 
   set earnings(income) {
     this.#earningID++;
-    this.#earnings.push(new Income(this.#earningID, income));
+    this.#earnings.push(
+      new Income(this.#earningID, income.date, income.name, income.amount)
+    );
   }
 
   get earnings() {
@@ -79,10 +89,6 @@ export default class Budget_App {
   renameCategory(id, newName) {
     const index = this.#categories.findIndex((object) => object.id === id);
     this.#categories[index].name = newName;
-  }
-
-  updateBudget(amount) {
-    console.log(this.#budget);
   }
 
   editPurchase(id) {
@@ -128,7 +134,8 @@ export default class Budget_App {
   getRemaining() {
     const incomes = this.getTotalEarnings();
     const spending = this.getTotalExpenses();
-    const remaining = this.#budget.amount + incomes - spending;
+    const initial = this.#budget.amount;
+    const remaining = initial + incomes - spending;
     return Number.parseFloat(remaining).toFixed(2);
   }
 }
