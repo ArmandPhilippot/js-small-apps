@@ -53,7 +53,7 @@ export default class Budget_App {
     this.#purchases.push(
       new Purchase(
         this.#purchaseID,
-        purchase.date,
+        new Date(purchase.date),
         purchase.name,
         purchase.category,
         purchase.amount
@@ -68,7 +68,12 @@ export default class Budget_App {
   set earnings(income) {
     this.#earningID++;
     this.#earnings.push(
-      new Income(this.#earningID, income.date, income.name, income.amount)
+      new Income(
+        this.#earningID,
+        new Date(income.date),
+        income.name,
+        income.amount
+      )
     );
   }
 

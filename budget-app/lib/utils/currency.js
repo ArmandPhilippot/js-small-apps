@@ -34,9 +34,9 @@ const getCurrencyUS = (number) => {
  */
 const getCurrencyFormat = (number, format) => {
   switch (format) {
-    case "fr_FR":
+    case "fr-FR":
       return getCurrencyFR(number);
-    case "en_US":
+    case "en-US":
       return getCurrencyUS(number);
     default:
       console.log("Not supported!");

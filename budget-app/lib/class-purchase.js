@@ -14,7 +14,7 @@ export default class Purchase {
     this.#id = id;
     this.#date = date;
     this.#name = name;
-    this.#category = category;
+    this.#category = Number(category);
     this.#amount = Number.parseFloat(amount);
   }
 
