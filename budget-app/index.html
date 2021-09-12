@@ -13,8 +13,8 @@
     </header>
     <main class="app">
       <div class="app__management">
-        <div class="app__purchases">
-          <h2 class="app__title">Purchases</h2>
+        <div class="app__categories">
+          <h2 class="app__title">Categories</h2>
           <form action="#" class="manage-categories form">
             <fieldset class="form__fieldset">
               <legend class="form__legend">Add a new category</legend>
@@ -27,6 +27,7 @@
                   name=""
                   id="add-category"
                   class="form__field"
+                  required
                 />
                 <button type="submit" class="form__submit btn btn--add">
                   Add
@@ -36,12 +37,12 @@
             <fieldset class="form__fieldset">
               <legend class="form__legend">Manage existing categories</legend>
               <p class="form__item">
-                <label for="manage-category" class="form__label"
+                <label for="select-category" class="form__label"
                   >Select a category:</label
                 >
                 <select
-                  name="manage-category"
-                  id="manage-category"
+                  name="select-category"
+                  id="select-category"
                   class="form__select"
                 >
                   <option value="undefined" class="form__option">
@@ -68,122 +69,102 @@
               </p>
             </fieldset>
           </form>
-          <form action="#" class="manage-purchases form">
+        </div>
+        <div class="app__transactions">
+          <h2 class="app__title">Transactions</h2>
+          <form action="#" class="manage-transactions form">
             <fieldset class="form__fieldset">
-              <legend class="form__legend">Add a new purchase</legend>
+              <legend class="form__legend">Manage transactions</legend>
               <p class="form__item">
-                <label for="purchase-date" class="form__label"
+                <label for="transaction-date" class="form__label"
                   >Select a date:</label
                 >
                 <input
                   type="date"
-                  name="purchase-date"
-                  id="purchase-date"
+                  name="transaction-date"
+                  id="transaction-date"
                   class="form__field"
+                  required
                 />
+              </p>
+              <p class="form__item">
+                <label for="" class="form__label">Choose a type:</label>
+                <select
+                  name="transaction-type"
+                  id="transaction-type"
+                  class="form__select"
+                >
+                  <option value=""></option>
+                  <option value="expense">Expense</option>
+                  <option value="income">Income</option>
+                </select>
               </p>
               <p class="form__item">
                 <label for="" class="form__label">Choose a category:</label>
                 <select
-                  name="purchase-category"
-                  id="purchase-category"
+                  name="transaction-category"
+                  id="transaction-category"
                   class="form__select"
                 >
                   <option value="undefined">Undefined</option>
                 </select>
               </p>
               <p class="form__item">
-                <label for="purchase-name" class="form__label"
-                  >Purchase name:</label
-                >
+                <label for="transaction-name" class="form__label">Name:</label>
                 <input
                   type="text"
-                  name="purchase-name"
-                  id="purchase-name"
+                  name="transaction-name"
+                  id="transaction-name"
                   class="form__field"
+                  required
                 />
               </p>
               <p class="form__item">
-                <label for="purchase-amount" class="form__label">Amount:</label>
+                <label for="transaction-amount" class="form__label"
+                  >Amount:</label
+                >
                 <input
                   type="number"
-                  name="purchase-amount"
-                  id="purchase-amount"
+                  name="transaction-amount"
+                  id="transaction-amount"
                   step="0.01"
                   class="form__field"
+                  required
                 />
               </p>
+              <input type="hidden" name="transaction-id" id="transaction-id" />
               <button type="submit" class="form__submit btn btn--update">
                 Update
               </button>
             </fieldset>
           </form>
         </div>
-        <div class="app__earnings">
-          <h2 class="app__title">Earnings</h2>
-          <form action="#" class="manage-earnings form">
-            <fieldset class="form__fieldset">
-              <legend class="form__legend">Add a new income</legend>
-              <p class="form__item">
-                <label for="income-date" class="form__label"
-                  >Select a date:</label
-                >
-                <input
-                  type="date"
-                  name="income-date"
-                  id="income-date"
-                  class="form__field"
-                />
-              </p>
-              <p class="form__item">
-                <label for="income-name" class="form__label">Name:</label>
-                <input
-                  type="text"
-                  name="income-name"
-                  id="income-name"
-                  class="form__field"
-                />
-              </p>
-              <p class="form__item">
-                <label for="income-amount" class="form__label">Amount:</label>
-                <input
-                  type="text"
-                  name="income-amount"
-                  id="income-amount"
-                  class="form__field"
-                />
-              </p>
-              <button type="submit" class="form__submit btn btn--update">
-                Update
-              </button>
-            </fieldset>
-          </form>
+        <div class="app__budget">
+          <h2 class="app__title">Budget state</h2>
+          <table class="table">
+            <thead class="table__header">
+              <tr>
+                <td class="table__item">Spent</td>
+                <td class="table__item">Remaining</td>
+              </tr>
+            </thead>
+            <tbody class="table__body">
+              <tr>
+                <td id="budget-spent" class="table__item">0</td>
+                <td id="budget-remaining" class="table__item">0</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-      <div class="app__budget">
-        <h2 class="app__title">Budget state</h2>
-        <table class="table">
-          <thead class="table__header">
-            <tr>
-              <td class="table__item">Spent</td>
-              <td class="table__item">Remaining</td>
-            </tr>
-          </thead>
-          <tbody class="table__body">
-            <tr>
-              <td id="budget-spent" class="table__item">0</td>
-              <td id="budget-remaining" class="table__item">0</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="purchases-history">
-        <h2 class="app__title">Purchases history</h2>
+      <div class="app__history">
+        <h2 class="app__title">History</h2>
         <table class="table">
           <thead class="table__header">
             <td class="table__item">Date</td>
             <td class="table__item">Name</td>
             <td class="table__item">Category</td>
+            <td class="table__item">Type</td>
             <td class="table__item">Amount</td>
             <td class="table__item">Manage</td>
           </thead>
