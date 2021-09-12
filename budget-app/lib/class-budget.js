@@ -1,24 +1,44 @@
 /**
  * Budget class
  *
- * Create a new budget by specifying an amount that can be updated.
+ * Create a new budget.
  */
-export default class Budget {
-  #amount;
+class Budget {
+  #initial = 0;
+  #spent = 0;
+  #profit = 0;
 
-  constructor(amount) {
-    this.#amount = Number.parseFloat(amount);
+  constructor(initial) {
+    this.#initial = Number.parseFloat(initial);
   }
 
-  set amount(number) {
-    this.#amount = number;
+  set initial(number) {
+    this.#initial = Number.parseFloat(number);
   }
 
-  get amount() {
-    return this.#amount;
+  get initial() {
+    return this.#initial;
   }
 
-  update(amount) {
-    this.#amount = this.#amount + amount;
+  set spent(number) {
+    this.#spent = Number.parseFloat(number);
+  }
+
+  get spent() {
+    return this.#spent;
+  }
+
+  set profit(number) {
+    this.#profit = Number.parseFloat(number);
+  }
+
+  get profit() {
+    return this.#profit;
+  }
+
+  remaining() {
+    return this.initial + this.profit - this.spent;
   }
 }
+
+export default Budget;
