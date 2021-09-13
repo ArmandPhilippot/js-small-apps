@@ -3,13 +3,13 @@
  *
  * Create a new category with id, name and attachments.
  */
-export default class Category {
+class Category {
   #id = 0;
-  #name;
+  #name = "";
   #attachments = [];
 
   constructor(id, name) {
-    this.#id = id;
+    this.#id = Number(id);
     this.#name = name;
   }
 
@@ -26,10 +26,12 @@ export default class Category {
   }
 
   set attachments(attachment) {
-    this.#attachments.push(attachment);
+    this.#attachments.push(Number(attachment));
   }
 
   get attachments() {
     return this.#attachments;
   }
 }
+
+export default Category;
