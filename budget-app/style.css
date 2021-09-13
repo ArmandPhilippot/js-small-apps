@@ -90,7 +90,7 @@ table {
   padding: 0.5rem 1rem;
 }
 
-.app__purchases {
+.app__management {
   display: grid;
   grid-template-columns: repeat(auto-fill, min(calc(100vw - 2 * 1rem), 21rem));
   justify-content: center;
@@ -188,10 +188,11 @@ table {
 
 .table__item {
   border: 1px solid hsl(207, 85%, 27%);
-  padding: 0.8rem 1rem;
+  padding: 0.5rem 0.7rem;
+  width: max-content;
 }
 
-.table__item--manage .btn {
+.table__item .btn {
   display: inline-flex;
   margin: 0.5rem;
 }
@@ -209,12 +210,12 @@ table {
   font-size: 1.3rem;
 }
 
-.purchases-history {
+.app__history {
   max-width: 100%;
   overflow-x: auto;
 }
 
-.purchases-history .app__title {
+.app__history .app__title {
   position: sticky;
   left: 0;
 }
@@ -299,25 +300,17 @@ table {
  * Media Queries
  */
 @media screen and (min-width: 1200px) {
-  .app__management {
-    display: grid;
-    grid-template-columns: 44rem minmax(0, 21rem);
-    gap: 2rem;
-    justify-content: center;
-  }
-}
-
-@media screen and (min-width: 1600px) {
   .app {
-    display: grid;
-    grid-template-columns: 67rem minmax(0, 21rem);
-    gap: 2rem;
-    justify-content: center;
+    margin: auto;
+    max-width: 1200px;
+  }
+  .app__management {
+    grid-template-columns: repeat(3, min(calc(100vw - 2 * 1rem), 21rem));
   }
 
   .app__budget {
     position: sticky;
-    top: 0;
+    top: 1rem;
     height: max-content;
   }
 }
