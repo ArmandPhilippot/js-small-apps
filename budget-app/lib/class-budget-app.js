@@ -88,10 +88,16 @@ class BudgetApp {
 
   editTransaction(transaction) {
     const array = transaction.type === "income" ? this.incomes : this.expenses;
-    const index = this.#categories.findIndex((object) => {
+    const index = array.findIndex((object) => {
       return object.id === Number(transaction.id);
     });
-    array[index] = new Transaction(...Object.values(transaction));
+    if (index !== -1) {
+      array[index] = new Transaction(...Object.values(transaction));
+    } else {
+      const oldArray = array === this.incomes ? this.expenses : this.incomes;
+      array.push(new Transaction(...Object.values(transaction)));
+      this.remove(transaction.id, oldArray);
+    }
   }
 
   getOrderedTransactions(order) {
