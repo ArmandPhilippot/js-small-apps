@@ -63,8 +63,11 @@ function getSelectOptions(select, options) {
 
 function findName(id, array) {
   const object = array.find((item) => item.id === Number(id));
-
-  return object.name;
+  if (object) {
+    return object.name;
+  } else {
+    return "(deleted)";
+  }
 }
 
 function resetTransactionForm() {
@@ -213,14 +216,18 @@ function listen() {
           }
           break;
         case "delete":
-          id
-            ? app.remove(id, app.categories)
-            : notify("A category must be selected!", "error", 3000);
+          if (id) {
+            app.remove(id, app.categories);
+            updateHistory();
+          } else {
+            notify("A category must be selected!", "error", 3000);
+          }
           break;
         case "rename":
           const newName = ui.form.categories.rename.value;
           if (newName && id) {
             app.renameCategory(id, newName);
+            updateHistory();
             ui.form.categories.rename.value = "";
           } else {
             notify(
