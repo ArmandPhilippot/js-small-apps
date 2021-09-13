@@ -1,4 +1,5 @@
 import BudgetApp from "./lib/class-budget-app.js";
+import Notification from "./lib/class-notification.js";
 import getCurrencyFormat from "./lib/utils/currency.js";
 
 const app = new BudgetApp("Budget", "Armand");
@@ -42,6 +43,13 @@ const ui = {
 function initApp(app) {
   app.user.budget = 3000;
   app.user.locale = "fr-FR";
+}
+
+function notify(message, type, duration, position = "bottom") {
+  const notification = new Notification(message, type);
+  notification.duration = duration;
+  notification.position = position;
+  return notification.notify();
 }
 
 function getSelectOptions(select, options) {
@@ -197,16 +205,30 @@ function listen() {
 
       switch (name) {
         case "add":
-          app.addCategory(ui.form.categories.add.value);
-          ui.form.categories.add.value = "";
+          if (ui.form.categories.add.value) {
+            app.addCategory(ui.form.categories.add.value);
+            ui.form.categories.add.value = "";
+          } else {
+            notify("Category name must be filled!", "error", 3000);
+          }
           break;
         case "delete":
-          app.remove(id, app.categories);
+          id
+            ? app.remove(id, app.categories)
+            : notify("A category must be selected!", "error", 3000);
           break;
         case "rename":
           const newName = ui.form.categories.rename.value;
-          app.renameCategory(id, newName);
-          ui.form.categories.rename.value = "";
+          if (newName && id) {
+            app.renameCategory(id, newName);
+            ui.form.categories.rename.value = "";
+          } else {
+            notify(
+              "You need to select a category and enter a new name first!",
+              "error",
+              3000
+            );
+          }
           break;
         default:
           break;
@@ -226,17 +248,30 @@ function listen() {
       category: ui.form.transactions.category.value,
       amount: ui.form.transactions.amount.value,
     };
-    transactionId
-      ? app.editTransaction({ id: transactionId, ...transaction })
-      : app.addTransaction(transaction);
-    updateBudget();
-    updateHistory();
-    resetTransactionForm();
+    const error = [];
+    for (const value in transaction) {
+      const element = transaction[value];
+      !element ? error.push(value) : "";
+    }
+    if (error.length === 0) {
+      transactionId
+        ? app.editTransaction({ id: transactionId, ...transaction })
+        : app.addTransaction(transaction);
+      updateBudget();
+      updateHistory();
+      resetTransactionForm();
+    } else {
+      const errorMsg = `These fields (${error.join(", ")}) must be filled!`;
+      notify(errorMsg, "error", 3000);
+    }
   });
 
   ui.buttons.reset.addEventListener("click", (event) => {
     event.preventDefault();
-    app.reset();
+    if (confirm("Are you sure?")) {
+      notify("Reset!", "warning", 2000);
+      app.reset();
+    }
     updateAll();
   });
 

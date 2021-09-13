@@ -296,6 +296,30 @@ table {
   box-shadow: 2px 2px 0 0 hsl(193, 33%, 24%);
 }
 
+.notification {
+  background: #fff;
+  border: 3px solid hsl(207, 85%, 27%);
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px 0 hsla(0, 0%, 0%, 0.7);
+  font-weight: 600;
+  padding: 1rem;
+}
+
+.notification--error {
+  color: hsl(0, 49%, 39%);
+  border-color: hsl(0, 49%, 39%);
+}
+
+.notification--info {
+  color: hsl(212, 76%, 38%);
+  border-color: hsl(212, 76%, 38%);
+}
+
+.notification--warning {
+  color: hsl(32, 76%, 38%);
+  border-color: hsl(32, 76%, 38%);
+}
+
 /*
  * Media Queries
  */
