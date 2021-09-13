@@ -1,27 +1,20 @@
-import Budget from "./class-budget.js";
 import Category from "./class-category.js";
-import Income from "./class-income.js";
-import Purchase from "./class-purchase.js";
+import Transaction from "./class-transaction.js";
+import User from "./class-user.js";
 
-/**
- * Budget App class
- *
- * Create a new budget app with id, title, budget, categories, purchases and
- * earnings.
- */
-export default class Budget_App {
+class BudgetApp {
   #title = "Budget App";
-  #budget = 0;
-  #catID = 1;
-  #categories = [new Category(this.#catID, "Undefined")];
-  #purchaseID = 0;
-  #purchases = [];
-  #earningID = 0;
-  #earnings = [];
+  #categoryId = 1;
+  #categories = [];
+  #transactionId = 1;
+  #incomes = [];
+  #expenses = [];
+  #userId = 1;
+  #user = {};
 
-  constructor(title, budget) {
+  constructor(title, username) {
     this.#title = title;
-    this.#budget = new Budget(budget);
+    this.#user = new User(this.#userId++, username);
   }
 
   set title(string) {
@@ -32,14 +25,6 @@ export default class Budget_App {
     return this.#title;
   }
 
-  set budget(number) {
-    this.#budget = number;
-  }
-
-  get budget() {
-    return this.#budget;
-  }
-
   set categories(array) {
     this.#categories = array;
   }
@@ -48,99 +33,106 @@ export default class Budget_App {
     return this.#categories;
   }
 
-  set purchases(purchase) {
-    this.#purchaseID++;
-    this.#purchases.push(
-      new Purchase(
-        this.#purchaseID,
-        new Date(purchase.date),
-        purchase.name,
-        purchase.category,
-        purchase.amount
-      )
-    );
+  set incomes(array) {
+    this.#incomes = array;
   }
 
-  get purchases() {
-    return this.#purchases;
+  get incomes() {
+    return this.#incomes;
   }
 
-  set earnings(income) {
-    this.#earningID++;
-    this.#earnings.push(
-      new Income(
-        this.#earningID,
-        new Date(income.date),
-        income.name,
-        income.amount
-      )
-    );
+  set expenses(array) {
+    this.#expenses = array;
   }
 
-  get earnings() {
-    return this.#earnings;
+  get expenses() {
+    return this.#expenses;
+  }
+
+  set user(username) {
+    this.#user = new User(this.#userId++, username);
+  }
+
+  get user() {
+    return this.#user;
+  }
+
+  remove(id, from) {
+    const index = from.findIndex((object) => object.id === id);
+    from.splice(index, 1);
   }
 
   addCategory(name) {
-    this.#catID++;
-    this.#categories.push(new Category(this.#catID, name));
-  }
-
-  removeCategory(id) {
-    const index = this.#categories.findIndex((object) => object.id === id);
-    this.#categories.splice(index, 1);
+    this.#categories.push(new Category(this.#categoryId++, name));
   }
 
   renameCategory(id, newName) {
-    const index = this.#categories.findIndex((object) => object.id === id);
-    this.#categories[index].name = newName;
+    const index = this.categories.findIndex((object) => object.id === id);
+    this.categories[index].name = newName;
   }
 
-  editPurchase(purchase) {
-    const index = this.#categories.findIndex(
-      (object) => object.id === purchase.id
+  addTransaction(transaction) {
+    const array =
+      transaction.type === "income" ? this.#incomes : this.#expenses;
+    array.push(
+      new Transaction(
+        this.#transactionId++,
+        transaction.date,
+        transaction.name,
+        transaction.type,
+        transaction.category,
+        transaction.amount
+      )
     );
-    this.#purchases[index] = purchase;
   }
 
-  removePurchase(id) {
-    const index = this.#purchases.findIndex((object) => object.id === id);
-    this.#purchases.splice(index, 1);
-  }
-
-  editEarning(id) {
-    this.#earnings.filter((earning) => {
-      console.log(earning);
+  editTransaction(transaction) {
+    const array = transaction.type === "income" ? this.incomes : this.expenses;
+    const index = this.#categories.findIndex((object) => {
+      return object.id === Number(transaction.id);
     });
+    array[index] = new Transaction(...Object.values(transaction));
   }
 
-  removeEarning(id) {
-    this.#earnings.filter((earning) => {
-      console.log(earning);
-    });
+  getOrderedTransactions(order) {
+    const transactions = [...this.expenses, ...this.incomes];
+
+    switch (order) {
+      case "newest":
+        transactions.sort((a, b) => b.date - a.date);
+        break;
+      case "oldest":
+        transactions.sort((a, b) => a.date - b.date);
+        break;
+      default:
+        break;
+    }
+
+    return transactions;
   }
 
-  getTotalEarnings() {
+  total(transaction) {
+    const array = transaction === "expense" ? this.#expenses : this.#incomes;
     let total = 0;
-    this.#earnings.forEach((earning) => {
-      total += earning.amount;
+    array.forEach((item) => {
+      total += item.amount;
     });
     return total;
   }
 
-  getTotalExpenses() {
-    let total = 0;
-    this.#purchases.forEach((purchase) => {
-      total += purchase.amount;
-    });
-    return total;
+  updateUserBudget() {
+    this.user.budget.spent = this.total("expense");
+    this.user.budget.profit = this.total("income");
   }
 
-  getRemaining() {
-    const incomes = this.getTotalEarnings();
-    const spending = this.getTotalExpenses();
-    const initial = this.#budget.amount;
-    const remaining = initial + incomes - spending;
-    return Number.parseFloat(remaining).toFixed(2);
+  reset() {
+    this.#categoryId = 1;
+    this.#transactionId = 1;
+    this.#categories = [];
+    this.#incomes = [];
+    this.#expenses = [];
+    this.updateUserBudget();
   }
 }
+
+export default BudgetApp;
