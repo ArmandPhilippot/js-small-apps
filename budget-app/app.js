@@ -2,7 +2,7 @@ import BudgetApp from "./lib/class-budget-app.js";
 import Notification from "./lib/class-notification.js";
 import getCurrencyFormat from "./lib/utils/currency.js";
 
-const app = new BudgetApp("Budget", "Armand");
+const app = new BudgetApp("Budget", "Anonymous");
 const ui = {
   budget: {
     remaining: document.getElementById("budget-remaining"),
@@ -14,6 +14,7 @@ const ui = {
       delete: document.querySelector(".manage-categories .btn--delete"),
       rename: document.querySelector(".manage-categories .btn--rename"),
     },
+    register: document.querySelector(".register .btn--register"),
     reset: document.querySelector(".footer .btn--reset"),
     transactions: {
       update: document.querySelector(".manage-transactions .btn--update"),
@@ -24,6 +25,11 @@ const ui = {
       add: document.getElementById("add-category"),
       rename: document.getElementById("rename-category"),
       select: document.getElementById("select-category"),
+    },
+    register: {
+      budget: document.getElementById("register-budget"),
+      language: document.getElementById("register-locale"),
+      username: document.getElementById("register-username"),
     },
     transactions: {
       amount: document.getElementById("transaction-amount"),
@@ -40,9 +46,22 @@ const ui = {
   title: document.querySelector(".branding__title"),
 };
 
-function initApp(app) {
-  app.user.budget = 3000;
-  app.user.locale = "fr-FR";
+function initApp() {
+  const register = document.querySelector(".register");
+  const application = document.querySelector(".app");
+  const budget = ui.form.register.budget.value;
+  const locale = ui.form.register.language.value;
+  const username = ui.form.register.username.value;
+
+  if (budget && locale && username) {
+    app.user.username = username;
+    app.user.budget = budget;
+    app.user.locale = locale;
+    register.style.display = "none";
+    application.style.display = "block";
+  } else {
+    notify("You must complete all fields!", "error", 3000);
+  }
 }
 
 function notify(message, type, duration, position = "bottom") {
@@ -273,17 +292,18 @@ function listen() {
     }
   });
 
+  ui.buttons.register.addEventListener("click", (event) => {
+    event.preventDefault();
+    initApp();
+    updateAll();
+  });
+
   ui.buttons.reset.addEventListener("click", (event) => {
     event.preventDefault();
     if (confirm("Are you sure?")) {
       notify("Reset!", "warning", 2000);
       app.reset();
     }
-    updateAll();
-  });
-
-  window.addEventListener("DOMContentLoaded", () => {
-    initApp(app);
     updateAll();
   });
 }

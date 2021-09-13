@@ -11,165 +11,216 @@
     <header class="branding">
       <h1 class="branding__title">Budget App</h1>
     </header>
-    <main class="app">
-      <div class="app__management">
-        <div class="app__categories">
-          <h2 class="app__title">Categories</h2>
-          <form action="#" class="manage-categories form">
-            <fieldset class="form__fieldset">
-              <legend class="form__legend">Add a new category</legend>
-              <p class="form__item">
-                <label for="add-category" class="form__label"
-                  >Category name:</label
-                >
+    <main class="main">
+      <div class="register">
+        <form action="#" class="register__form form">
+          <p class="form__item">
+            <label for="register-username" class="form__label"
+              >Enter a username:</label
+            >
+            <input
+              type="text"
+              id="register-username"
+              name="register-username"
+              class="form__field"
+              required
+            />
+          </p>
+          <p class="form__item">
+            <label for="register-budget" class="form__label"
+              >Enter a budget:</label
+            >
+            <input
+              type="number"
+              id="register-budget"
+              name="register-budget"
+              class="form__field"
+              required
+            />
+          </p>
+          <p class="form__item">
+            <label for="register-locale" class="form__label"
+              >Select a language:</label
+            >
+            <select
+              name="register-locale"
+              id="register-locale"
+              class="form__select"
+              required
+            >
+              <option value="en-US">Anglais</option>
+              <option value="fr-FR">Français</option>
+            </select>
+          </p>
+          <button type="submit" class="btn btn--register">Register</button>
+        </form>
+      </div>
+      <div class="app">
+        <div class="app__management">
+          <div class="app__categories">
+            <h2 class="app__title">Categories</h2>
+            <form action="#" class="manage-categories form">
+              <fieldset class="form__fieldset">
+                <legend class="form__legend">Add a new category</legend>
+                <p class="form__item">
+                  <label for="add-category" class="form__label"
+                    >Category name:</label
+                  >
+                  <input
+                    type="text"
+                    name=""
+                    id="add-category"
+                    class="form__field"
+                    required
+                  />
+                  <button type="submit" class="form__submit btn btn--add">
+                    Add
+                  </button>
+                </p>
+              </fieldset>
+              <fieldset class="form__fieldset">
+                <legend class="form__legend">Manage existing categories</legend>
+                <p class="form__item">
+                  <label for="select-category" class="form__label"
+                    >Select a category:</label
+                  >
+                  <select
+                    name="select-category"
+                    id="select-category"
+                    class="form__select"
+                  >
+                    <option value="undefined" class="form__option">
+                      Undefined
+                    </option>
+                  </select>
+                  <button type="submit" class="form__submit btn btn--delete">
+                    Delete
+                  </button>
+                </p>
+                <p class="form__item">
+                  <label for="rename-category" class="form__label"
+                    >New name:</label
+                  >
+                  <input
+                    type="text"
+                    name="rename-category"
+                    id="rename-category"
+                    class="form__field"
+                  />
+                  <button type="submit" class="form__submit btn btn--rename">
+                    Rename
+                  </button>
+                </p>
+              </fieldset>
+            </form>
+          </div>
+          <div class="app__transactions">
+            <h2 class="app__title">Transactions</h2>
+            <form action="#" class="manage-transactions form">
+              <fieldset class="form__fieldset">
+                <legend class="form__legend">Manage transactions</legend>
+                <p class="form__item">
+                  <label for="transaction-date" class="form__label"
+                    >Select a date:</label
+                  >
+                  <input
+                    type="date"
+                    name="transaction-date"
+                    id="transaction-date"
+                    class="form__field"
+                    required
+                  />
+                </p>
+                <p class="form__item">
+                  <label for="" class="form__label">Choose a type:</label>
+                  <select
+                    name="transaction-type"
+                    id="transaction-type"
+                    class="form__select"
+                  >
+                    <option value=""></option>
+                    <option value="expense">Expense</option>
+                    <option value="income">Income</option>
+                  </select>
+                </p>
+                <p class="form__item">
+                  <label for="" class="form__label">Choose a category:</label>
+                  <select
+                    name="transaction-category"
+                    id="transaction-category"
+                    class="form__select"
+                  >
+                    <option value="undefined">Undefined</option>
+                  </select>
+                </p>
+                <p class="form__item">
+                  <label for="transaction-name" class="form__label"
+                    >Name:</label
+                  >
+                  <input
+                    type="text"
+                    name="transaction-name"
+                    id="transaction-name"
+                    class="form__field"
+                    required
+                  />
+                </p>
+                <p class="form__item">
+                  <label for="transaction-amount" class="form__label"
+                    >Amount:</label
+                  >
+                  <input
+                    type="number"
+                    name="transaction-amount"
+                    id="transaction-amount"
+                    step="0.01"
+                    class="form__field"
+                    required
+                  />
+                </p>
                 <input
-                  type="text"
-                  name=""
-                  id="add-category"
-                  class="form__field"
-                  required
+                  type="hidden"
+                  name="transaction-id"
+                  id="transaction-id"
                 />
-                <button type="submit" class="form__submit btn btn--add">
-                  Add
+                <button type="submit" class="form__submit btn btn--update">
+                  Update
                 </button>
-              </p>
-            </fieldset>
-            <fieldset class="form__fieldset">
-              <legend class="form__legend">Manage existing categories</legend>
-              <p class="form__item">
-                <label for="select-category" class="form__label"
-                  >Select a category:</label
-                >
-                <select
-                  name="select-category"
-                  id="select-category"
-                  class="form__select"
-                >
-                  <option value="undefined" class="form__option">
-                    Undefined
-                  </option>
-                </select>
-                <button type="submit" class="form__submit btn btn--delete">
-                  Delete
-                </button>
-              </p>
-              <p class="form__item">
-                <label for="rename-category" class="form__label"
-                  >New name:</label
-                >
-                <input
-                  type="text"
-                  name="rename-category"
-                  id="rename-category"
-                  class="form__field"
-                />
-                <button type="submit" class="form__submit btn btn--rename">
-                  Rename
-                </button>
-              </p>
-            </fieldset>
-          </form>
+              </fieldset>
+            </form>
+          </div>
+          <div class="app__budget">
+            <h2 class="app__title">Budget state</h2>
+            <table class="table">
+              <thead class="table__header">
+                <tr>
+                  <td class="table__item">Spent</td>
+                  <td class="table__item">Remaining</td>
+                </tr>
+              </thead>
+              <tbody class="table__body">
+                <tr>
+                  <td id="budget-spent" class="table__item">0</td>
+                  <td id="budget-remaining" class="table__item">0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="app__transactions">
-          <h2 class="app__title">Transactions</h2>
-          <form action="#" class="manage-transactions form">
-            <fieldset class="form__fieldset">
-              <legend class="form__legend">Manage transactions</legend>
-              <p class="form__item">
-                <label for="transaction-date" class="form__label"
-                  >Select a date:</label
-                >
-                <input
-                  type="date"
-                  name="transaction-date"
-                  id="transaction-date"
-                  class="form__field"
-                  required
-                />
-              </p>
-              <p class="form__item">
-                <label for="" class="form__label">Choose a type:</label>
-                <select
-                  name="transaction-type"
-                  id="transaction-type"
-                  class="form__select"
-                >
-                  <option value=""></option>
-                  <option value="expense">Expense</option>
-                  <option value="income">Income</option>
-                </select>
-              </p>
-              <p class="form__item">
-                <label for="" class="form__label">Choose a category:</label>
-                <select
-                  name="transaction-category"
-                  id="transaction-category"
-                  class="form__select"
-                >
-                  <option value="undefined">Undefined</option>
-                </select>
-              </p>
-              <p class="form__item">
-                <label for="transaction-name" class="form__label">Name:</label>
-                <input
-                  type="text"
-                  name="transaction-name"
-                  id="transaction-name"
-                  class="form__field"
-                  required
-                />
-              </p>
-              <p class="form__item">
-                <label for="transaction-amount" class="form__label"
-                  >Amount:</label
-                >
-                <input
-                  type="number"
-                  name="transaction-amount"
-                  id="transaction-amount"
-                  step="0.01"
-                  class="form__field"
-                  required
-                />
-              </p>
-              <input type="hidden" name="transaction-id" id="transaction-id" />
-              <button type="submit" class="form__submit btn btn--update">
-                Update
-              </button>
-            </fieldset>
-          </form>
-        </div>
-        <div class="app__budget">
-          <h2 class="app__title">Budget state</h2>
+        <div class="app__history">
+          <h2 class="app__title">History</h2>
           <table class="table">
             <thead class="table__header">
-              <tr>
-                <td class="table__item">Spent</td>
-                <td class="table__item">Remaining</td>
-              </tr>
+              <td class="table__item">Date</td>
+              <td class="table__item">Name</td>
+              <td class="table__item">Category</td>
+              <td class="table__item">Type</td>
+              <td class="table__item">Amount</td>
+              <td class="table__item">Manage</td>
             </thead>
-            <tbody class="table__body">
-              <tr>
-                <td id="budget-spent" class="table__item">0</td>
-                <td id="budget-remaining" class="table__item">0</td>
-              </tr>
-            </tbody>
+            <tbody class="table__body"></tbody>
           </table>
         </div>
-      </div>
-      <div class="app__history">
-        <h2 class="app__title">History</h2>
-        <table class="table">
-          <thead class="table__header">
-            <td class="table__item">Date</td>
-            <td class="table__item">Name</td>
-            <td class="table__item">Category</td>
-            <td class="table__item">Type</td>
-            <td class="table__item">Amount</td>
-            <td class="table__item">Manage</td>
-          </thead>
-          <tbody class="table__body"></tbody>
-        </table>
       </div>
     </main>
     <footer class="footer container">
