@@ -57,7 +57,7 @@ button {
 
 .branding__title {
   color: hsl(207, 85%, 47%);
-  font-size: 2.5rem;
+  font-size: clamp(2.5rem, 3vw, 3rem);
   text-align: center;
   text-shadow: 1px 1px 1px hsl(207, 85%, 27%);
 }
@@ -67,7 +67,7 @@ button {
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
-  gap: 3rem;
+  gap: 2rem;
   margin: auto;
   padding: clamp(1rem, 3vh, 2rem) 0;
 }
@@ -84,7 +84,7 @@ button {
   border: 5px solid hsl(207, 85%, 47%);
   border-radius: 3px;
   display: inline-block;
-  margin-bottom: clamp(1.5rem, 5vh, 3rem);
+  margin-bottom: clamp(1rem, 3vh, 2rem);
   padding: 1rem 0;
   width: calc(50% - 1rem);
   position: relative;
@@ -122,10 +122,10 @@ button {
   margin-top: 1rem;
 }
 
-.scoring-board__result {
+.message-board {
+  font-size: 1.4rem;
   text-align: center;
-  margin-top: 1rem;
-  height: clamp(3rem, 5vh, 5rem);
+  margin: 1rem auto;
 }
 
 .actions {
@@ -200,7 +200,7 @@ button {
   transform: translateY(4px);
 }
 
-.btn--reset {
+.btn--new-game {
   border: 2px solid hsl(0, 50%, 45%);
   border-radius: 0.5rem;
   color: hsl(0, 50%, 45%);
@@ -208,22 +208,22 @@ button {
   padding: 0.75rem 1rem;
 }
 
-.btn--reset:hover,
-.btn--reset:focus {
+.btn--new-game:hover,
+.btn--new-game:focus {
   background: hsl(0, 35%, 90%);
   color: hsl(0, 50%, 25%);
   transform: translateX(-3px) translateY(-3px);
 }
 
-.btn--reset:hover {
+.btn--new-game:hover {
   box-shadow: 3px 3px 0 1px hsl(0, 50%, 25%);
 }
 
-.btn--reset:focus {
+.btn--new-game:focus {
   box-shadow: 3px 3px 0 1px hsl(0, 50%, 25%), 3px 3px 0 4px hsl(0, 11%, 75%);
 }
 
-.btn--reset:active {
+.btn--new-game:active {
   background: hsl(204, 14%, 93%);
   color: hsl(0, 50%, 25%);
   box-shadow: none;
