@@ -14,7 +14,7 @@ body {
   display: flex;
   flex-flow: column nowrap;
   background: hsl(180, 29%, 95%);
-  font-family: 'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
   font-size: 1rem;
   line-height: 1.618;
   min-height: 100vh;
@@ -26,9 +26,9 @@ button {
   display: block;
   cursor: pointer;
   font-family: inherit;
-	font-size: 100%;
-	line-height: 1.15;
-	margin: 0;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
 }
 
 /*
@@ -72,14 +72,14 @@ button {
   padding: clamp(1rem, 3vh, 2rem) 0;
 }
 
-.scoring {
-  font-family: 'Courier New', Courier, monospace;
+.scoring-board {
+  font-family: "Courier New", Courier, monospace;
   font-size: 1.5rem;
   text-align: center;
   width: 100%;
 }
 
-.scoring__body {
+.scoring-board__item {
   background: hsl(0, 0%, 100%);
   border: 5px solid hsl(207, 85%, 47%);
   border-radius: 3px;
@@ -90,17 +90,16 @@ button {
   position: relative;
 }
 
-
-.scoring__body:first-child {
+.scoring-board__item:first-child {
   box-shadow: 1px 1px 0 2px hsl(207, 85%, 27%);
 }
 
-.scoring__body:not(:first-child) {
+.scoring-board__item:not(:first-child) {
   box-shadow: -1px 1px 0 2px hsl(207, 85%, 27%);
   margin-left: 1rem;
 }
 
-.scoring__body:first-child::after {
+.scoring-board__item:first-child::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -112,18 +111,18 @@ button {
   z-index: -1;
 }
 
-.scoring__user {
+.scoring-board__username {
   font-variant: small-caps;
   letter-spacing: 1px;
 }
 
-.scoring__value  {
+.scoring-board__score {
   font-size: 2rem;
   font-weight: 600;
   margin-top: 1rem;
 }
 
-.scoring__result {
+.scoring-board__result {
   text-align: center;
   margin-top: 1rem;
   height: clamp(3rem, 5vh, 5rem);
@@ -180,7 +179,8 @@ button {
   box-shadow: 0 0 0 3px hsl(207, 81%, 28%);
 }
 
-.btn--action:hover, .btn--action:focus {
+.btn--action:hover,
+.btn--action:focus {
   background: hsl(207, 71%, 59%);
   border-color: hsl(207, 80%, 43%);
   transform: translateY(-4px);
@@ -191,7 +191,8 @@ button {
 }
 
 .btn--action:focus {
-  box-shadow: 0 0 0 3px hsl(207, 81%, 28%), 0 7px 0 0 hsl(207, 81%, 28%), 0 5px 0 6px hsl(204, 42%, 68%);
+  box-shadow: 0 0 0 3px hsl(207, 81%, 28%), 0 7px 0 0 hsl(207, 81%, 28%),
+    0 5px 0 6px hsl(204, 42%, 68%);
 }
 
 .btn--action:active {
@@ -207,7 +208,8 @@ button {
   padding: 0.75rem 1rem;
 }
 
-.btn--reset:hover,.btn--reset:focus {
+.btn--reset:hover,
+.btn--reset:focus {
   background: hsl(0, 35%, 90%);
   color: hsl(0, 50%, 25%);
   transform: translateX(-3px) translateY(-3px);

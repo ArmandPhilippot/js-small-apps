@@ -1,49 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rock Paper Scissors - Game</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="branding">
-    <h1 class="branding__title">Rock Paper Scissors</h1>
-  </header>
-  <main class="game">
-    <div class="scoring">
-      <div class="scoring__body scoring__body--computer">
-        <div class="scoring__user">Computer</div>
-        <div class="scoring__value">0</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors - Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="branding">
+      <h1 class="branding__title">Rock Paper Scissors</h1>
+    </header>
+    <main class="game">
+      <div class="scoring-board">
+        <div class="scoring-board__item">
+          <div id="player1username" class="scoring-board__username">
+            Player1
+          </div>
+          <div id="player1score" class="scoring-board__score">0</div>
+        </div>
+        <div class="scoring-board__item">
+          <div id="player2username" class="scoring-board__username">
+            Player2
+          </div>
+          <div id="player2score" class="scoring-board__score">0</div>
+        </div>
+        <div class="scoring-board__result">Ready? Let's play!</div>
       </div>
-      <div class="scoring__body scoring__body--user">
-        <div class="scoring__user">Player</div>
-        <div class="scoring__value">0</div>
+      <div class="actions">
+        <button type="button" class="actions__body btn btn--action btn--rock">
+          <span class="actions__txt screen-reader-txt">Rock</span>
+          <span class="actions__icon">✊</span>
+        </button>
+        <button type="button" class="actions__body btn btn--action btn--paper">
+          <span class="actions__txt screen-reader-txt">Paper</span>
+          <span class="actions__icon">✋</span>
+        </button>
+        <button
+          type="button"
+          class="actions__body btn btn--action btn--scissors"
+        >
+          <span class="actions__txt screen-reader-txt">Scissors</span>
+          <span class="actions__icon">✌️</span>
+        </button>
       </div>
-      <div class="scoring__result">Ready? Let's play!</div>
-    </div>
-    <div class="actions">
-      <button type="button" class="actions__body btn btn--action btn--rock">
-        <span class="actions__txt screen-reader-txt">Rock</span>
-        <span class="actions__icon">✊</span>
-      </button>
-      <button type="button" class="actions__body btn btn--action btn--paper">
-        <span class="actions__txt screen-reader-txt">Paper</span>
-        <span class="actions__icon">✋</span>
-      </button>
-      <button type="button" class="actions__body btn btn--action btn--scissors">
-        <span class="actions__txt screen-reader-txt">Scissors</span>
-        <span class="actions__icon">✌️</span>
-      </button>
-    </div>
-    <div class="settings">
-      <button type="reset" class="settings__body btn btn--reset">Reset?</button>
-    </div>
-  </main>
-  <footer class="footer">
-    <p class="footer__copyright">Rock Paper Scissors. MIT 2021. Armand Philippot.</p>
-  </footer>
-  <script type="module" src="./app.js"></script>
-</body>
+      <div class="settings">
+        <button type="reset" class="settings__body btn btn--reset">
+          Reset?
+        </button>
+      </div>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">
+        Rock Paper Scissors. MIT 2021. Armand Philippot.
+      </p>
+    </footer>
+    <script type="module" src="./app.js"></script>
+  </body>
 </html>
