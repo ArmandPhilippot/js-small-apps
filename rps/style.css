@@ -32,8 +32,8 @@ button {
 }
 
 /*
- * Helpers
- */
+  * Helpers
+  */
 
 .screen-reader-txt {
   border: 0;
@@ -48,8 +48,8 @@ button {
 }
 
 /*
- * Layout
- */
+  * Layout
+  */
 
 .branding {
   margin: 2rem auto clamp(2rem, 5vh, 5rem);
@@ -130,7 +130,7 @@ button {
 
 .actions {
   display: grid;
-  grid-template-columns: repeat(3, max-content);
+  grid-template-columns: repeat(3, 33%);
   justify-content: center;
   gap: clamp(1rem, 3vw, 2rem);
   font-size: 1.2rem;
@@ -139,11 +139,15 @@ button {
 
 .actions__body {
   width: clamp(5rem, 15vw, 8rem);
-  height: clamp(5rem, 15vw, 8rem);
+  height: clamp(4.5rem, 12vw, 7rem);
+  position: relative;
 }
 
 .actions__icon {
-  font-size: 3rem;
+  font-size: clamp(2.2rem, 7vw, 3.2rem);
+  filter: drop-shadow(1px 1px 1px hsl(207, 85%, 27%));
+  position: relative;
+  top: 4px;
 }
 
 .settings {
@@ -160,8 +164,8 @@ button {
 }
 
 /*
- * Components
- */
+  * Components
+  */
 
 .btn {
   font-weight: 600;
@@ -173,31 +177,33 @@ button {
 }
 
 .btn--action {
-  background: hsl(207, 71%, 54%);
-  border: 5px solid hsl(207, 86%, 38%);
+  background: hsl(207, 85%, 45%);
+  border: 2px solid hsl(207, 85%, 28%);
   border-radius: 100%;
-  box-shadow: 0 0 0 3px hsl(207, 81%, 28%);
+  box-shadow: inset 0 0 0 3px hsl(207, 85%, 38%), 0 5px 0 0 hsl(207, 85%, 28%),
+    0 5px 0 2px hsl(207, 85%, 20%);
 }
 
 .btn--action:hover,
 .btn--action:focus {
-  background: hsl(207, 71%, 59%);
-  border-color: hsl(207, 80%, 43%);
-  transform: translateY(-4px);
+  background: hsl(207, 85%, 52%);
+  transform: translateY(2px);
 }
 
 .btn--action:hover {
-  box-shadow: 0 0 0 3px hsl(207, 81%, 28%), 0 7px 0 0 hsl(207, 81%, 28%);
+  box-shadow: inset 0 0 0 3px hsl(207, 85%, 38%), 0 3px 0 0 hsl(207, 85%, 32%),
+    0 3px 0 2px hsl(207, 85%, 22%);
 }
 
 .btn--action:focus {
-  box-shadow: 0 0 0 3px hsl(207, 81%, 28%), 0 7px 0 0 hsl(207, 81%, 28%),
-    0 5px 0 6px hsl(204, 42%, 68%);
+  box-shadow: inset 0 0 0 3px hsl(207, 85%, 38%), 0 3px 0 0 hsl(207, 85%, 32%),
+    0 3px 0 2px hsl(207, 85%, 22%), 0 3px 0 8px hsl(204, 42%, 68%);
 }
 
 .btn--action:active {
-  box-shadow: 0 0 0 3px hsl(207, 81%, 28%);
-  transform: translateY(4px);
+  box-shadow: inset 0 0 0 3px hsl(207, 85%, 38%), 0 0 0 0 hsl(207, 85%, 28%),
+    0 0 0 1px hsl(207, 85%, 20%);
+  transform: translateY(8px);
 }
 
 .btn--new-game {
