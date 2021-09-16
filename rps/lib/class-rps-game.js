@@ -11,7 +11,9 @@ class RPSGame extends Game {
 
   /**
    * Initialize a new RPSGame instance.
-   * @param {Array} players - The players username.
+   * @param {Object[]} players - An array of player object.
+   * @param {String} players[].username - The player username.
+   * @param {Boolean} players[].ia - True to set the player as an IA.
    * @param {Object} buttons - The buttons HTMLElement.
    * @param {HTMLElement} buttons.rock - Button Element for rock choice.
    * @param {HTMLElement} buttons.paper - Button Element for paper choice.

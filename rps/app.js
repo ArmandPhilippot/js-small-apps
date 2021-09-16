@@ -1,6 +1,9 @@
 import RPSGame from "./lib/class-rps-game.js";
 
-const players = ["Armand", "Computer"];
+const players = [
+  { username: "Armand", ia: false },
+  { username: "Computer", ia: true },
+];
 const buttons = {
   rock: document.querySelector(".btn--rock"),
   paper: document.querySelector(".btn--paper"),

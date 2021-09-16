@@ -6,15 +6,18 @@ class Player {
   #username = "Anonymous";
   #choice = "";
   #score = 0;
+  #ia = false;
 
   /**
    * Initialize a new Player instance.
    * @param {Integer} id - The player id.
    * @param {String} username - The player username.
+   * @param {Boolean} ia - True to set player as an IA.
    */
-  constructor(id, username) {
+  constructor(id, username, ia) {
     this.#id = id;
     this.#username = username;
+    this.#ia = ia;
   }
 
   get id() {
@@ -43,6 +46,14 @@ class Player {
 
   get score() {
     return this.#score;
+  }
+
+  set ia(boolean) {
+    this.#ia = boolean;
+  }
+
+  get ia() {
+    return this.#ia;
   }
 }
 

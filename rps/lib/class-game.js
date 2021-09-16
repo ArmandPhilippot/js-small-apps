@@ -20,12 +20,16 @@ class Game {
   /**
    * Initialize a new Game instance.
    * @param {String} name - The game name.
-   * @param {Array} players - The players username.
+   * @param {Object[]} players - The players.
+   * @param {String} players[].username - The player username.
+   * @param {Boolean} players[].ia - True to set the player as an IA.
    */
   constructor(name, players) {
     this.#name = name;
-    players.forEach((username) => {
-      this.#players.push(new Player(++this.#playerId, username));
+    players.forEach((player) => {
+      this.#players.push(
+        new Player(++this.#playerId, player.username, player.ia)
+      );
     });
   }
 
@@ -46,8 +50,10 @@ class Game {
   }
 
   set players(array) {
-    array.forEach((username) =>
-      this.#players.push(new Player(++this.#playerId, username))
+    array.forEach((player) =>
+      this.#players.push(
+        new Player(++this.#playerId, player.username, player.ia)
+      )
     );
   }
 
