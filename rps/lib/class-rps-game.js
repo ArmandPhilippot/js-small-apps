@@ -4,6 +4,7 @@ import Game from "./class-game.js";
  * RPSGame class.
  */
 class RPSGame extends Game {
+  #choices = ["rock", "paper", "scissors"];
   #buttons = { rock: "", paper: "", scissors: "", newGame: "" };
   #p1Scoring = { name: "", value: "" };
   #p2Scoring = { name: "", value: "" };
@@ -94,7 +95,27 @@ class RPSGame extends Game {
     this.#updateMessage(msg);
   }
 
+  #getIAAction() {
+    if (this.currentTurn % 2 === 0) {
+      this.#setTurnIssue();
+      this.turn.next();
+      if (!this.isGameOver()) {
+        this.getCurrentPlayer().choice = this.getRandomChoice(this.#choices);
+      }
+    } else {
+      this.turn.next();
+      this.getCurrentPlayer().choice = this.getRandomChoice(this.#choices);
+      this.#setTurnIssue();
+    }
+    this.turn.next();
+  }
+
   listen() {
+    if (this.getCurrentPlayer().ia) {
+      this.getCurrentPlayer().choice = this.getRandomChoice(this.#choices);
+      this.turn.next();
+    }
+
     for (const [name, element] of Object.entries(this.#buttons)) {
       element.addEventListener("click", (event) => {
         event.preventDefault();
@@ -104,9 +125,8 @@ class RPSGame extends Game {
           case "scissors":
             if (this.state === "running") {
               this.setPlayerChoice(name);
-              this.turn.next();
-              if (this.isNewRound() || this.isGameOver()) {
-                this.#setTurnIssue();
+              if (this.getNextPlayer().ia) {
+                this.#getIAAction();
               }
             }
             break;

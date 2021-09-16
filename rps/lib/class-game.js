@@ -142,7 +142,11 @@ class Game {
   }
 
   getNextPlayer() {
-    return this.getPlayer(this.currentTurn + 1);
+    if (this.currentTurn < this.maxTurn) {
+      return this.getPlayer(this.currentTurn + 1);
+    } else {
+      return this.getPlayer(1);
+    }
   }
 
   isNewRound() {
@@ -190,6 +194,16 @@ class Game {
     this.winners = this.getGameWinners();
     this.losers = this.getGameLosers();
     return;
+  }
+
+  /**
+   * Get a random choice from an array of choices.
+   * @param {Array} array - The choices.
+   * @returns {*} A random choice.
+   */
+  getRandomChoice(array) {
+    const randomIndex = Math.floor(Math.random() * array.length);
+    return array[randomIndex];
   }
 
   getOrderedScores() {
