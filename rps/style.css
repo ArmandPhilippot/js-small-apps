@@ -67,9 +67,11 @@ button {
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-between;
+  align-items: center;
   gap: 2rem;
   margin: auto;
   padding: clamp(1rem, 3vh, 2rem) 0;
+  width: min(calc(100vw - 2rem), 600px);
 }
 
 .scoring-board {
