@@ -1,37 +1,20 @@
-import RPS_Instance from "./lib/rps-instance.js";
+import RPSGame from "./lib/class-rps-game.js";
 
-function getButtons() {
-  const rock = document.querySelector('.btn--rock');
-  const paper = document.querySelector('.btn--paper');
-  const scissors = document.querySelector('.btn--scissors');
-  const reset = document.querySelector('.btn--reset');
-  const buttons = {
-    rock,
-    paper,
-    scissors,
-    reset
-  };
-
-  return buttons;
-}
-
-function getScoring() {
-  const player1Box = document.querySelector('.scoring__body--user');
-  const player1Score = player1Box.querySelector('.scoring__value');
-  const player2Box = document.querySelector('.scoring__body--computer');
-  const player2Score = player2Box.querySelector('.scoring__value');
-  const scoring = {
-    player1: player1Score,
-    player2: player2Score,
-  }
-
-  return scoring;
-}
-
-function getResultMsg() {
-  const result = document.querySelector('.scoring__result');
-  return result;
-}
-
-const myGame = new RPS_Instance('Armand', 'Computer', getButtons(), getScoring(), getResultMsg());
-myGame.init();
+const players = ["Armand", "Computer"];
+const buttons = {
+  rock: document.querySelector(".btn--rock"),
+  paper: document.querySelector(".btn--paper"),
+  scissors: document.querySelector(".btn--scissors"),
+  newGame: document.querySelector(".btn--new-game"),
+};
+const p1Scoring = {
+  name: document.getElementById("player1username"),
+  value: document.getElementById("player1score"),
+};
+const p2Scoring = {
+  name: document.getElementById("player2username"),
+  value: document.getElementById("player2score"),
+};
+const messages = document.querySelector(".message-board");
+const app = new RPSGame(players, buttons, p1Scoring, p2Scoring, messages);
+app.init();
