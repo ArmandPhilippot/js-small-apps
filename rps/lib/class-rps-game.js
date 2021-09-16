@@ -9,6 +9,8 @@ class RPSGame extends Game {
   #p1Scoring = { name: "", value: "" };
   #p2Scoring = { name: "", value: "" };
   #messages = "";
+  #messageIterator;
+  #timeoutId;
 
   /**
    * Initialize a new RPSGame instance.
@@ -42,6 +44,18 @@ class RPSGame extends Game {
     this.#messages = messages;
   }
 
+  get messages() {
+    return this.#messages;
+  }
+
+  set messageIterator(generator) {
+    this.#messageIterator = generator;
+  }
+
+  get messageIterator() {
+    return this.#messageIterator;
+  }
+
   #updatePlayers() {
     this.#p1Scoring.name.textContent = this.getPlayer(1).username;
     this.#p2Scoring.name.textContent = this.getPlayer(2).username;
@@ -52,11 +66,51 @@ class RPSGame extends Game {
     this.#p2Scoring.value.textContent = this.getPlayer(2).score;
   }
 
-  #updateMessage(msg) {
-    this.#messages.textContent = msg;
+  async #createMessage(msg, delay = 0) {
+    return new Promise(
+      (resolve) =>
+        (this.#timeoutId = setTimeout(() => {
+          resolve(msg);
+        }, delay))
+    );
   }
 
-  #setTurnIssue() {
+  async *#generateMessages() {
+    let msg;
+    msg = yield await this.#createMessage("New game, let's play!");
+
+    while (this.state === "running") {
+      for (let index = 0; index < this.getPlayersNumber(); index++) {
+        if (this.getCurrentPlayer().ia) {
+          msg = yield this.#createMessage(
+            `${this.getCurrentPlayer().username} is playing...`,
+            this.isFirstTurn() ? 1200 : 200
+          );
+        } else {
+          msg = yield this.#createMessage(
+            `${this.getCurrentPlayer().username}'s turn...`,
+            this.isFirstTurn() ? 1200 : 900
+          );
+        }
+      }
+      msg = yield this.#createMessage(
+        msg,
+        this.getCurrentPlayer().ia ? 1000 : 500
+      );
+      msg = yield this.#createMessage("New round...", 1500);
+    }
+  }
+
+  async printNextMessage(msg = null) {
+    if (!this.messageIterator) {
+      this.messageIterator = this.#generateMessages();
+    }
+    this.messages.textContent = await this.messageIterator
+      .next(msg)
+      .then((object) => object.value);
+  }
+
+  async #setTurnIssue() {
     const choices = `${this.getPlayer(1).choice}-${this.getPlayer(2).choice}`;
     let turnWinner;
     let turnLoser;
@@ -85,39 +139,38 @@ class RPSGame extends Game {
       this.winners = [turnWinner];
       this.losers = [turnLoser];
       turnWinner.score++;
-      this.#updateScore();
       msg = `${turnWinner.username} wins! ${turnWinner.choice} beats ${turnLoser.choice}.`;
     } else {
       msg = `No winner. ${this.getPlayer(1).choice} equals to ${
         this.getPlayer(2).choice
       }.`;
     }
-    this.#updateMessage(msg);
+    await this.printNextMessage(msg);
+    this.#updateScore();
+    await this.printNextMessage();
   }
 
-  #getIAAction() {
+  async #getIAAction() {
     if (this.currentTurn % 2 === 0) {
-      this.#setTurnIssue();
+      await this.#setTurnIssue();
       this.turn.next();
+      await this.printNextMessage();
       if (!this.isGameOver()) {
         this.getCurrentPlayer().choice = this.getRandomChoice(this.#choices);
       }
     } else {
       this.turn.next();
+      await this.printNextMessage();
       this.getCurrentPlayer().choice = this.getRandomChoice(this.#choices);
-      this.#setTurnIssue();
+      await this.#setTurnIssue();
     }
     this.turn.next();
+    await this.printNextMessage();
   }
 
-  listen() {
-    if (this.getCurrentPlayer().ia) {
-      this.getCurrentPlayer().choice = this.getRandomChoice(this.#choices);
-      this.turn.next();
-    }
-
+  async listen() {
     for (const [name, element] of Object.entries(this.#buttons)) {
-      element.addEventListener("click", (event) => {
+      element.addEventListener("click", async (event) => {
         event.preventDefault();
         switch (name) {
           case "rock":
@@ -126,12 +179,14 @@ class RPSGame extends Game {
             if (this.state === "running") {
               this.setPlayerChoice(name);
               if (this.getNextPlayer().ia) {
-                this.#getIAAction();
+                await this.#getIAAction();
               }
             }
             break;
           case "newGame":
-            this.launch();
+            this.messageIterator = null;
+            clearTimeout(this.#timeoutId);
+            await this.launch();
           default:
             break;
         }
@@ -139,15 +194,22 @@ class RPSGame extends Game {
     }
   }
 
-  launch() {
+  async launch() {
     super.launch();
     this.#updatePlayers();
     this.#updateScore();
-    this.#updateMessage(`New game, let's play!`);
+    await this.printNextMessage();
+    await this.printNextMessage();
+
+    if (this.getCurrentPlayer().ia) {
+      this.getCurrentPlayer().choice = this.getRandomChoice(this.#choices);
+      this.turn.next();
+      await this.printNextMessage();
+    }
   }
 
-  init() {
-    this.launch();
+  async init() {
+    await this.launch();
     this.listen();
   }
 }

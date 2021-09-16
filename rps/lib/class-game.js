@@ -149,8 +149,12 @@ class Game {
     }
   }
 
+  isFirstTurn() {
+    return this.currentTurn === 1;
+  }
+
   isNewRound() {
-    return this.currentRound > 1 && this.currentTurn === 1;
+    return this.currentRound > 1 && this.isFirstTurn();
   }
 
   isGameOver() {
