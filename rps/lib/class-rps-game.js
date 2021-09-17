@@ -185,8 +185,14 @@ class RPSGame extends Game {
           case "scissors":
             if (this.state === "running") {
               this.setPlayerChoice(name);
+              if (this.currentTurn % 2 === 0) {
+                await this.#setTurnIssue();
+              }
               if (this.getNextPlayer().ia) {
                 await this.#getIAAction();
+              } else {
+                this.turn.next();
+                await this.printNextMessage();
               }
             }
             break;
