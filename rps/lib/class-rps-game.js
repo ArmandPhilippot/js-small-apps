@@ -97,8 +97,15 @@ class RPSGame extends Game {
         msg,
         this.getCurrentPlayer().ia ? 1000 : 500
       );
-      msg = yield this.#createMessage("New round...", 1500);
+      if (!this.isGameOver()) {
+        msg = yield this.#createMessage("New round...", 1500);
+      }
     }
+    const winnersList = this.gameWinners.map((winner) => winner.username);
+    const losersList = this.gameLosers.map((loser) => loser.username);
+    msg = yield this.#createMessage(
+      `Winner: ${winnersList.join(", ")} / Loser: ${losersList.join(", ")}`
+    );
   }
 
   async printNextMessage(msg = null) {
@@ -136,8 +143,8 @@ class RPSGame extends Game {
     }
 
     if (!even) {
-      this.winners = [turnWinner];
-      this.losers = [turnLoser];
+      this.turnWinners = [turnWinner];
+      this.turnLosers = [turnLoser];
       turnWinner.score++;
       msg = `${turnWinner.username} wins! ${turnWinner.choice} beats ${turnLoser.choice}.`;
     } else {

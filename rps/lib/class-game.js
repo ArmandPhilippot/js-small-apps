@@ -8,8 +8,10 @@ class Game {
   #language = "en-US";
   #playerId = 0;
   #players = [];
-  #winners = [];
-  #losers = [];
+  #roundWinners = [];
+  #roundLosers = [];
+  #gameWinners = [];
+  #gameLosers = [];
   #state = "paused";
   #turn;
   #currentTurn = 1;
@@ -61,20 +63,52 @@ class Game {
     return this.#players;
   }
 
-  set winners(array) {
-    array.forEach((player) => this.#winners.push(player));
+  set roundWinners(array) {
+    if (array.length > 0) {
+      array.forEach((player) => this.#roundWinners.push(player));
+    } else {
+      this.#roundWinners = [];
+    }
   }
 
-  get winners() {
-    return this.#winners;
+  get roundWinners() {
+    return this.#roundWinners;
   }
 
-  set losers(array) {
-    array.forEach((player) => this.#losers.push(player));
+  set roundLosers(array) {
+    if (array.length > 0) {
+      array.forEach((player) => this.#roundLosers.push(player));
+    } else {
+      this.#roundLosers = [];
+    }
   }
 
-  get losers() {
-    return this.#losers;
+  get roundLosers() {
+    return this.#roundLosers;
+  }
+
+  set gameWinners(array) {
+    if (array.length > 0) {
+      array.forEach((player) => this.#gameWinners.push(player));
+    } else {
+      this.#gameWinners = [];
+    }
+  }
+
+  get gameWinners() {
+    return this.#gameWinners;
+  }
+
+  set gameLosers(array) {
+    if (array.length > 0) {
+      array.forEach((player) => this.#gameLosers.push(player));
+    } else {
+      this.#gameLosers = [];
+    }
+  }
+
+  get gameLosers() {
+    return this.#gameLosers;
   }
 
   set state(string) {
@@ -168,8 +202,10 @@ class Game {
   }
 
   newGame() {
-    this.winners = [];
-    this.losers = [];
+    this.roundWinners = [];
+    this.roundLosers = [];
+    this.gameWinners = [];
+    this.gameLosers = [];
     this.state = "paused";
     this.turn = this.#generateTurns();
     this.currentTurn = 1;
@@ -195,8 +231,8 @@ class Game {
       this.currentRound++;
     }
     this.stop();
-    this.winners = this.getGameWinners();
-    this.losers = this.getGameLosers();
+    this.setGameWinners();
+    this.setGameLosers();
     return;
   }
 
@@ -220,24 +256,22 @@ class Game {
     return scores;
   }
 
-  getGameWinners() {
+  setGameWinners() {
     const scores = this.getOrderedScores();
     const highestScore = scores.pop();
     const winners = this.players.filter(
       (player) => player.score === highestScore
     );
-
-    return winners;
+    this.gameWinners = winners;
   }
 
-  getGameLosers() {
+  setGameLosers() {
     const scores = this.getOrderedScores();
     const lowestScore = scores.shift();
     const losers = this.players.filter(
       (player) => player.score === lowestScore
     );
-
-    return losers;
+    this.gameLosers = losers;
   }
 
   resume() {
