@@ -92,7 +92,7 @@ function initApp() {
 
   const app = new RPSGame(players, buttons, p1Scoring, p2Scoring, messages);
   app.init();
-  app.maxRound = maxRoundValue ? maxRoundValue : "";
+  app.maxRound = maxRoundValue && maxRoundValue !== "0" ? maxRoundValue : "";
   app.getPlayer(1).ia = checkboxP1IA.checked ? true : false;
   app.getPlayer(2).ia = checkboxP2IA.checked ? true : false;
   register.style.display = "none";
