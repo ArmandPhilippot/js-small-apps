@@ -30,6 +30,17 @@ function setSvgClockSeconds(seconds) {
   clockSeconds.style.transformOrigin = "center";
 }
 
+function setDigitalClockHours(hours) {
+  const clockHours = document.getElementById("digital-clock_hours");
+  clockHours.textContent = hours;
+}
+
+function setDigitalClockMinutes(minutes) {
+  const formatted = minutes < 10 ? `0` + minutes : minutes;
+  const clockMinutes = document.getElementById("digital-clock_minutes");
+  clockMinutes.textContent = formatted;
+}
+
 function updateAll() {
   const now = new Date();
   const [month, day, year] = [now.getMonth(), now.getDay(), now.getFullYear()];
@@ -43,6 +54,8 @@ function updateAll() {
   setSvgClockHours(hours);
   setSvgClockMinutes(minutes);
   setSvgClockSeconds(seconds);
+  setDigitalClockHours(hours);
+  setDigitalClockMinutes(minutes);
 }
 
 updateAll();
