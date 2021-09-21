@@ -1,6 +1,6 @@
 function setDate(day, month, year) {
   const div = document.getElementById("date");
-  div.textContent = `${day} ${month} ${year}`;
+  div.textContent = `${day}/${month}/${year}`;
 }
 
 function get12Rotation(int) {
@@ -41,6 +41,74 @@ function setDigitalClockMinutes(minutes) {
   clockMinutes.textContent = formatted;
 }
 
+function getHoursToString(hours) {
+  const hoursToText = [
+    "noon",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+    "ten",
+    "eleven",
+    "twelve",
+  ];
+
+  return hoursToText[hours % 12];
+}
+
+function getMinutesToString(minutes) {
+  const ones = [
+    "",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+  ];
+  const teens = [
+    "ten",
+    "eleven",
+    "twelve",
+    "thirteen",
+    "fourteen",
+    "fifteen",
+    "sixteen",
+    "seventeen",
+    "eighteen",
+    "nineteen",
+  ];
+  const tens = ["", "", "twenty", "thirty", "forty", "fifty"];
+  const minutesToArray = minutes.toString().split("");
+  let text = "";
+
+  if (minutes < 10) {
+    text = ones[minutes];
+  } else if (minutes < 20) {
+    text = teens[minutesToArray[1]];
+  } else {
+    text = `${tens[minutesToArray[0]]} ${ones[minutesToArray[1]]}`;
+  }
+
+  return text;
+}
+
+function setTextClock(hours, minutes) {
+  const div = document.getElementById("text-clock");
+  const meridiem = hours < 12 ? "am" : "pm";
+  div.textContent = `It's ${getHoursToString(hours)} ${getMinutesToString(
+    minutes
+  )} ${meridiem}.`;
+}
+
 function updateAll() {
   const now = new Date();
   const [month, day, year] = [now.getMonth(), now.getDay(), now.getFullYear()];
@@ -56,6 +124,7 @@ function updateAll() {
   setSvgClockSeconds(seconds);
   setDigitalClockHours(hours);
   setDigitalClockMinutes(minutes);
+  setTextClock(hours, minutes);
 }
 
 updateAll();
