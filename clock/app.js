@@ -111,7 +111,11 @@ function setTextClock(hours, minutes) {
 
 function updateAll() {
   const now = new Date();
-  const [month, day, year] = [now.getMonth(), now.getDay(), now.getFullYear()];
+  const [month, day, year] = [
+    now.getMonth() + 1,
+    now.getDate(),
+    now.getFullYear(),
+  ];
   const [hours, minutes, seconds] = [
     now.getHours(),
     now.getMinutes(),
