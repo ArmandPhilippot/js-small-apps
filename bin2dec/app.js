@@ -46,9 +46,28 @@ function handleInput(value) {
   }
 }
 
+function convertBinToDec(bin) {
+  let result = 0;
+
+  for (const char of bin) {
+    result = result * 2 + Number(char);
+  }
+
+  return result;
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const input = document.querySelector(".form__input");
+  const result = document.getElementById("result");
+  result.textContent = convertBinToDec(input.value);
+}
+
 function init() {
+  const form = document.querySelector(".form");
   const input = document.querySelector(".form__input");
   handleInput(input.value);
+  form.addEventListener("submit", handleSubmit);
   input.addEventListener("keyup", (e) => handleInput(e.target.value));
 }
 
