@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bin2Dec</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header"><h1 class="branding">Bin2Dec</h1></header>
+    <main class="main">
+      <form action="#" method="POST" class="form">
+        <label class="form__label">Enter a binary string:</label>
+        <input
+          type="text"
+          name="binary-string"
+          id="input-field"
+          maxlength="8"
+          value=""
+          required
+          pattern="[0-1]{1,8}"
+          size="8"
+          class="form__input"
+        />
+        <button type="submit" class="btn">Convert</button>
+      </form>
+      <div class="result-box">
+        <p>Result:</p>
+        <p id="result"></p>
+      </div>
+    </main>
+    <footer class="footer">
+      <p class="copyright">Bin2Dec. MIT 2021. Armand Philippot.</p>
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>

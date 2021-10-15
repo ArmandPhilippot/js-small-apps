@@ -1,0 +1,75 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #fff;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  line-height: 1.618;
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 100vh;
+}
+
+.header,
+.main,
+.footer {
+  width: min(calc(100vw - 2rem), 80ch);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header {
+  padding: 1rem 0 2rem;
+}
+
+.main {
+  flex: 1;
+}
+
+.footer {
+  padding: 1rem 0;
+}
+
+.copyright {
+  font-size: 0.9rem;
+}
+
+.form__label {
+  display: block;
+  cursor: pointer;
+}
+
+.form__input {
+  border: 1px solid hsl(219, 64%, 35%);
+  font: inherit;
+  line-height: inherit;
+  padding: 0.2rem 0.5rem;
+}
+
+.btn {
+  background: #fff;
+  border: 2px solid hsl(219, 64%, 35%);
+  color: hsl(219, 64%, 35%);
+  font: inherit;
+  font-weight: 600;
+  line-height: inherit;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:focus {
+  background: hsl(219, 64%, 35%);
+  color: #fff;
+}
+
+.result-box {
+  margin-top: 2rem;
+}
