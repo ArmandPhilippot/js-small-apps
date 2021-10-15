@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Border Previewer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="branding">CSS Border Previewer</h1>
+    </header>
+    <main class="main">
+      <div class="preview">
+        <div class="box"></div>
+      </div>
+      <form action="#" method="POST" class="settings form">
+        <fieldset class="form__fieldset">
+          <legend class="form__legend">Global settings</legend>
+          <div class="form__item">
+            Control border property separately?
+            <label for="border-property-no">No</label>
+            <input
+              type="radio"
+              name="border-property"
+              id="border-property-no"
+              checked
+            />
+            <label for="border-property-yes">Yes</label>
+            <input
+              type="radio"
+              name="border-property"
+              id="border-property-yes"
+            />
+          </div>
+          <div class="form__item">
+            Control border radius property separately?
+            <label for="border-radius-property-no">No</label>
+            <input
+              type="radio"
+              name="border-radius-property"
+              id="border-radius-property-no"
+              checked
+            />
+            <label for="border-radius-property-yes">Yes</label>
+            <input
+              type="radio"
+              name="border-radius-property"
+              id="border-radius-property-yes"
+            />
+          </div>
+        </fieldset>
+        <fieldset class="form__fieldset form__fieldset--flex">
+          <legend class="form__legend">Border settings</legend>
+          <div class="form__item form__item--flex">
+            <label for="borders-width">Width</label>
+            <input
+              type="number"
+              name="borders-width"
+              id="borders-width"
+              size="3"
+              value="1"
+              class="form__input"
+            />
+          </div>
+          <div class="form__item form__item--flex">
+            <label for="borders-unit" class="form__label">Unit</label>
+            <select name="borders-unit" id="borders-unit" class="form__select">
+              <option value="px" selected>px</option>
+              <option value="cm">cm</option>
+              <option value="em">em</option>
+              <option value="rem">rem</option>
+            </select>
+          </div>
+          <div class="form__item form__item--flex">
+            <label for="borders-style">Style</label>
+            <select
+              name="borders-style"
+              id="borders-style"
+              class="form__select"
+            >
+              <option value="none">None</option>
+              <option value="dashed">Dashed</option>
+              <option value="dotted">Dotted</option>
+              <option value="double">Double</option>
+              <option value="groove">Groove</option>
+              <option value="hidden">Hidden</option>
+              <option value="inset">Inset</option>
+              <option value="outset">Outset</option>
+              <option value="ridge">Ridge</option>
+              <option value="solid" selected>Solid</option>
+            </select>
+          </div>
+          <div class="form__item form__item--flex">
+            <label for="borders-color">Color</label>
+            <input
+              type="color"
+              name="borders-color"
+              id="borders-color"
+              value="#000000"
+              class="form__input form__input--color"
+            />
+          </div>
+        </fieldset>
+        <fieldset class="form__fieldset">
+          <legend class="form__legend">Border radius settings</legend>
+          <div class="form__item">
+            <p>First radius:</p>
+            <label for="borders-first-radius">Value</label>
+            <input
+              type="number"
+              name="borders-first-radius"
+              id="borders-first-radius"
+              class="form__input"
+            />
+            <label for="borders-first-radius-unit" class="form__label"
+              >Unit</label
+            >
+            <select
+              name="borders-first-radius-unit"
+              id="borders-first-radius-unit"
+              class="form__select"
+            >
+              <option value="px" selected>px</option>
+              <option value="%">%</option>
+              <option value="em">em</option>
+              <option value="rem">rem</option>
+            </select>
+          </div>
+          <div class="form__item">
+            <p>Second radius:</p>
+            <label for="borders-second-radius">Value</label>
+            <input
+              type="number"
+              name="borders-second-radius"
+              id="borders-second-radius"
+              class="form__input"
+            />
+            <label for="borders-second-radius-unit" class="form__label"
+              >Unit</label
+            >
+            <select
+              name="borders-second-radius-unit"
+              id="borders-second-radius-unit"
+              class="form__select"
+            >
+              <option value="px" selected>px</option>
+              <option value="%">%</option>
+              <option value="em">em</option>
+              <option value="rem">rem</option>
+            </select>
+          </div>
+        </fieldset>
+      </form>
+    </main>
+    <footer class="footer">
+      <p class="copyright">CSS Border Previewer. MIT 2021. Armand Philippot.</p>
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>
