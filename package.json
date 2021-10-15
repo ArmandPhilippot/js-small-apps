@@ -1,0 +1,28 @@
+{
+  "name": "js-small-apps",
+  "description": "A collection of small apps and exercises implemented with Javascript.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Armand Philippot",
+    "url": "https://www.armandphilippot.com"
+  },
+  "homepage": "https://github.com/ap-training/js-small-apps#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:ap-training/js-small-apps.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ap-training/js-small-apps/issues"
+  },
+  "private": true,
+  "scripts": {
+    "release": "standard-version -s"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^13.2.1",
+    "@commitlint/config-conventional": "^13.2.0",
+    "husky": "^7.0.2",
+    "standard-version": "^9.3.1"
+  }
+}
