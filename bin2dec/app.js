@@ -1,9 +1,9 @@
 function setErrorBox() {
   const main = document.querySelector(".main");
-  const resultBox = document.querySelector(".result-box");
+  const form = document.querySelector(".form");
   const errorBox = document.createElement("div");
   errorBox.classList.add("error-box");
-  main.insertBefore(errorBox, resultBox);
+  main.insertBefore(errorBox, form);
 }
 
 function getErrorBox() {

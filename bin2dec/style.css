@@ -26,24 +26,52 @@ body {
 }
 
 .header {
-  padding: 1rem 0 2rem;
+  padding: 2rem 0 3rem;
+  text-align: center;
 }
 
 .main {
   flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  align-content: flex-start;
 }
 
 .footer {
+  margin-top: 2rem;
   padding: 1rem 0;
 }
 
 .copyright {
   font-size: 0.9rem;
+  text-align: center;
+}
+
+.form {
+  border: solid 2px hsl(219, 64%, 35%);
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 0 auto;
+}
+
+.form__fieldset {
+  border: none;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form__legend {
+  color: hsl(219, 64%, 35%);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
 }
 
 .form__label {
-  display: block;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .form__input {
@@ -74,11 +102,17 @@ body {
   border: 1px solid hsl(0, 75%, 38%);
   color: hsl(0, 75%, 38%);
   font-weight: 600;
-  margin-top: 2rem;
+  margin: 0 auto 2rem;
   padding: 1rem;
   width: max-content;
 }
 
 .result-box {
+  display: flex;
+  gap: 0.5rem;
   margin-top: 2rem;
+}
+
+.result-box__label {
+  font-weight: 600;
 }

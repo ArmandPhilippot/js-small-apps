@@ -11,24 +11,27 @@
     <header class="header"><h1 class="branding">Bin2Dec</h1></header>
     <main class="main">
       <form action="#" method="POST" class="form">
-        <label class="form__label">Enter a binary string:</label>
-        <input
-          type="text"
-          name="binary-string"
-          id="input-field"
-          maxlength="8"
-          value=""
-          required
-          pattern="[0-1]{1,8}"
-          size="8"
-          class="form__input"
-        />
-        <button type="submit" class="btn">Convert</button>
+        <fieldset class="form__fieldset">
+          <legend class="form__legend">
+            Convert a binary number to decimal
+          </legend>
+          <label class="form__label">Binary:</label>
+          <input
+            type="text"
+            name="binary-string"
+            id="input-field"
+            value=""
+            required
+            pattern="[0-1]{1,}"
+            class="form__input"
+          />
+          <button type="submit" class="btn">Convert</button>
+        </fieldset>
+        <div class="result-box">
+          <p class="result-box__label">Decimal:</p>
+          <p id="result"></p>
+        </div>
       </form>
-      <div class="result-box">
-        <p>Result:</p>
-        <p id="result"></p>
-      </div>
     </main>
     <footer class="footer">
       <p class="copyright">Bin2Dec. MIT 2021. Armand Philippot.</p>
