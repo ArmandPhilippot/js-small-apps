@@ -70,6 +70,15 @@ body {
   color: #fff;
 }
 
+.error-box {
+  border: 1px solid hsl(0, 75%, 38%);
+  color: hsl(0, 75%, 38%);
+  font-weight: 600;
+  margin-top: 2rem;
+  padding: 1rem;
+  width: max-content;
+}
+
 .result-box {
   margin-top: 2rem;
 }
