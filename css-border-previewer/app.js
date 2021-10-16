@@ -662,6 +662,27 @@ function setBottomRightBorderRadius(el) {
   });
 }
 
+function printCopySuccess(el) {
+  const backupContent = el.textContent;
+
+  el.textContent = "Copied to clipboard!";
+  setTimeout(() => (el.textContent = backupContent), 1000);
+}
+
+function copyCode() {
+  const code = document.querySelector(".result__code");
+  navigator.clipboard.writeText(code.textContent);
+}
+
+function listenCopyCodeBtn() {
+  const btn = document.getElementById("copy-code");
+
+  btn.addEventListener("click", () => {
+    copyCode();
+    printCopySuccess(btn);
+  });
+}
+
 function initBorders(radioValue, el) {
   if (isIndividualSettings(radioValue)) {
     toggleBorderSettingsDisplay("individual");
@@ -708,6 +729,7 @@ function init() {
   }
 
   printCode(box);
+  listenCopyCodeBtn();
 }
 
 init();

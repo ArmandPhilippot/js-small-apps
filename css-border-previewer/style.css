@@ -157,5 +157,18 @@ body {
   font-size: inherit;
   font-weight: 600;
   line-height: inherit;
+  display: block;
   padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out 0s;
+}
+
+.btn:hover,
+.btn:focus {
+  background: hsl(219, 64%, 35%);
+  color: #fff;
+}
+
+.btn:active {
+  transform: translateX(1px) translateY(1px);
 }
