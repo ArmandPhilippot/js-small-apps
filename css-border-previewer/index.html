@@ -20,39 +20,46 @@
           <legend class="form__legend">Global settings</legend>
           <div class="form__item">
             Control border property separately?
-            <label for="border-property-no">No</label>
             <input
               type="radio"
               name="border-property"
               id="border-property-no"
+              value="false"
               checked
             />
-            <label for="border-property-yes">Yes</label>
+            <label for="border-property-no">No</label>
             <input
               type="radio"
               name="border-property"
               id="border-property-yes"
+              value="true"
             />
+            <label for="border-property-yes">Yes</label>
           </div>
           <div class="form__item">
             Control border radius property separately?
-            <label for="border-radius-property-no">No</label>
             <input
               type="radio"
               name="border-radius-property"
               id="border-radius-property-no"
+              value="false"
               checked
             />
-            <label for="border-radius-property-yes">Yes</label>
+            <label for="border-radius-property-no">No</label>
             <input
               type="radio"
               name="border-radius-property"
               id="border-radius-property-yes"
+              value="true"
             />
+            <label for="border-radius-property-yes">Yes</label>
           </div>
         </fieldset>
-        <fieldset class="form__fieldset form__fieldset--flex">
-          <legend class="form__legend">Border settings</legend>
+        <fieldset
+          id="fieldset-borders"
+          class="form__fieldset form__fieldset--flex"
+        >
+          <legend class="form__legend">Borders settings</legend>
           <div class="form__item form__item--flex">
             <label for="borders-width">Width</label>
             <input
@@ -103,7 +110,243 @@
             />
           </div>
         </fieldset>
-        <fieldset class="form__fieldset">
+        <fieldset
+          id="fieldset-border-top"
+          class="form__fieldset form__fieldset--flex"
+        >
+          <legend class="form__legend">Border-top settings</legend>
+          <div class="form__item form__item--flex">
+            <label for="border-top-width">Width</label>
+            <input
+              type="number"
+              name="border-top-width"
+              id="border-top-width"
+              size="3"
+              value="1"
+              class="form__input"
+            />
+          </div>
+          <div class="form__item form__item--flex">
+            <label for="border-top-unit" class="form__label">Unit</label>
+            <select
+              name="border-top-unit"
+              id="border-top-unit"
+              class="form__select"
+            >
+              <option value="px" selected>px</option>
+              <option value="cm">cm</option>
+              <option value="em">em</option>
+              <option value="rem">rem</option>
+            </select>
+          </div>
+          <div class="form__item form__item--flex">
+            <label for="border-top-style">Style</label>
+            <select
+              name="border-top-style"
+              id="border-top-style"
+              class="form__select"
+            >
+              <option value="none">None</option>
+              <option value="dashed">Dashed</option>
+              <option value="dotted">Dotted</option>
+              <option value="double">Double</option>
+              <option value="groove">Groove</option>
+              <option value="hidden">Hidden</option>
+              <option value="inset">Inset</option>
+              <option value="outset">Outset</option>
+              <option value="ridge">Ridge</option>
+              <option value="solid" selected>Solid</option>
+            </select>
+          </div>
+          <div class="form__item form__item--flex">
+            <label for="border-top-color">Color</label>
+            <input
+              type="color"
+              name="border-top-color"
+              id="border-top-color"
+              value="#000000"
+              class="form__input form__input--color"
+            />
+          </div>
+        </fieldset>
+        <fieldset
+          id="fieldset-border-right"
+          class="form__fieldset form__fieldset--flex"
+        >
+          <legend class="form__legend">Border-right settings</legend>
+          <div class="form__item form__item--flex">
+            <label for="border-right-width">Width</label>
+            <input
+              type="number"
+              name="border-right-width"
+              id="border-right-width"
+              size="3"
+              value="1"
+              class="form__input"
+            />
+          </div>
+          <div class="form__item form__item--flex">
+            <label for="border-right-unit" class="form__label">Unit</label>
+            <select
+              name="border-right-unit"
+              id="border-right-unit"
+              class="form__select"
+            >
+              <option value="px" selected>px</option>
+              <option value="cm">cm</option>
+              <option value="em">em</option>
+              <option value="rem">rem</option>
+            </select>
+          </div>
+          <div class="form__item form__item--flex">
+            <label for="border-right-style">Style</label>
+            <select
+              name="border-right-style"
+              id="border-right-style"
+              class="form__select"
+            >
+              <option value="none">None</option>
+              <option value="dashed">Dashed</option>
+              <option value="dotted">Dotted</option>
+              <option value="double">Double</option>
+              <option value="groove">Groove</option>
+              <option value="hidden">Hidden</option>
+              <option value="inset">Inset</option>
+              <option value="outset">Outset</option>
+              <option value="ridge">Ridge</option>
+              <option value="solid" selected>Solid</option>
+            </select>
+          </div>
+          <div class="form__item form__item--flex">
+            <label for="border-right-color">Color</label>
+            <input
+              type="color"
+              name="border-right-color"
+              id="border-right-color"
+              value="#000000"
+              class="form__input form__input--color"
+            />
+          </div>
+        </fieldset>
+        <fieldset
+          id="fieldset-border-bottom"
+          class="form__fieldset form__fieldset--flex"
+        >
+          <legend class="form__legend">Border-bottom settings</legend>
+          <div class="form__item form__item--flex">
+            <label for="border-bottom-width">Width</label>
+            <input
+              type="number"
+              name="border-bottom-width"
+              id="border-bottom-width"
+              size="3"
+              value="1"
+              class="form__input"
+            />
+          </div>
+          <div class="form__item form__item--flex">
+            <label for="border-bottom-unit" class="form__label">Unit</label>
+            <select
+              name="border-bottom-unit"
+              id="border-bottom-unit"
+              class="form__select"
+            >
+              <option value="px" selected>px</option>
+              <option value="cm">cm</option>
+              <option value="em">em</option>
+              <option value="rem">rem</option>
+            </select>
+          </div>
+          <div class="form__item form__item--flex">
+            <label for="border-bottom-style">Style</label>
+            <select
+              name="border-bottom-style"
+              id="border-bottom-style"
+              class="form__select"
+            >
+              <option value="none">None</option>
+              <option value="dashed">Dashed</option>
+              <option value="dotted">Dotted</option>
+              <option value="double">Double</option>
+              <option value="groove">Groove</option>
+              <option value="hidden">Hidden</option>
+              <option value="inset">Inset</option>
+              <option value="outset">Outset</option>
+              <option value="ridge">Ridge</option>
+              <option value="solid" selected>Solid</option>
+            </select>
+          </div>
+          <div class="form__item form__item--flex">
+            <label for="border-bottom-color">Color</label>
+            <input
+              type="color"
+              name="border-bottom-color"
+              id="border-bottom-color"
+              value="#000000"
+              class="form__input form__input--color"
+            />
+          </div>
+        </fieldset>
+        <fieldset
+          id="fieldset-border-left"
+          class="form__fieldset form__fieldset--flex"
+        >
+          <legend class="form__legend">Border-left settings</legend>
+          <div class="form__item form__item--flex">
+            <label for="border-left-width">Width</label>
+            <input
+              type="number"
+              name="border-left-width"
+              id="border-left-width"
+              size="3"
+              value="1"
+              class="form__input"
+            />
+          </div>
+          <div class="form__item form__item--flex">
+            <label for="border-left-unit" class="form__label">Unit</label>
+            <select
+              name="border-left-unit"
+              id="border-left-unit"
+              class="form__select"
+            >
+              <option value="px" selected>px</option>
+              <option value="cm">cm</option>
+              <option value="em">em</option>
+              <option value="rem">rem</option>
+            </select>
+          </div>
+          <div class="form__item form__item--flex">
+            <label for="border-left-style">Style</label>
+            <select
+              name="border-left-style"
+              id="border-left-style"
+              class="form__select"
+            >
+              <option value="none">None</option>
+              <option value="dashed">Dashed</option>
+              <option value="dotted">Dotted</option>
+              <option value="double">Double</option>
+              <option value="groove">Groove</option>
+              <option value="hidden">Hidden</option>
+              <option value="inset">Inset</option>
+              <option value="outset">Outset</option>
+              <option value="ridge">Ridge</option>
+              <option value="solid" selected>Solid</option>
+            </select>
+          </div>
+          <div class="form__item form__item--flex">
+            <label for="border-left-color">Color</label>
+            <input
+              type="color"
+              name="border-left-color"
+              id="border-left-color"
+              value="#000000"
+              class="form__input form__input--color"
+            />
+          </div>
+        </fieldset>
+        <fieldset id="fieldset-borders-radius" class="form__fieldset">
           <legend class="form__legend">Border radius settings</legend>
           <div class="form__item">
             <p>First radius:</p>
