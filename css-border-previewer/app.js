@@ -1,3 +1,8 @@
+/**
+ * Retrieve the border color property name depending on direction.
+ * @param {String} direction - Either `top`, `right`, `left` or `bottom`.
+ * @returns {String} The CSS property name.
+ */
 function getBorderColorProperty(direction) {
   let borderColorProperty;
 
@@ -22,6 +27,11 @@ function getBorderColorProperty(direction) {
   return borderColorProperty;
 }
 
+/**
+ * Retrieve the border style property name depending on direction.
+ * @param {String} direction - Either `top`, `right`, `bottom` or `left`.
+ * @returns {String} The CSS property name.
+ */
 function getBorderStyleProperty(direction) {
   let borderStyleProperty;
 
@@ -46,6 +56,11 @@ function getBorderStyleProperty(direction) {
   return borderStyleProperty;
 }
 
+/**
+ * Retrieve the border width property name depending on direction.
+ * @param {String} direction - Either `top`, `right`, `left` or `bottom`.
+ * @returns {String} The CSS property name.
+ */
 function getBorderWidthProperty(direction) {
   let borderWidthProperty;
 
@@ -70,6 +85,13 @@ function getBorderWidthProperty(direction) {
   return borderWidthProperty;
 }
 
+/**
+ * Apply the custom border to an element.
+ * @param {HTMLElement} el - Apply border to this element.
+ * @param {String} property - Either `color`, `style` or `width`.
+ * @param {String} value - The value to apply.
+ * @param {String} [direction] - Either `top`, `right`, `bottom` or `left`.
+ */
 function setBorder(el, property, value, direction = null) {
   let borderProperty;
 
@@ -89,6 +111,14 @@ function setBorder(el, property, value, direction = null) {
   el.style[borderProperty] = value;
 }
 
+/**
+ * Apply the custom border radius to an element.
+ * @param {HTMLElement} el - Apply border radius to this element.
+ * @param {String} firstRadius - The first radius value.
+ * @param {String} [secondRadius] - The second radius value.
+ * @param {String} [x] - The horizontal direction: either `right` or `left`.
+ * @param {String} [y] - The vertical direction: either `top` or `bottom`.
+ */
 function setBorderRadius(el, firstRadius, secondRadius, x = null, y = null) {
   const direction = `${x}-${y}`;
   const value = `${firstRadius}${secondRadius ? ` / ${secondRadius}` : ""}`;
@@ -115,6 +145,10 @@ function setBorderRadius(el, firstRadius, secondRadius, x = null, y = null) {
   el.style[borderRadiusProperty] = value;
 }
 
+/**
+ * Display the corresponding border settings.
+ * @param {String} string - Either `common` or `individual`.
+ */
 function toggleBorderSettingsDisplay(string) {
   const allBordersFieldset = document.getElementById("fieldset-borders");
   const topBorderFieldset = document.getElementById("fieldset-border-top");
@@ -139,6 +173,10 @@ function toggleBorderSettingsDisplay(string) {
   }
 }
 
+/**
+ * Display the corresponding border-radius settings.
+ * @param {String} string - Either `common` or `individual`.
+ */
 function toggleBorderRadiusSettingsDisplay(string) {
   const allBordersRadiusFieldset = document.getElementById(
     "fieldset-borders-radius"
@@ -171,6 +209,10 @@ function toggleBorderRadiusSettingsDisplay(string) {
   }
 }
 
+/**
+ * Print the generated code into the given element.
+ * @param {HTMLElement} el - The element where to print generated code.
+ */
 function printCode(el) {
   const code = document.querySelector(".result__code");
   let codeOutput = `
@@ -184,10 +226,19 @@ function printCode(el) {
   code.textContent = codeOutput;
 }
 
+/**
+ * Check which type of settings is checked.
+ * @param {String} radioValue - The input radio value.
+ * @returns {Boolean} True if is individual; false if is common.
+ */
 function isIndividualSettings(radioValue) {
   return radioValue === "true" ? true : false;
 }
 
+/**
+ * Set all borders to a given element.
+ * @param {HTMLElement} el - Apply border to this element.
+ */
 function setCommonBorder(el) {
   const allBordersColorInput = document.getElementById("borders-color");
   const allBordersStyleSelect = document.getElementById("borders-style");
@@ -231,6 +282,10 @@ function setCommonBorder(el) {
   });
 }
 
+/**
+ * Set the top border to the given element.
+ * @param {HTMLElement} el - Apply the top border to this element.
+ */
 function setTopBorder(el) {
   const topBorderColorInput = document.getElementById("border-top-color");
   const topBorderStyleSelect = document.getElementById("border-top-style");
@@ -277,6 +332,10 @@ function setTopBorder(el) {
   });
 }
 
+/**
+ * Set the right border to the given element.
+ * @param {HTMLElement} el - Apply the right border to this element.
+ */
 function setRightBorder(el) {
   const rightBorderWidthInput = document.getElementById("border-right-width");
   const rightBorderUnitSelect = document.getElementById("border-right-unit");
@@ -323,6 +382,10 @@ function setRightBorder(el) {
   });
 }
 
+/**
+ * Set the bottom border to the given element.
+ * @param {HTMLElement} el - Apply the bottom border to this element.
+ */
 function setBottomBorder(el) {
   const bottomBorderWidthInput = document.getElementById("border-bottom-width");
   const bottomBorderUnitSelect = document.getElementById("border-bottom-unit");
@@ -371,6 +434,10 @@ function setBottomBorder(el) {
   });
 }
 
+/**
+ * Set the left border to the given element.
+ * @param {HTMLElement} el - Apply the left border to this element.
+ */
 function setLeftBorder(el) {
   const leftBorderWidthInput = document.getElementById("border-left-width");
   const leftBorderUnitSelect = document.getElementById("border-left-unit");
@@ -417,6 +484,10 @@ function setLeftBorder(el) {
   });
 }
 
+/**
+ * Set all borders radius to the given element.
+ * @param {HTMLElement} el - Apply the border radius to this element.
+ */
 function setCommonBorderRadius(el) {
   const borderCommonFirstRadius = document.getElementById(
     "borders-first-radius"
@@ -466,6 +537,10 @@ function setCommonBorderRadius(el) {
   });
 }
 
+/**
+ * Set the top left border-radius to the given element.
+ * @param {HTMLElement} el - Apply the top left border-radius to this element.
+ */
 function setTopLeftBorderRadius(el) {
   const borderTopLeftFirstRadius = document.getElementById(
     "border-top-left-first-radius"
@@ -515,6 +590,10 @@ function setTopLeftBorderRadius(el) {
   });
 }
 
+/**
+ * Set the top right border-radius to the given element.
+ * @param {HTMLElement} el - Apply the top right border-radius to this element.
+ */
 function setTopRightBorderRadius(el) {
   const borderTopRightFirstRadius = document.getElementById(
     "border-top-right-first-radius"
@@ -564,6 +643,10 @@ function setTopRightBorderRadius(el) {
   });
 }
 
+/**
+ * Set the bottom left border-radius to the given element.
+ * @param {HTMLElement} el - Apply bottom left border-radius to this element.
+ */
 function setBottomLeftBorderRadius(el) {
   const borderBottomLeftFirstRadius = document.getElementById(
     "border-bottom-left-first-radius"
@@ -613,6 +696,10 @@ function setBottomLeftBorderRadius(el) {
   });
 }
 
+/**
+ * Set the bottom right border-radius to the given element.
+ * @param {HTMLElement} el - Apply bottom right border-radius to this element.
+ */
 function setBottomRightBorderRadius(el) {
   const borderBottomRightFirstRadius = document.getElementById(
     "border-bottom-right-first-radius"
@@ -662,27 +749,44 @@ function setBottomRightBorderRadius(el) {
   });
 }
 
-function printCopySuccess(el) {
+/**
+ * Display a message inside the given element.
+ * @param {HTMLElement} el - The element where to print the message.
+ * @param {String} msg - The message to display.
+ * @param {Number} [duration] - The message duration.
+ */
+function printMessage(el, msg, duration = 1000) {
   const backupContent = el.textContent;
 
-  el.textContent = "Copied to clipboard!";
-  setTimeout(() => (el.textContent = backupContent), 1000);
+  el.textContent = msg;
+  setTimeout(() => (el.textContent = backupContent), duration);
 }
 
+/**
+ * Copy code to the clipboard.
+ */
 function copyCode() {
   const code = document.querySelector(".result__code");
   navigator.clipboard.writeText(code.textContent);
 }
 
+/**
+ * Listen the button copy to clipboard.
+ */
 function listenCopyCodeBtn() {
   const btn = document.getElementById("copy-code");
 
   btn.addEventListener("click", () => {
     copyCode();
-    printCopySuccess(btn);
+    printMessage(btn, "Copied to clipboard!");
   });
 }
 
+/**
+ * Initialize borders settings and borders.
+ * @param {String} radioValue - The input radio value.
+ * @param {HTMLElement} el - The element where to apply borders.
+ */
 function initBorders(radioValue, el) {
   if (isIndividualSettings(radioValue)) {
     toggleBorderSettingsDisplay("individual");
@@ -696,6 +800,11 @@ function initBorders(radioValue, el) {
   }
 }
 
+/**
+ * Initialize border-radius settings and border-radius.
+ * @param {String} radioValue - The input radio value.
+ * @param {HTMLElement} el - The element where to apply border-radius.
+ */
 function initBordersRadius(radioValue, el) {
   if (isIndividualSettings(radioValue)) {
     toggleBorderRadiusSettingsDisplay("individual");
@@ -709,6 +818,9 @@ function initBordersRadius(radioValue, el) {
   }
 }
 
+/**
+ * Initialize the app.
+ */
 function init() {
   const box = document.querySelector(".box");
   const borderPropertyRadio = document.querySelectorAll(
