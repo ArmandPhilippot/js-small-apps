@@ -1,297 +1,435 @@
-const box = document.querySelector(".box");
+function getBorderColorProperty(direction) {
+  let borderColorProperty;
 
-function setCommonBorderWidth(value, unit) {
-  const bordersWidth = `${value}${unit}`;
-  box.style.borderWidth = bordersWidth;
+  switch (direction) {
+    case "top":
+      borderColorProperty = "borderTopColor";
+      break;
+    case "right":
+      borderColorProperty = "borderRightColor";
+      break;
+    case "bottom":
+      borderColorProperty = "borderBottomColor";
+      break;
+    case "left":
+      borderColorProperty = "borderLeftColor";
+      break;
+    default:
+      borderColorProperty = "borderColor";
+      break;
+  }
+
+  return borderColorProperty;
 }
 
-function setCommonBorderStyle(value) {
-  box.style.borderStyle = value;
+function getBorderStyleProperty(direction) {
+  let borderStyleProperty;
+
+  switch (direction) {
+    case "top":
+      borderStyleProperty = "borderTopStyle";
+      break;
+    case "right":
+      borderStyleProperty = "borderRightStyle";
+      break;
+    case "bottom":
+      borderStyleProperty = "borderBottomStyle";
+      break;
+    case "left":
+      borderStyleProperty = "borderLeftStyle";
+      break;
+    default:
+      borderStyleProperty = "borderStyle";
+      break;
+  }
+
+  return borderStyleProperty;
 }
 
-function setCommonBorderColor(value) {
-  box.style.borderColor = value;
+function getBorderWidthProperty(direction) {
+  let borderWidthProperty;
+
+  switch (direction) {
+    case "top":
+      borderWidthProperty = "borderTopWidth";
+      break;
+    case "right":
+      borderWidthProperty = "borderRightWidth";
+      break;
+    case "bottom":
+      borderWidthProperty = "borderBottomWidth";
+      break;
+    case "left":
+      borderWidthProperty = "borderLeftWidth";
+      break;
+    default:
+      borderWidthProperty = "borderWidth";
+      break;
+  }
+
+  return borderWidthProperty;
 }
 
-function setCommonBorderRadius(
-  firstRadius,
-  firstRadiusUnit,
-  secondRadius = "",
-  secondRadiusUnit = ""
-) {
-  const bordersRadius = `${firstRadius}${firstRadiusUnit}${
-    secondRadius ? ` / ${secondRadius}${secondRadiusUnit}` : ""
-  }`;
-  box.style.borderRadius = bordersRadius;
+function setBorder(el, property, value, direction = null) {
+  let borderProperty;
+
+  switch (property) {
+    case "color":
+      borderProperty = getBorderColorProperty(direction);
+      break;
+    case "style":
+      borderProperty = getBorderStyleProperty(direction);
+      break;
+    case "width":
+      borderProperty = getBorderWidthProperty(direction);
+    default:
+      break;
+  }
+
+  el.style[borderProperty] = value;
 }
 
-function initCommonBorder() {
-  const bordersWidthInput = document.getElementById("borders-width");
-  const bordersUnitSelect = document.getElementById("borders-unit");
-  const bordersStyleSelect = document.getElementById("borders-style");
-  const bordersColorInput = document.getElementById("borders-color");
+function setBorderRadius(el, firstRadius, secondRadius, x = null, y = null) {
+  const direction = `${x}-${y}`;
+  const value = `${firstRadius}${secondRadius ? ` / ${secondRadius}` : ""}`;
+  let borderRadiusProperty;
 
-  setCommonBorderColor(bordersColorInput.value);
-  setCommonBorderStyle(bordersStyleSelect.value);
-  setCommonBorderWidth(bordersWidthInput.value, bordersUnitSelect.value);
+  switch (direction) {
+    case "left-top":
+      borderRadiusProperty = "borderTopLeftRadius";
+      break;
+    case "right-top":
+      borderRadiusProperty = "borderTopRightRadius";
+      break;
+    case "left-bottom":
+      borderRadiusProperty = "borderBottomLeftRadius";
+      break;
+    case "right-bottom":
+      borderRadiusProperty = "borderBottomRightRadius";
+      break;
+    default:
+      borderRadiusProperty = "borderRadius";
+      break;
+  }
 
-  bordersWidthInput.addEventListener("input", (e) =>
-    setCommonBorderWidth(e.target.value, bordersUnitSelect.value)
-  );
-  bordersUnitSelect.addEventListener("input", (e) =>
-    setCommonBorderWidth(bordersWidthInput.value, e.target.value)
-  );
-  bordersStyleSelect.addEventListener("input", (e) =>
-    setCommonBorderStyle(e.target.value)
-  );
-  bordersColorInput.addEventListener("input", (e) =>
-    setCommonBorderColor(e.target.value)
-  );
+  el.style[borderRadiusProperty] = value;
 }
 
-function initCommonBorderRadius() {
-  const bordersFirstRadius = document.getElementById("borders-first-radius");
-  const bordersFirstRadiusUnit = document.getElementById(
-    "borders-first-radius-unit"
+function toggleBorderSettingsDisplay(string) {
+  const allBordersFieldset = document.getElementById("fieldset-borders");
+  const topBorderFieldset = document.getElementById("fieldset-border-top");
+  const rightBorderFieldset = document.getElementById("fieldset-border-right");
+  const bottomBorderFieldset = document.getElementById(
+    "fieldset-border-bottom"
   );
-  const bordersSecondRadius = document.getElementById("borders-second-radius");
-  const bordersSecondRadiusUnit = document.getElementById(
-    "borders-second-radius-unit"
+  const leftBorderFieldset = document.getElementById("fieldset-border-left");
+
+  if (string === "common") {
+    allBordersFieldset.style.display = "";
+    topBorderFieldset.style.display = "none";
+    rightBorderFieldset.style.display = "none";
+    bottomBorderFieldset.style.display = "none";
+    leftBorderFieldset.style.display = "none";
+  } else {
+    allBordersFieldset.style.display = "none";
+    topBorderFieldset.style.display = "";
+    rightBorderFieldset.style.display = "";
+    bottomBorderFieldset.style.display = "";
+    leftBorderFieldset.style.display = "";
+  }
+}
+
+function toggleBorderRadiusSettingsDisplay(string) {
+  const allBordersRadiusFieldset = document.getElementById(
+    "fieldset-borders-radius"
+  );
+  const topLeftBorderRadiusFieldset = document.getElementById(
+    "fieldset-border-top-left-radius"
+  );
+  const topRightBorderRadiusFieldset = document.getElementById(
+    "fieldset-border-top-right-radius"
+  );
+  const bottomLeftBorderRadiusFieldset = document.getElementById(
+    "fieldset-border-bottom-left-radius"
+  );
+  const bottomRightBorderRadiusFieldset = document.getElementById(
+    "fieldset-border-bottom-right-radius"
   );
 
-  setCommonBorderRadius(
-    bordersFirstRadius.value,
-    bordersFirstRadiusUnit.value,
-    bordersSecondRadius.value,
-    bordersSecondRadiusUnit.value
+  if (string === "common") {
+    allBordersRadiusFieldset.style.display = "";
+    topLeftBorderRadiusFieldset.style.display = "none";
+    topRightBorderRadiusFieldset.style.display = "none";
+    bottomLeftBorderRadiusFieldset.style.display = "none";
+    bottomRightBorderRadiusFieldset.style.display = "none";
+  } else {
+    allBordersRadiusFieldset.style.display = "none";
+    topLeftBorderRadiusFieldset.style.display = "";
+    topRightBorderRadiusFieldset.style.display = "";
+    bottomLeftBorderRadiusFieldset.style.display = "";
+    bottomRightBorderRadiusFieldset.style.display = "";
+  }
+}
+
+function isIndividualSettings(radioValue) {
+  return radioValue === "true" ? true : false;
+}
+
+function setCommonBorder(el) {
+  const allBordersColorInput = document.getElementById("borders-color");
+  const allBordersStyleSelect = document.getElementById("borders-style");
+  const allBordersUnitSelect = document.getElementById("borders-unit");
+  const allBordersWidthInput = document.getElementById("borders-width");
+
+  setBorder(el, "color", allBordersColorInput.value);
+  setBorder(el, "style", allBordersStyleSelect.value);
+  setBorder(
+    el,
+    "width",
+    `${allBordersWidthInput.value}${allBordersUnitSelect.value}`
   );
 
-  bordersFirstRadius.addEventListener("input", (e) =>
-    setCommonBorderRadius(e.target.value, bordersFirstRadiusUnit.value)
+  allBordersColorInput.addEventListener("input", () =>
+    setBorder(el, "color", allBordersColorInput.value)
   );
-  bordersFirstRadiusUnit.addEventListener("input", (e) =>
-    setCommonBorderRadius(bordersFirstRadius.value, e.target.value)
+
+  allBordersStyleSelect.addEventListener("input", () =>
+    setBorder(el, "style", allBordersStyleSelect.value)
   );
-  bordersSecondRadius.addEventListener("input", (e) =>
-    setCommonBorderRadius(
-      bordersFirstRadius.value,
-      bordersFirstRadiusUnit.value,
-      e.target.value,
-      bordersSecondRadiusUnit.value
+
+  allBordersUnitSelect.addEventListener("input", () =>
+    setBorder(
+      el,
+      "width",
+      `${allBordersWidthInput.value}${allBordersUnitSelect.value}`
     )
   );
-  bordersSecondRadiusUnit.addEventListener("input", (e) =>
-    setCommonBorderRadius(
-      bordersFirstRadius.value,
-      bordersFirstRadiusUnit.value,
-      bordersSecondRadius.value,
-      e.target.value
+
+  allBordersWidthInput.addEventListener("input", () =>
+    setBorder(
+      el,
+      "width",
+      `${allBordersWidthInput.value}${allBordersUnitSelect.value}`
     )
   );
 }
 
-function setBorderTopWidth(value, unit) {
-  const borderTopWidth = `${value}${unit}`;
-  box.style.borderTopWidth = borderTopWidth;
-}
+function setTopBorder(el) {
+  const topBorderColorInput = document.getElementById("border-top-color");
+  const topBorderStyleSelect = document.getElementById("border-top-style");
+  const topBorderUnitSelect = document.getElementById("border-top-unit");
+  const topBorderWidthInput = document.getElementById("border-top-width");
 
-function setBorderRightWidth(value, unit) {
-  const borderRightWidth = `${value}${unit}`;
-  box.style.borderRightWidth = borderRightWidth;
-}
-
-function setBorderBottomWidth(value, unit) {
-  const borderBottomWidth = `${value}${unit}`;
-  box.style.borderBottomWidth = borderBottomWidth;
-}
-
-function setBorderLeftWidth(value, unit) {
-  const borderLeftWidth = `${value}${unit}`;
-  box.style.borderLeftWidth = borderLeftWidth;
-}
-
-function setBorderTopStyle(value) {
-  box.style.borderTopStyle = value;
-}
-
-function setBorderRightStyle(value) {
-  box.style.borderRightStyle = value;
-}
-
-function setBorderBottomStyle(value) {
-  box.style.borderBottomStyle = value;
-}
-
-function setBorderLeftStyle(value) {
-  box.style.borderLeftStyle = value;
-}
-
-function setBorderTopColor(value) {
-  box.style.borderTopColor = value;
-}
-
-function setBorderRightColor(value) {
-  box.style.borderRightColor = value;
-}
-
-function setBorderBottomColor(value) {
-  box.style.borderBottomColor = value;
-}
-
-function setBorderLeftColor(value) {
-  box.style.borderLeftColor = value;
-}
-
-function initBorderTop() {
-  const borderTopWidthInput = document.getElementById("border-top-width");
-  const borderTopUnitSelect = document.getElementById("border-top-unit");
-  const borderTopStyleSelect = document.getElementById("border-top-style");
-  const borderTopColorInput = document.getElementById("border-top-color");
-
-  setBorderTopColor(borderTopColorInput.value);
-  setBorderTopStyle(borderTopStyleSelect.value);
-  setBorderTopWidth(borderTopWidthInput.value, borderTopUnitSelect.value);
-
-  borderTopColorInput.addEventListener("input", (e) =>
-    setBorderTopColor(e.target.value)
+  setBorder(el, "color", topBorderColorInput.value, "top");
+  setBorder(el, "style", topBorderStyleSelect.value, "top");
+  setBorder(
+    el,
+    "width",
+    `${topBorderWidthInput.value}${topBorderUnitSelect.value}`,
+    "top"
   );
-  borderTopStyleSelect.addEventListener("input", (e) =>
-    setBorderTopStyle(e.target.value)
+
+  topBorderColorInput.addEventListener("input", () =>
+    setBorder(el, "color", topBorderColorInput.value, "top")
   );
-  borderTopWidthInput.addEventListener("input", (e) =>
-    setBorderTopWidth(e.target.value, borderTopUnitSelect.value)
+
+  topBorderStyleSelect.addEventListener("input", () =>
+    setBorder(el, "style", topBorderStyleSelect.value, "top")
   );
-  borderTopUnitSelect.addEventListener("input", (e) =>
-    setBorderTopWidth(borderTopWidthInput.value, e.target.value)
+
+  topBorderUnitSelect.addEventListener("input", () =>
+    setBorder(
+      el,
+      "width",
+      `${topBorderWidthInput.value}${topBorderUnitSelect.value}`,
+      "top"
+    )
+  );
+
+  topBorderWidthInput.addEventListener("input", () =>
+    setBorder(
+      el,
+      "width",
+      `${topBorderWidthInput.value}${topBorderUnitSelect.value}`,
+      "top"
+    )
   );
 }
 
-function initBorderRight() {
-  const borderRightWidthInput = document.getElementById("border-right-width");
-  const borderRightUnitSelect = document.getElementById("border-right-unit");
-  const borderRightStyleSelect = document.getElementById("border-right-style");
-  const borderRightColorInput = document.getElementById("border-right-color");
+function setRightBorder(el) {
+  const rightBorderWidthInput = document.getElementById("border-right-width");
+  const rightBorderUnitSelect = document.getElementById("border-right-unit");
+  const rightBorderStyleSelect = document.getElementById("border-right-style");
+  const rightBorderColorInput = document.getElementById("border-right-color");
 
-  setBorderRightColor(borderRightColorInput.value);
-  setBorderRightStyle(borderRightStyleSelect.value);
-  setBorderRightWidth(borderRightWidthInput.value, borderRightUnitSelect.value);
+  setBorder(el, "color", rightBorderColorInput.value, "right");
+  setBorder(el, "style", rightBorderStyleSelect.value, "right");
+  setBorder(
+    el,
+    "width",
+    `${rightBorderWidthInput.value}${rightBorderUnitSelect.value}`,
+    "right"
+  );
 
-  borderRightColorInput.addEventListener("input", (e) =>
-    setBorderRightColor(e.target.value)
+  rightBorderColorInput.addEventListener("input", () =>
+    setBorder(el, "color", rightBorderColorInput.value, "right")
   );
-  borderRightStyleSelect.addEventListener("input", (e) =>
-    setBorderRightStyle(e.target.value)
+
+  rightBorderStyleSelect.addEventListener("input", () =>
+    setBorder(el, "style", rightBorderStyleSelect.value, "right")
   );
-  borderRightWidthInput.addEventListener("input", (e) =>
-    setBorderRightWidth(e.target.value, borderRightUnitSelect.value)
+
+  rightBorderUnitSelect.addEventListener("input", () =>
+    setBorder(
+      el,
+      "width",
+      `${rightBorderWidthInput.value}${rightBorderUnitSelect.value}`,
+      "right"
+    )
   );
-  borderRightUnitSelect.addEventListener("input", (e) =>
-    setBorderRightWidth(borderRightWidthInput.value, e.target.value)
+
+  rightBorderWidthInput.addEventListener("input", () =>
+    setBorder(
+      el,
+      "width",
+      `${rightBorderWidthInput.value}${rightBorderUnitSelect.value}`,
+      "right"
+    )
   );
 }
 
-function initBorderBottom() {
-  const borderBottomWidthInput = document.getElementById("border-bottom-width");
-  const borderBottomUnitSelect = document.getElementById("border-bottom-unit");
-  const borderBottomStyleSelect = document.getElementById(
+function setBottomBorder(el) {
+  const bottomBorderWidthInput = document.getElementById("border-bottom-width");
+  const bottomBorderUnitSelect = document.getElementById("border-bottom-unit");
+  const bottomBorderStyleSelect = document.getElementById(
     "border-bottom-style"
   );
-  const borderBottomColorInput = document.getElementById("border-bottom-color");
+  const bottomBorderColorInput = document.getElementById("border-bottom-color");
 
-  setBorderBottomColor(borderBottomColorInput.value);
-  setBorderBottomStyle(borderBottomStyleSelect.value);
-  setBorderBottomWidth(
-    borderBottomWidthInput.value,
-    borderBottomUnitSelect.value
+  setBorder(el, "color", bottomBorderColorInput.value, "bottom");
+  setBorder(el, "style", bottomBorderStyleSelect.value, "bottom");
+  setBorder(
+    el,
+    "width",
+    `${bottomBorderWidthInput.value}${bottomBorderUnitSelect.value}`,
+    "bottom"
   );
 
-  borderBottomColorInput.addEventListener("input", (e) =>
-    setBorderBottomColor(e.target.value)
+  bottomBorderColorInput.addEventListener("input", () =>
+    setBorder(el, "color", bottomBorderColorInput.value, "bottom")
   );
-  borderBottomStyleSelect.addEventListener("input", (e) =>
-    setBorderBottomStyle(e.target.value)
-  );
-  borderBottomWidthInput.addEventListener("input", (e) =>
-    setBorderBottomWidth(e.target.value, borderBottomUnitSelect.value)
-  );
-  borderBottomUnitSelect.addEventListener("input", (e) =>
-    setBorderBottomWidth(borderBottomWidthInput.value, e.target.value)
-  );
-}
 
-function initBorderLeft() {
-  const borderLeftWidthInput = document.getElementById("border-left-width");
-  const borderLeftUnitSelect = document.getElementById("border-left-unit");
-  const borderLeftStyleSelect = document.getElementById("border-left-style");
-  const borderLeftColorInput = document.getElementById("border-left-color");
+  bottomBorderStyleSelect.addEventListener("input", () =>
+    setBorder(el, "style", bottomBorderStyleSelect.value, "bottom")
+  );
 
-  setBorderLeftColor(borderLeftColorInput.value);
-  setBorderLeftStyle(borderLeftStyleSelect.value);
-  setBorderLeftWidth(borderLeftWidthInput.value, borderLeftUnitSelect.value);
+  bottomBorderUnitSelect.addEventListener("input", () =>
+    setBorder(
+      el,
+      "width",
+      `${bottomBorderWidthInput.value}${bottomBorderUnitSelect.value}`,
+      "bottom"
+    )
+  );
 
-  borderLeftColorInput.addEventListener("input", (e) =>
-    setBorderLeftColor(e.target.value)
-  );
-  borderLeftStyleSelect.addEventListener("input", (e) =>
-    setBorderLeftStyle(e.target.value)
-  );
-  borderLeftWidthInput.addEventListener("input", (e) =>
-    setBorderLeftWidth(e.target.value, borderLeftUnitSelect.value)
-  );
-  borderLeftUnitSelect.addEventListener("input", (e) =>
-    setBorderLeftWidth(borderLeftWidthInput.value, e.target.value)
+  bottomBorderWidthInput.addEventListener("input", () =>
+    setBorder(
+      el,
+      "width",
+      `${bottomBorderWidthInput.value}${bottomBorderUnitSelect.value}`,
+      "bottom"
+    )
   );
 }
 
-function setBorderTopLeftRadius(
-  firstRadius,
-  firstRadiusUnit,
-  secondRadius = "",
-  secondRadiusUnit = ""
-) {
-  const borderTopLeftRadius = `${firstRadius}${firstRadiusUnit}${
-    secondRadius ? ` / ${secondRadius}${secondRadiusUnit}` : ""
-  }`;
-  box.style.borderTopLeftRadius = borderTopLeftRadius;
+function setLeftBorder(el) {
+  const leftBorderWidthInput = document.getElementById("border-left-width");
+  const leftBorderUnitSelect = document.getElementById("border-left-unit");
+  const leftBorderStyleSelect = document.getElementById("border-left-style");
+  const leftBorderColorInput = document.getElementById("border-left-color");
+
+  setBorder(el, "color", leftBorderColorInput.value, "left");
+  setBorder(el, "style", leftBorderStyleSelect.value, "left");
+  setBorder(
+    el,
+    "width",
+    `${leftBorderWidthInput.value}${leftBorderUnitSelect.value}`,
+    "left"
+  );
+
+  leftBorderColorInput.addEventListener("input", () =>
+    setBorder(el, "color", leftBorderColorInput.value, "left")
+  );
+
+  leftBorderStyleSelect.addEventListener("input", () =>
+    setBorder(el, "style", leftBorderStyleSelect.value, "left")
+  );
+
+  leftBorderUnitSelect.addEventListener("input", () =>
+    setBorder(
+      el,
+      "width",
+      `${leftBorderWidthInput.value}${leftBorderUnitSelect.value}`,
+      "left"
+    )
+  );
+
+  leftBorderWidthInput.addEventListener("input", () =>
+    setBorder(
+      el,
+      "width",
+      `${leftBorderWidthInput.value}${leftBorderUnitSelect.value}`,
+      "left"
+    )
+  );
 }
 
-function setBorderTopRightRadius(
-  firstRadius,
-  firstRadiusUnit,
-  secondRadius = "",
-  secondRadiusUnit = ""
-) {
-  const borderTopRightRadius = `${firstRadius}${firstRadiusUnit}${
-    secondRadius ? ` / ${secondRadius}${secondRadiusUnit}` : ""
-  }`;
-  box.style.borderTopRightRadius = borderTopRightRadius;
+function setCommonBorderRadius(el) {
+  const borderCommonFirstRadius = document.getElementById(
+    "borders-first-radius"
+  );
+  const borderCommonFirstRadiusUnit = document.getElementById(
+    "borders-first-radius-unit"
+  );
+  const borderCommonSecondRadius = document.getElementById(
+    "borders-second-radius"
+  );
+  const borderCommonSecondRadiusUnit = document.getElementById(
+    "borders-second-radius-unit"
+  );
+  let firstRadius = `${borderCommonFirstRadius.value}${borderCommonFirstRadiusUnit.value}`;
+  let secondRadius = borderCommonSecondRadius.value
+    ? `${borderCommonSecondRadius.value}${borderCommonSecondRadiusUnit.value}`
+    : null;
+
+  setBorderRadius(el, firstRadius, secondRadius);
+
+  borderCommonFirstRadius.addEventListener("input", () => {
+    firstRadius = `${borderCommonFirstRadius.value}${borderCommonFirstRadiusUnit.value}`;
+    setBorderRadius(el, firstRadius, secondRadius);
+  });
+
+  borderCommonFirstRadiusUnit.addEventListener("input", () => {
+    firstRadius = `${borderCommonFirstRadius.value}${borderCommonFirstRadiusUnit.value}`;
+    setBorderRadius(el, firstRadius, secondRadius);
+  });
+
+  borderCommonSecondRadius.addEventListener("input", () => {
+    secondRadius = borderCommonSecondRadius.value
+      ? `${borderCommonSecondRadius.value}${borderCommonSecondRadiusUnit.value}`
+      : null;
+    setBorderRadius(el, firstRadius, secondRadius);
+  });
+
+  borderCommonSecondRadiusUnit.addEventListener("input", () => {
+    secondRadius = borderCommonSecondRadius.value
+      ? `${borderCommonSecondRadius.value}${borderCommonSecondRadiusUnit.value}`
+      : null;
+    setBorderRadius(el, firstRadius, secondRadius);
+  });
 }
 
-function setBorderBottomLeftRadius(
-  firstRadius,
-  firstRadiusUnit,
-  secondRadius = "",
-  secondRadiusUnit = ""
-) {
-  const borderBottomLeftRadius = `${firstRadius}${firstRadiusUnit}${
-    secondRadius ? ` / ${secondRadius}${secondRadiusUnit}` : ""
-  }`;
-  box.style.borderBottomLeftRadius = borderBottomLeftRadius;
-}
-
-function setBorderBottomRightRadius(
-  firstRadius,
-  firstRadiusUnit,
-  secondRadius = "",
-  secondRadiusUnit = ""
-) {
-  const borderBottomRightRadius = `${firstRadius}${firstRadiusUnit}${
-    secondRadius ? ` / ${secondRadius}${secondRadiusUnit}` : ""
-  }`;
-  box.style.borderBottomRightRadius = borderBottomRightRadius;
-}
-
-function initBorderTopLeftRadius() {
+function setTopLeftBorderRadius(el) {
   const borderTopLeftFirstRadius = document.getElementById(
     "border-top-left-first-radius"
   );
@@ -304,39 +442,39 @@ function initBorderTopLeftRadius() {
   const borderTopLeftSecondRadiusUnit = document.getElementById(
     "border-top-left-second-radius-unit"
   );
+  let firstRadius = `${borderTopLeftFirstRadius.value}${borderTopLeftFirstRadiusUnit.value}`;
+  let secondRadius = borderTopLeftSecondRadius.value
+    ? `${borderTopLeftSecondRadius.value}${borderTopLeftSecondRadiusUnit.value}`
+    : null;
 
-  setBorderTopLeftRadius(
-    borderTopLeftFirstRadius.value,
-    borderTopLeftFirstRadiusUnit.value,
-    borderTopLeftSecondRadius.value,
-    borderTopLeftSecondRadiusUnit.value
-  );
+  setBorderRadius(el, firstRadius, secondRadius, "left", "top");
 
-  borderTopLeftFirstRadius.addEventListener("input", (e) =>
-    setBorderTopLeftRadius(e.target.value, borderTopLeftFirstRadiusUnit.value)
-  );
-  borderTopLeftFirstRadiusUnit.addEventListener("input", (e) =>
-    setBorderTopLeftRadius(borderTopLeftFirstRadius.value, e.target.value)
-  );
-  borderTopLeftSecondRadius.addEventListener("input", (e) =>
-    setBorderTopLeftRadius(
-      borderTopLeftFirstRadius.value,
-      borderTopLeftFirstRadiusUnit.value,
-      e.target.value,
-      borderTopLeftSecondRadiusUnit.value
-    )
-  );
-  borderTopLeftSecondRadiusUnit.addEventListener("input", (e) =>
-    setBorderTopLeftRadius(
-      borderTopLeftFirstRadius.value,
-      borderTopLeftFirstRadiusUnit.value,
-      borderTopLeftSecondRadius.value,
-      e.target.value
-    )
-  );
+  borderTopLeftFirstRadius.addEventListener("input", () => {
+    firstRadius = `${borderTopLeftFirstRadius.value}${borderTopLeftFirstRadiusUnit.value}`;
+    setBorderRadius(el, firstRadius, secondRadius, "left", "top");
+  });
+
+  borderTopLeftFirstRadiusUnit.addEventListener("input", () => {
+    firstRadius = `${borderTopLeftFirstRadius.value}${borderTopLeftFirstRadiusUnit.value}`;
+    setBorderRadius(el, firstRadius, secondRadius, "left", "top");
+  });
+
+  borderTopLeftSecondRadius.addEventListener("input", () => {
+    secondRadius = borderTopLeftSecondRadius.value
+      ? `${borderTopLeftSecondRadius.value}${borderTopLeftSecondRadiusUnit.value}`
+      : null;
+    setBorderRadius(el, firstRadius, secondRadius, "left", "top");
+  });
+
+  borderTopLeftSecondRadiusUnit.addEventListener("input", () => {
+    secondRadius = borderTopLeftSecondRadius.value
+      ? `${borderTopLeftSecondRadius.value}${borderTopLeftSecondRadiusUnit.value}`
+      : null;
+    setBorderRadius(el, firstRadius, secondRadius, "left", "top");
+  });
 }
 
-function initBorderTopRightRadius() {
+function setTopRightBorderRadius(el) {
   const borderTopRightFirstRadius = document.getElementById(
     "border-top-right-first-radius"
   );
@@ -349,39 +487,39 @@ function initBorderTopRightRadius() {
   const borderTopRightSecondRadiusUnit = document.getElementById(
     "border-top-right-second-radius-unit"
   );
+  const firstRadius = `${borderTopRightFirstRadius.value}${borderTopRightFirstRadiusUnit.value}`;
+  const secondRadius = borderTopRightSecondRadius.value
+    ? `${borderTopRightSecondRadius.value}${borderTopRightSecondRadiusUnit.value}`
+    : null;
 
-  setBorderTopRightRadius(
-    borderTopRightFirstRadius.value,
-    borderTopRightFirstRadiusUnit.value,
-    borderTopRightSecondRadius.value,
-    borderTopRightSecondRadiusUnit.value
-  );
+  setBorderRadius(el, firstRadius, secondRadius, "right", "top");
 
-  borderTopRightFirstRadius.addEventListener("input", (e) =>
-    setBorderTopRightRadius(e.target.value, borderTopRightFirstRadiusUnit.value)
-  );
-  borderTopRightFirstRadiusUnit.addEventListener("input", (e) =>
-    setBorderTopRightRadius(borderTopRightFirstRadius.value, e.target.value)
-  );
-  borderTopRightSecondRadius.addEventListener("input", (e) =>
-    setBorderTopRightRadius(
-      borderTopRightFirstRadius.value,
-      borderTopRightFirstRadiusUnit.value,
-      e.target.value,
-      borderTopRightSecondRadiusUnit.value
-    )
-  );
-  borderTopRightSecondRadiusUnit.addEventListener("input", (e) =>
-    setBorderTopRightRadius(
-      borderTopRightFirstRadius.value,
-      borderTopRightFirstRadiusUnit.value,
-      borderTopRightSecondRadius.value,
-      e.target.value
-    )
-  );
+  borderTopRightFirstRadius.addEventListener("input", () => {
+    firstRadius = `${borderTopRightFirstRadius.value}${borderTopRightFirstRadiusUnit.value}`;
+    setBorderRadius(el, firstRadius, secondRadius, "right", "top");
+  });
+
+  borderTopRightFirstRadiusUnit.addEventListener("input", () => {
+    firstRadius = `${borderTopRightFirstRadius.value}${borderTopRightFirstRadiusUnit.value}`;
+    setBorderRadius(el, firstRadius, secondRadius, "right", "top");
+  });
+
+  borderTopRightSecondRadius.addEventListener("input", () => {
+    secondRadius = borderTopRightSecondRadius.value
+      ? `${borderTopRightSecondRadius.value}${borderTopRightSecondRadiusUnit.value}`
+      : null;
+    setBorderRadius(el, firstRadius, secondRadius, "right", "top");
+  });
+
+  borderTopRightSecondRadiusUnit.addEventListener("input", () => {
+    secondRadius = borderTopRightSecondRadius.value
+      ? `${borderTopRightSecondRadius.value}${borderTopRightSecondRadiusUnit.value}`
+      : null;
+    setBorderRadius(el, firstRadius, secondRadius, "right", "top");
+  });
 }
 
-function initBorderBottomLeftRadius() {
+function setBottomLeftBorderRadius(el) {
   const borderBottomLeftFirstRadius = document.getElementById(
     "border-bottom-left-first-radius"
   );
@@ -394,42 +532,39 @@ function initBorderBottomLeftRadius() {
   const borderBottomLeftSecondRadiusUnit = document.getElementById(
     "border-bottom-left-second-radius-unit"
   );
+  const firstRadius = `${borderBottomLeftFirstRadius.value}${borderBottomLeftFirstRadiusUnit.value}`;
+  const secondRadius = borderBottomLeftSecondRadius.value
+    ? `${borderBottomLeftSecondRadius.value}${borderBottomLeftSecondRadiusUnit.value}`
+    : null;
 
-  setBorderBottomLeftRadius(
-    borderBottomLeftFirstRadius.value,
-    borderBottomLeftFirstRadiusUnit.value,
-    borderBottomLeftSecondRadius.value,
-    borderBottomLeftSecondRadiusUnit.value
-  );
+  setBorderRadius(el, firstRadius, secondRadius, "left", "bottom");
 
-  borderBottomLeftFirstRadius.addEventListener("input", (e) =>
-    setBorderBottomLeftRadius(
-      e.target.value,
-      borderBottomLeftFirstRadiusUnit.value
-    )
-  );
-  borderBottomLeftFirstRadiusUnit.addEventListener("input", (e) =>
-    setBorderBottomLeftRadius(borderBottomLeftFirstRadius.value, e.target.value)
-  );
-  borderBottomLeftSecondRadius.addEventListener("input", (e) =>
-    setBorderBottomLeftRadius(
-      borderBottomLeftFirstRadius.value,
-      borderBottomLeftFirstRadiusUnit.value,
-      e.target.value,
-      borderBottomLeftSecondRadiusUnit.value
-    )
-  );
-  borderBottomLeftSecondRadiusUnit.addEventListener("input", (e) =>
-    setBorderBottomLeftRadius(
-      borderBottomLeftFirstRadius.value,
-      borderBottomLeftFirstRadiusUnit.value,
-      borderBottomLeftSecondRadius.value,
-      e.target.value
-    )
-  );
+  borderBottomLeftFirstRadius.addEventListener("input", () => {
+    firstRadius = `${borderBottomLeftFirstRadius.value}${borderBottomLeftFirstRadiusUnit.value}`;
+    setBorderRadius(el, firstRadius, secondRadius, "left", "bottom");
+  });
+
+  borderBottomLeftFirstRadiusUnit.addEventListener("input", () => {
+    firstRadius = `${borderBottomLeftFirstRadius.value}${borderBottomLeftFirstRadiusUnit.value}`;
+    setBorderRadius(el, firstRadius, secondRadius, "left", "bottom");
+  });
+
+  borderBottomLeftSecondRadius.addEventListener("input", () => {
+    secondRadius = borderBottomLeftSecondRadius.value
+      ? `${borderBottomLeftSecondRadius.value}${borderBottomLeftSecondRadiusUnit.value}`
+      : null;
+    setBorderRadius(el, firstRadius, secondRadius, "left", "bottom");
+  });
+
+  borderBottomLeftSecondRadiusUnit.addEventListener("input", () => {
+    secondRadius = borderBottomLeftSecondRadius.value
+      ? `${borderBottomLeftSecondRadius.value}${borderBottomLeftSecondRadiusUnit.value}`
+      : null;
+    setBorderRadius(el, firstRadius, secondRadius, "left", "bottom");
+  });
 }
 
-function initBorderBottomRightRadius() {
+function setBottomRightBorderRadius(el) {
   const borderBottomRightFirstRadius = document.getElementById(
     "border-bottom-right-first-radius"
   );
@@ -442,132 +577,81 @@ function initBorderBottomRightRadius() {
   const borderBottomRightSecondRadiusUnit = document.getElementById(
     "border-bottom-right-second-radius-unit"
   );
+  const firstRadius = `${borderBottomRightFirstRadius.value}${borderBottomRightFirstRadiusUnit.value}`;
+  const secondRadius = borderBottomRightSecondRadius.value
+    ? `${borderBottomRightSecondRadius.value}${borderBottomRightSecondRadiusUnit.value}`
+    : null;
 
-  setBorderBottomRightRadius(
-    borderBottomRightFirstRadius.value,
-    borderBottomRightFirstRadiusUnit.value,
-    borderBottomRightSecondRadius.value,
-    borderBottomRightSecondRadiusUnit.value
-  );
+  setBorderRadius(el, firstRadius, secondRadius, "right", "bottom");
 
-  borderBottomRightFirstRadius.addEventListener("input", (e) =>
-    setBorderBottomRightRadius(
-      e.target.value,
-      borderBottomRightFirstRadiusUnit.value
-    )
-  );
-  borderBottomRightFirstRadiusUnit.addEventListener("input", (e) =>
-    setBorderBottomRightRadius(
-      borderBottomRightFirstRadius.value,
-      e.target.value
-    )
-  );
-  borderBottomRightSecondRadius.addEventListener("input", (e) =>
-    setBorderBottomRightRadius(
-      borderBottomRightFirstRadius.value,
-      borderBottomRightFirstRadiusUnit.value,
-      e.target.value,
-      borderBottomRightSecondRadiusUnit.value
-    )
-  );
-  borderBottomRightSecondRadiusUnit.addEventListener("input", (e) =>
-    setBorderBottomRightRadius(
-      borderBottomRightFirstRadius.value,
-      borderBottomRightFirstRadiusUnit.value,
-      borderBottomRightSecondRadius.value,
-      e.target.value
-    )
-  );
+  borderBottomRightFirstRadius.addEventListener("input", () => {
+    firstRadius = `${borderBottomRightFirstRadius.value}${borderBottomRightFirstRadiusUnit.value}`;
+    setBorderRadius(el, firstRadius, secondRadius, "right", "bottom");
+  });
+
+  borderBottomRightFirstRadiusUnit.addEventListener("input", () => {
+    firstRadius = `${borderBottomRightFirstRadius.value}${borderBottomRightFirstRadiusUnit.value}`;
+    setBorderRadius(el, firstRadius, secondRadius, "right", "bottom");
+  });
+
+  borderBottomRightSecondRadius.addEventListener("input", () => {
+    secondRadius = borderBottomRightSecondRadius.value
+      ? `${borderBottomRightSecondRadius.value}${borderBottomRightSecondRadiusUnit.value}`
+      : null;
+    setBorderRadius(el, firstRadius, secondRadius, "right", "bottom");
+  });
+
+  borderBottomRightSecondRadiusUnit.addEventListener("input", () => {
+    secondRadius = borderBottomRightSecondRadius.value
+      ? `${borderBottomRightSecondRadius.value}${borderBottomRightSecondRadiusUnit.value}`
+      : null;
+    setBorderRadius(el, firstRadius, secondRadius, "right", "bottom");
+  });
 }
 
-function isIndividual(value) {
-  return value === "true" ? true : false;
-}
-
-function initBorder(value) {
-  const fieldsetCommon = document.getElementById("fieldset-borders");
-  const fieldsetBorderTop = document.getElementById("fieldset-border-top");
-  const fieldsetBorderRight = document.getElementById("fieldset-border-right");
-  const fieldsetBorderBottom = document.getElementById(
-    "fieldset-border-bottom"
-  );
-  const fieldsetBorderLeft = document.getElementById("fieldset-border-left");
-
-  if (isIndividual(value)) {
-    fieldsetCommon.style.display = "none";
-    fieldsetBorderTop.style.display = "";
-    fieldsetBorderRight.style.display = "";
-    fieldsetBorderBottom.style.display = "";
-    fieldsetBorderLeft.style.display = "";
-    initBorderTop();
-    initBorderRight();
-    initBorderBottom();
-    initBorderLeft();
+function initBorders(radioValue, el) {
+  if (isIndividualSettings(radioValue)) {
+    toggleBorderSettingsDisplay("individual");
+    setTopBorder(el);
+    setRightBorder(el);
+    setBottomBorder(el);
+    setLeftBorder(el);
   } else {
-    fieldsetCommon.style.display = "";
-    fieldsetBorderTop.style.display = "none";
-    fieldsetBorderRight.style.display = "none";
-    fieldsetBorderBottom.style.display = "none";
-    fieldsetBorderLeft.style.display = "none";
-    initCommonBorder();
+    toggleBorderSettingsDisplay("common");
+    setCommonBorder(el);
   }
 }
 
-function initBorderRadius(value) {
-  const fieldsetCommonRadius = document.getElementById(
-    "fieldset-borders-radius"
-  );
-  const fieldsetBorderTopLeftRadius = document.getElementById(
-    "fieldset-border-top-left-radius"
-  );
-  const fieldsetBorderTopRightRadius = document.getElementById(
-    "fieldset-border-top-right-radius"
-  );
-  const fieldsetBorderBottomLeftRadius = document.getElementById(
-    "fieldset-border-bottom-left-radius"
-  );
-  const fieldsetBorderBottomRightRadius = document.getElementById(
-    "fieldset-border-bottom-right-radius"
-  );
-
-  if (isIndividual(value)) {
-    fieldsetCommonRadius.style.display = "none";
-    fieldsetBorderTopLeftRadius.style.display = "";
-    fieldsetBorderTopRightRadius.style.display = "";
-    fieldsetBorderBottomLeftRadius.style.display = "";
-    fieldsetBorderBottomRightRadius.style.display = "";
-    initBorderTopLeftRadius();
-    initBorderTopRightRadius();
-    initBorderBottomLeftRadius();
-    initBorderBottomRightRadius();
+function initBordersRadius(radioValue, el) {
+  if (isIndividualSettings(radioValue)) {
+    toggleBorderRadiusSettingsDisplay("individual");
+    setTopLeftBorderRadius(el);
+    setTopRightBorderRadius(el);
+    setBottomLeftBorderRadius(el);
+    setBottomRightBorderRadius(el);
   } else {
-    fieldsetCommonRadius.style.display = "";
-    fieldsetBorderTopLeftRadius.style.display = "none";
-    fieldsetBorderTopRightRadius.style.display = "none";
-    fieldsetBorderBottomLeftRadius.style.display = "none";
-    fieldsetBorderBottomRightRadius.style.display = "none";
-    initCommonBorderRadius();
+    toggleBorderRadiusSettingsDisplay("common");
+    setCommonBorderRadius(el);
   }
 }
 
 function init() {
-  const borderProperty = document.querySelectorAll(
+  const box = document.querySelector(".box");
+  const borderPropertyRadio = document.querySelectorAll(
     'input[name="border-property"]'
   );
-  const borderRadiusProperty = document.querySelectorAll(
+  const borderRadiusPropertyRadio = document.querySelectorAll(
     'input[name="border-radius-property"]'
   );
 
-  for (const item of borderProperty) {
-    item.addEventListener("change", (e) => initBorder(e.target.value));
-
-    if (item.checked) initBorder(item.value);
+  for (const radio of borderPropertyRadio) {
+    if (radio.checked) initBorders(radio.value, box);
+    radio.addEventListener("change", () => initBorders(radio.value, box));
   }
 
-  for (const item of borderRadiusProperty) {
-    item.addEventListener("change", (e) => initBorderRadius(e.target.value));
-
-    if (item.checked) initBorderRadius(item.value);
+  for (const radio of borderRadiusPropertyRadio) {
+    if (radio.checked) initBordersRadius(radio.value, box);
+    radio.addEventListener("change", () => initBordersRadius(radio.value, box));
   }
 }
 
