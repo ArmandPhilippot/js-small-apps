@@ -171,6 +171,19 @@ function toggleBorderRadiusSettingsDisplay(string) {
   }
 }
 
+function printCode(el) {
+  const code = document.querySelector(".result__code");
+  let codeOutput = `
+.box {\n`;
+
+  for (const property of el.style) {
+    codeOutput += `\t${property}: ${el.style[property]};\n`;
+  }
+
+  codeOutput += "}";
+  code.textContent = codeOutput;
+}
+
 function isIndividualSettings(radioValue) {
   return radioValue === "true" ? true : false;
 }
@@ -189,29 +202,33 @@ function setCommonBorder(el) {
     `${allBordersWidthInput.value}${allBordersUnitSelect.value}`
   );
 
-  allBordersColorInput.addEventListener("input", () =>
-    setBorder(el, "color", allBordersColorInput.value)
-  );
+  allBordersColorInput.addEventListener("input", () => {
+    setBorder(el, "color", allBordersColorInput.value);
+    printCode(el);
+  });
 
-  allBordersStyleSelect.addEventListener("input", () =>
-    setBorder(el, "style", allBordersStyleSelect.value)
-  );
+  allBordersStyleSelect.addEventListener("input", () => {
+    setBorder(el, "style", allBordersStyleSelect.value);
+    printCode(el);
+  });
 
-  allBordersUnitSelect.addEventListener("input", () =>
+  allBordersUnitSelect.addEventListener("input", () => {
     setBorder(
       el,
       "width",
       `${allBordersWidthInput.value}${allBordersUnitSelect.value}`
-    )
-  );
+    );
+    printCode(el);
+  });
 
-  allBordersWidthInput.addEventListener("input", () =>
+  allBordersWidthInput.addEventListener("input", () => {
     setBorder(
       el,
       "width",
       `${allBordersWidthInput.value}${allBordersUnitSelect.value}`
-    )
-  );
+    );
+    printCode(el);
+  });
 }
 
 function setTopBorder(el) {
@@ -229,31 +246,35 @@ function setTopBorder(el) {
     "top"
   );
 
-  topBorderColorInput.addEventListener("input", () =>
-    setBorder(el, "color", topBorderColorInput.value, "top")
-  );
+  topBorderColorInput.addEventListener("input", () => {
+    setBorder(el, "color", topBorderColorInput.value, "top");
+    printCode(el);
+  });
 
-  topBorderStyleSelect.addEventListener("input", () =>
-    setBorder(el, "style", topBorderStyleSelect.value, "top")
-  );
+  topBorderStyleSelect.addEventListener("input", () => {
+    setBorder(el, "style", topBorderStyleSelect.value, "top");
+    printCode(el);
+  });
 
-  topBorderUnitSelect.addEventListener("input", () =>
+  topBorderUnitSelect.addEventListener("input", () => {
     setBorder(
       el,
       "width",
       `${topBorderWidthInput.value}${topBorderUnitSelect.value}`,
       "top"
-    )
-  );
+    );
+    printCode(el);
+  });
 
-  topBorderWidthInput.addEventListener("input", () =>
+  topBorderWidthInput.addEventListener("input", () => {
     setBorder(
       el,
       "width",
       `${topBorderWidthInput.value}${topBorderUnitSelect.value}`,
       "top"
-    )
-  );
+    );
+    printCode(el);
+  });
 }
 
 function setRightBorder(el) {
@@ -271,31 +292,35 @@ function setRightBorder(el) {
     "right"
   );
 
-  rightBorderColorInput.addEventListener("input", () =>
-    setBorder(el, "color", rightBorderColorInput.value, "right")
-  );
+  rightBorderColorInput.addEventListener("input", () => {
+    setBorder(el, "color", rightBorderColorInput.value, "right");
+    printCode(el);
+  });
 
-  rightBorderStyleSelect.addEventListener("input", () =>
-    setBorder(el, "style", rightBorderStyleSelect.value, "right")
-  );
+  rightBorderStyleSelect.addEventListener("input", () => {
+    setBorder(el, "style", rightBorderStyleSelect.value, "right");
+    printCode(el);
+  });
 
-  rightBorderUnitSelect.addEventListener("input", () =>
+  rightBorderUnitSelect.addEventListener("input", () => {
     setBorder(
       el,
       "width",
       `${rightBorderWidthInput.value}${rightBorderUnitSelect.value}`,
       "right"
-    )
-  );
+    );
+    printCode(el);
+  });
 
-  rightBorderWidthInput.addEventListener("input", () =>
+  rightBorderWidthInput.addEventListener("input", () => {
     setBorder(
       el,
       "width",
       `${rightBorderWidthInput.value}${rightBorderUnitSelect.value}`,
       "right"
-    )
-  );
+    );
+    printCode(el);
+  });
 }
 
 function setBottomBorder(el) {
@@ -315,31 +340,35 @@ function setBottomBorder(el) {
     "bottom"
   );
 
-  bottomBorderColorInput.addEventListener("input", () =>
-    setBorder(el, "color", bottomBorderColorInput.value, "bottom")
-  );
+  bottomBorderColorInput.addEventListener("input", () => {
+    setBorder(el, "color", bottomBorderColorInput.value, "bottom");
+    printCode(el);
+  });
 
-  bottomBorderStyleSelect.addEventListener("input", () =>
-    setBorder(el, "style", bottomBorderStyleSelect.value, "bottom")
-  );
+  bottomBorderStyleSelect.addEventListener("input", () => {
+    setBorder(el, "style", bottomBorderStyleSelect.value, "bottom");
+    printCode(el);
+  });
 
-  bottomBorderUnitSelect.addEventListener("input", () =>
+  bottomBorderUnitSelect.addEventListener("input", () => {
     setBorder(
       el,
       "width",
       `${bottomBorderWidthInput.value}${bottomBorderUnitSelect.value}`,
       "bottom"
-    )
-  );
+    );
+    printCode(el);
+  });
 
-  bottomBorderWidthInput.addEventListener("input", () =>
+  bottomBorderWidthInput.addEventListener("input", () => {
     setBorder(
       el,
       "width",
       `${bottomBorderWidthInput.value}${bottomBorderUnitSelect.value}`,
       "bottom"
-    )
-  );
+    );
+    printCode(el);
+  });
 }
 
 function setLeftBorder(el) {
@@ -357,31 +386,35 @@ function setLeftBorder(el) {
     "left"
   );
 
-  leftBorderColorInput.addEventListener("input", () =>
-    setBorder(el, "color", leftBorderColorInput.value, "left")
-  );
+  leftBorderColorInput.addEventListener("input", () => {
+    setBorder(el, "color", leftBorderColorInput.value, "left");
+    printCode(el);
+  });
 
-  leftBorderStyleSelect.addEventListener("input", () =>
-    setBorder(el, "style", leftBorderStyleSelect.value, "left")
-  );
+  leftBorderStyleSelect.addEventListener("input", () => {
+    setBorder(el, "style", leftBorderStyleSelect.value, "left");
+    printCode(el);
+  });
 
-  leftBorderUnitSelect.addEventListener("input", () =>
+  leftBorderUnitSelect.addEventListener("input", () => {
     setBorder(
       el,
       "width",
       `${leftBorderWidthInput.value}${leftBorderUnitSelect.value}`,
       "left"
-    )
-  );
+    );
+    printCode(el);
+  });
 
-  leftBorderWidthInput.addEventListener("input", () =>
+  leftBorderWidthInput.addEventListener("input", () => {
     setBorder(
       el,
       "width",
       `${leftBorderWidthInput.value}${leftBorderUnitSelect.value}`,
       "left"
-    )
-  );
+    );
+    printCode(el);
+  });
 }
 
 function setCommonBorderRadius(el) {
@@ -407,11 +440,13 @@ function setCommonBorderRadius(el) {
   borderCommonFirstRadius.addEventListener("input", () => {
     firstRadius = `${borderCommonFirstRadius.value}${borderCommonFirstRadiusUnit.value}`;
     setBorderRadius(el, firstRadius, secondRadius);
+    printCode(el);
   });
 
   borderCommonFirstRadiusUnit.addEventListener("input", () => {
     firstRadius = `${borderCommonFirstRadius.value}${borderCommonFirstRadiusUnit.value}`;
     setBorderRadius(el, firstRadius, secondRadius);
+    printCode(el);
   });
 
   borderCommonSecondRadius.addEventListener("input", () => {
@@ -419,6 +454,7 @@ function setCommonBorderRadius(el) {
       ? `${borderCommonSecondRadius.value}${borderCommonSecondRadiusUnit.value}`
       : null;
     setBorderRadius(el, firstRadius, secondRadius);
+    printCode(el);
   });
 
   borderCommonSecondRadiusUnit.addEventListener("input", () => {
@@ -426,6 +462,7 @@ function setCommonBorderRadius(el) {
       ? `${borderCommonSecondRadius.value}${borderCommonSecondRadiusUnit.value}`
       : null;
     setBorderRadius(el, firstRadius, secondRadius);
+    printCode(el);
   });
 }
 
@@ -452,11 +489,13 @@ function setTopLeftBorderRadius(el) {
   borderTopLeftFirstRadius.addEventListener("input", () => {
     firstRadius = `${borderTopLeftFirstRadius.value}${borderTopLeftFirstRadiusUnit.value}`;
     setBorderRadius(el, firstRadius, secondRadius, "left", "top");
+    printCode(el);
   });
 
   borderTopLeftFirstRadiusUnit.addEventListener("input", () => {
     firstRadius = `${borderTopLeftFirstRadius.value}${borderTopLeftFirstRadiusUnit.value}`;
     setBorderRadius(el, firstRadius, secondRadius, "left", "top");
+    printCode(el);
   });
 
   borderTopLeftSecondRadius.addEventListener("input", () => {
@@ -464,6 +503,7 @@ function setTopLeftBorderRadius(el) {
       ? `${borderTopLeftSecondRadius.value}${borderTopLeftSecondRadiusUnit.value}`
       : null;
     setBorderRadius(el, firstRadius, secondRadius, "left", "top");
+    printCode(el);
   });
 
   borderTopLeftSecondRadiusUnit.addEventListener("input", () => {
@@ -471,6 +511,7 @@ function setTopLeftBorderRadius(el) {
       ? `${borderTopLeftSecondRadius.value}${borderTopLeftSecondRadiusUnit.value}`
       : null;
     setBorderRadius(el, firstRadius, secondRadius, "left", "top");
+    printCode(el);
   });
 }
 
@@ -497,11 +538,13 @@ function setTopRightBorderRadius(el) {
   borderTopRightFirstRadius.addEventListener("input", () => {
     firstRadius = `${borderTopRightFirstRadius.value}${borderTopRightFirstRadiusUnit.value}`;
     setBorderRadius(el, firstRadius, secondRadius, "right", "top");
+    printCode(el);
   });
 
   borderTopRightFirstRadiusUnit.addEventListener("input", () => {
     firstRadius = `${borderTopRightFirstRadius.value}${borderTopRightFirstRadiusUnit.value}`;
     setBorderRadius(el, firstRadius, secondRadius, "right", "top");
+    printCode(el);
   });
 
   borderTopRightSecondRadius.addEventListener("input", () => {
@@ -509,6 +552,7 @@ function setTopRightBorderRadius(el) {
       ? `${borderTopRightSecondRadius.value}${borderTopRightSecondRadiusUnit.value}`
       : null;
     setBorderRadius(el, firstRadius, secondRadius, "right", "top");
+    printCode(el);
   });
 
   borderTopRightSecondRadiusUnit.addEventListener("input", () => {
@@ -516,6 +560,7 @@ function setTopRightBorderRadius(el) {
       ? `${borderTopRightSecondRadius.value}${borderTopRightSecondRadiusUnit.value}`
       : null;
     setBorderRadius(el, firstRadius, secondRadius, "right", "top");
+    printCode(el);
   });
 }
 
@@ -542,11 +587,13 @@ function setBottomLeftBorderRadius(el) {
   borderBottomLeftFirstRadius.addEventListener("input", () => {
     firstRadius = `${borderBottomLeftFirstRadius.value}${borderBottomLeftFirstRadiusUnit.value}`;
     setBorderRadius(el, firstRadius, secondRadius, "left", "bottom");
+    printCode(el);
   });
 
   borderBottomLeftFirstRadiusUnit.addEventListener("input", () => {
     firstRadius = `${borderBottomLeftFirstRadius.value}${borderBottomLeftFirstRadiusUnit.value}`;
     setBorderRadius(el, firstRadius, secondRadius, "left", "bottom");
+    printCode(el);
   });
 
   borderBottomLeftSecondRadius.addEventListener("input", () => {
@@ -554,6 +601,7 @@ function setBottomLeftBorderRadius(el) {
       ? `${borderBottomLeftSecondRadius.value}${borderBottomLeftSecondRadiusUnit.value}`
       : null;
     setBorderRadius(el, firstRadius, secondRadius, "left", "bottom");
+    printCode(el);
   });
 
   borderBottomLeftSecondRadiusUnit.addEventListener("input", () => {
@@ -561,6 +609,7 @@ function setBottomLeftBorderRadius(el) {
       ? `${borderBottomLeftSecondRadius.value}${borderBottomLeftSecondRadiusUnit.value}`
       : null;
     setBorderRadius(el, firstRadius, secondRadius, "left", "bottom");
+    printCode(el);
   });
 }
 
@@ -587,11 +636,13 @@ function setBottomRightBorderRadius(el) {
   borderBottomRightFirstRadius.addEventListener("input", () => {
     firstRadius = `${borderBottomRightFirstRadius.value}${borderBottomRightFirstRadiusUnit.value}`;
     setBorderRadius(el, firstRadius, secondRadius, "right", "bottom");
+    printCode(el);
   });
 
   borderBottomRightFirstRadiusUnit.addEventListener("input", () => {
     firstRadius = `${borderBottomRightFirstRadius.value}${borderBottomRightFirstRadiusUnit.value}`;
     setBorderRadius(el, firstRadius, secondRadius, "right", "bottom");
+    printCode(el);
   });
 
   borderBottomRightSecondRadius.addEventListener("input", () => {
@@ -599,6 +650,7 @@ function setBottomRightBorderRadius(el) {
       ? `${borderBottomRightSecondRadius.value}${borderBottomRightSecondRadiusUnit.value}`
       : null;
     setBorderRadius(el, firstRadius, secondRadius, "right", "bottom");
+    printCode(el);
   });
 
   borderBottomRightSecondRadiusUnit.addEventListener("input", () => {
@@ -606,6 +658,7 @@ function setBottomRightBorderRadius(el) {
       ? `${borderBottomRightSecondRadius.value}${borderBottomRightSecondRadiusUnit.value}`
       : null;
     setBorderRadius(el, firstRadius, secondRadius, "right", "bottom");
+    printCode(el);
   });
 }
 
@@ -653,6 +706,8 @@ function init() {
     if (radio.checked) initBordersRadius(radio.value, box);
     radio.addEventListener("change", () => initBordersRadius(radio.value, box));
   }
+
+  printCode(box);
 }
 
 init();
