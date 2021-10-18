@@ -8,9 +8,7 @@ function updateDisplay(value) {
 }
 
 function handleDigits(target) {
-  numberStr.length < 8
-    ? (numberStr += target.textContent.trim())
-    : (lastNumber = numberStr);
+  if (numberStr.length < 8) numberStr += target.textContent.trim();
   updateDisplay(numberStr);
 }
 
@@ -42,7 +40,9 @@ function printResult() {
   const number2 = Number(numberStr);
   numberStr = calculate(number1, number2, operation);
   lastNumber = "";
-  updateDisplay(numberStr);
+  numberStr.toString().length >= 8
+    ? updateDisplay("ERR")
+    : updateDisplay(numberStr);
 }
 
 function handleOperation(target) {
