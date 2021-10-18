@@ -68,8 +68,8 @@ function handleOperation(target) {
     if (lastNumber && numberStr) printResult();
     operation = target.textContent.trim();
     lastNumber = numberStr;
-    numberStr = "";
   }
+  numberStr = "";
 }
 
 function clearAll() {
