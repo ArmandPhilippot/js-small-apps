@@ -15,6 +15,8 @@ function handleDigits(target) {
 function calculate(number1, number2, operation) {
   let result = 0;
 
+  if (!operation) return number2;
+
   switch (operation) {
     case "+":
       result = number1 + number2;
