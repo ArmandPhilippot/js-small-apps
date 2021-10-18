@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1 class="branding">Calculator</h1>
+    </header>
+    <main class="main">
+      <div class="calculator">
+        <div class="calculator__display">0</div>
+        <div class="calculator__entry-pad">
+          <div class="calculator__clear">
+            <button type="button" id="clear" class="btn btn--clear">C</button>
+            <button type="button" id="clear-all" class="btn btn--clear">
+              AC
+            </button>
+          </div>
+          <div class="calculator__digits">
+            <button type="button" id="digit9" class="btn btn--digits">9</button>
+            <button type="button" id="digit8" class="btn btn--digits">8</button>
+            <button type="button" id="digit7" class="btn btn--digits">7</button>
+            <button type="button" id="digit6" class="btn btn--digits">6</button>
+            <button type="button" id="digit5" class="btn btn--digits">5</button>
+            <button type="button" id="digit4" class="btn btn--digits">4</button>
+            <button type="button" id="digit3" class="btn btn--digits">3</button>
+            <button type="button" id="digit2" class="btn btn--digits">2</button>
+            <button type="button" id="digit1" class="btn btn--digits">1</button>
+            <button type="button" id="digit0" class="btn btn--digits">0</button>
+          </div>
+          <div class="calculator__operations">
+            <button
+              type="button"
+              id="operation-divide"
+              class="btn btn--operation"
+            >
+              /
+            </button>
+            <button
+              type="button"
+              id="operation-multiply"
+              class="btn btn--operation"
+            >
+              *
+            </button>
+            <button
+              type="button"
+              id="operation-minus"
+              class="btn btn--operation"
+            >
+              -
+            </button>
+            <button
+              type="button"
+              id="operation-plus"
+              class="btn btn--operation"
+            >
+              +
+            </button>
+            <button
+              type="button"
+              id="operation-equal"
+              class="btn btn--operation"
+            >
+              =
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <p class="copyright">Calculator. MIT 2021. Armand Philippot.</p>
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>
