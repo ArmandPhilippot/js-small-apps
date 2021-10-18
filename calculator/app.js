@@ -31,11 +31,37 @@ function isDecimalLimitReached(string) {
   return decimalPart?.length > 3 ? true : false;
 }
 
+function isNegativePositive(id) {
+  return id === "sign" ? true : false;
+}
+
+function isNegativeNumber(string) {
+  return string.startsWith("-");
+}
+
+function hasLeadingZero(string) {
+  if (isNegativeNumber(string) && string.charAt(1) === "0") return true;
+  if (string.startsWith("0")) return true;
+  return false;
+}
+
 function handleDigits(target) {
   const isDecimalInput = target.textContent.trim() === ".";
+
+  if (isNegativeNumber(numberStr) && hasLeadingZero(numberStr)) {
+    numberStr = numberStr.replace("0", "");
+  }
   if (isDecimalInput && isDecimal(numberStr)) return;
   if (!numberStr && isDecimalInput) numberStr = 0;
-  numberStr += target.textContent.trim();
+  if (isNegativePositive(target.id)) {
+    if (isNegativeNumber(numberStr)) {
+      numberStr = numberStr.replace("-", "");
+    } else {
+      numberStr = numberStr ? `-${numberStr}` : "-0";
+    }
+  } else {
+    numberStr += target.textContent.trim();
+  }
   if (isDigitsLimitReached(numberStr) || isDecimalLimitReached(numberStr)) {
     numberStr = numberStr.slice(0, -1);
   }
