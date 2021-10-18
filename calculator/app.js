@@ -6,45 +6,89 @@ let lastInput = [];
 const inputHistory = [];
 const operators = ["+", "-", "/", "*"];
 
+/**
+ * Check if the provided string is an operator.
+ * @param {String} string - The string to test.
+ * @returns True if it is an operator; false otherwise.
+ */
 function isOperator(string) {
   const operatorIndex = operators.findIndex((operator) => operator === string);
   return operatorIndex === -1 ? false : true;
 }
 
+/**
+ * Check if the provided string represents a decimal number.
+ * @param {String} string - The string to test.
+ * @returns True if the string represents a decimal number.
+ */
 function isDecimal(string) {
   const dotIndex = string.indexOf(".");
   return dotIndex === -1 ? false : true;
 }
 
+/**
+ * Display a value in calculator display.
+ * @param {String} value - The value to display in the DOM.
+ */
 function updateDisplay(value) {
   const display = document.querySelector(".calculator__display");
   display.textContent = value;
 }
 
+/**
+ * Check if the string exceeds the limit of 8 characters.
+ * @param {String} string - The string to test.
+ * @returns True if the length is greater than 8; false otherwise.
+ */
 function isDigitsLimitReached(string) {
   const digitsPart = string.split(".")[0];
   return digitsPart?.length > 8 ? true : false;
 }
 
+/**
+ * Check if the decimal part exceeds the limit of 3 characters.
+ * @param {String} string - The string to test.
+ * @returns True if the decimal part is greater than 3; false otherwise.
+ */
 function isDecimalLimitReached(string) {
   const decimalPart = string.split(".")[1];
   return decimalPart?.length > 3 ? true : false;
 }
 
+/**
+ * Check if the clicked button represents the plus/minus sign.
+ * @param {String} id - The button id.
+ * @returns True if the clicked button represents plus/minus sign.
+ */
 function isNegativePositive(id) {
   return id === "sign" ? true : false;
 }
 
+/**
+ * Check if the string represents a negative number.
+ * @param {String} string - The string to test.
+ * @returns True if the string starts with a minus sign; false otherwise.
+ */
 function isNegativeNumber(string) {
   return string.startsWith("-");
 }
 
+/**
+ * Check if the represented number starts with a 0.
+ * @param {String} string The string to test.
+ * @returns True if the string starts with a 0; false otherwise.
+ */
 function hasLeadingZero(string) {
   if (isNegativeNumber(string) && string.charAt(1) === "0") return true;
   if (string.startsWith("0")) return true;
   return false;
 }
 
+/**
+ * Compute the provided number.
+ * @param {Object} target - The button target.
+ * @returns {void}
+ */
 function handleDigits(target) {
   const isDecimalInput = target.textContent.trim() === ".";
 
@@ -69,6 +113,13 @@ function handleDigits(target) {
   updateDisplay(numberStr);
 }
 
+/**
+ * Calculate the operation between two numbers.
+ * @param {Number} number1 - The left part of the operation.
+ * @param {Number} number2 - The second part of the operation.
+ * @param {String} operation - The current operation.
+ * @returns {Number} The result.
+ */
 function calculate(number1, number2, operation) {
   let result = 0;
 
@@ -94,6 +145,9 @@ function calculate(number1, number2, operation) {
   return result;
 }
 
+/**
+ * Print the operation result.
+ */
 function printResult() {
   const number1 = Number(lastNumber);
   const number2 = Number(numberStr);
@@ -105,6 +159,10 @@ function printResult() {
     : updateDisplay(numberStr);
 }
 
+/**
+ * Handle the different operations.
+ * @param {Object} target - The button target.
+ */
 function handleOperation(target) {
   inputHistory.push(target.textContent.trim());
   if (target.id === "operation-equal") {
@@ -117,6 +175,9 @@ function handleOperation(target) {
   numberStr = "";
 }
 
+/**
+ * Reset the calculator.
+ */
 function clearAll() {
   numberStr = "";
   lastNumber = "";
@@ -126,6 +187,9 @@ function clearAll() {
   updateDisplay(0);
 }
 
+/**
+ * Undo the previous input.
+ */
 function clear() {
   const lastInput = inputHistory.pop();
   if (isOperator(lastInput)) {
@@ -150,11 +214,19 @@ function clear() {
   }
 }
 
+/**
+ * Determine wether clear all or clear is needed.
+ * @param {Object} target - The button target.
+ */
 function handleClear(target) {
   if (target.id === "clear-all") clearAll();
   if (target.id === "clear") clear();
 }
 
+/**
+ * Determine which function to call on click.
+ * @param {Object} e - The button event.
+ */
 function handleClick(e) {
   const targetClasses = e.target.classList;
   if (targetClasses.contains("btn--digits")) handleDigits(e.target);
@@ -162,6 +234,9 @@ function handleClick(e) {
   if (targetClasses.contains("btn--clear")) handleClear(e.target);
 }
 
+/**
+ * Listen the calculator buttons.
+ */
 function listenButtons() {
   const buttons = document.querySelectorAll(".btn");
 
