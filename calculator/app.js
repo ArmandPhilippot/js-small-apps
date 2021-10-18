@@ -11,16 +11,35 @@ function isOperator(string) {
   return operatorIndex === -1 ? false : true;
 }
 
+function isDecimal(string) {
+  const dotIndex = string.indexOf(".");
+  return dotIndex === -1 ? false : true;
+}
+
 function updateDisplay(value) {
   const display = document.querySelector(".calculator__display");
   display.textContent = value;
 }
 
+function isDigitsLimitReached(string) {
+  const digitsPart = string.split(".")[0];
+  return digitsPart?.length > 8 ? true : false;
+}
+
+function isDecimalLimitReached(string) {
+  const decimalPart = string.split(".")[1];
+  return decimalPart?.length > 3 ? true : false;
+}
+
 function handleDigits(target) {
-  if (numberStr.length < 8) {
-    numberStr += target.textContent.trim();
-    inputHistory.push(numberStr);
+  const isDecimalInput = target.textContent.trim() === ".";
+  if (isDecimalInput && isDecimal(numberStr)) return;
+  if (!numberStr && isDecimalInput) numberStr = 0;
+  numberStr += target.textContent.trim();
+  if (isDigitsLimitReached(numberStr) || isDecimalLimitReached(numberStr)) {
+    numberStr = numberStr.slice(0, -1);
   }
+  inputHistory.push(numberStr);
   updateDisplay(numberStr);
 }
 
@@ -52,10 +71,10 @@ function calculate(number1, number2, operation) {
 function printResult() {
   const number1 = Number(lastNumber);
   const number2 = Number(numberStr);
-  numberStr = calculate(number1, number2, operation);
+  numberStr = calculate(number1, number2, operation).toString();
   lastResult = numberStr;
   lastNumber = "";
-  numberStr.toString().length >= 8
+  isDigitsLimitReached(numberStr) || isDecimalLimitReached(numberStr)
     ? updateDisplay("ERR")
     : updateDisplay(numberStr);
 }

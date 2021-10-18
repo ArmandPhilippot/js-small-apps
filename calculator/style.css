@@ -73,7 +73,7 @@ body {
   border: 1px solid hsl(0, 0%, 60%);
   border-radius: 2px;
   box-shadow: inset 0 0 2px 0 hsl(0, 0%, 70%), 0 0 0 1px hsl(0, 0%, 75%);
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 3vw, 2.5rem);
   font-weight: 600;
   text-align: right;
   width: 100%;
