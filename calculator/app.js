@@ -1,6 +1,15 @@
 let numberStr = "";
 let lastNumber = "";
 let operation = "";
+let lastResult;
+let lastInput = [];
+const inputHistory = [];
+const operators = ["+", "-", "/", "*"];
+
+function isOperator(string) {
+  const operatorIndex = operators.findIndex((operator) => operator === string);
+  return operatorIndex === -1 ? false : true;
+}
 
 function updateDisplay(value) {
   const display = document.querySelector(".calculator__display");
@@ -8,7 +17,10 @@ function updateDisplay(value) {
 }
 
 function handleDigits(target) {
-  if (numberStr.length < 8) numberStr += target.textContent.trim();
+  if (numberStr.length < 8) {
+    numberStr += target.textContent.trim();
+    inputHistory.push(numberStr);
+  }
   updateDisplay(numberStr);
 }
 
@@ -41,6 +53,7 @@ function printResult() {
   const number1 = Number(lastNumber);
   const number2 = Number(numberStr);
   numberStr = calculate(number1, number2, operation);
+  lastResult = numberStr;
   lastNumber = "";
   numberStr.toString().length >= 8
     ? updateDisplay("ERR")
@@ -48,6 +61,7 @@ function printResult() {
 }
 
 function handleOperation(target) {
+  inputHistory.push(target.textContent.trim());
   if (target.id === "operation-equal") {
     printResult();
   } else {
@@ -61,12 +75,39 @@ function handleOperation(target) {
 function clearAll() {
   numberStr = "";
   lastNumber = "";
+  lastResult = undefined;
   operation = "";
+  inputHistory.length = 0;
   updateDisplay(0);
+}
+
+function clear() {
+  const lastInput = inputHistory.pop();
+  if (isOperator(lastInput)) {
+    operation = "";
+    numberStr = lastResult ?? lastNumber;
+    lastNumber = "";
+    updateDisplay(numberStr);
+  } else if (lastInput === "=") {
+    clearAll();
+  } else {
+    if (lastNumber) {
+      numberStr = "";
+      updateDisplay(lastNumber);
+    } else if (lastResult) {
+      numberStr = lastResult;
+      lastResult = undefined;
+      updateDisplay(numberStr);
+    } else {
+      numberStr = "";
+      updateDisplay(0);
+    }
+  }
 }
 
 function handleClear(target) {
   if (target.id === "clear-all") clearAll();
+  if (target.id === "clear") clear();
 }
 
 function handleClick(e) {
