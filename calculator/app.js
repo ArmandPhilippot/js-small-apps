@@ -14,7 +14,7 @@ function handleDigits(target) {
   updateDisplay(numberStr);
 }
 
-function getResult(number1, number2, operation) {
+function calculate(number1, number2, operation) {
   let result = 0;
 
   switch (operation) {
@@ -37,13 +37,19 @@ function getResult(number1, number2, operation) {
   return result;
 }
 
+function printResult() {
+  const number1 = Number(lastNumber);
+  const number2 = Number(numberStr);
+  numberStr = calculate(number1, number2, operation);
+  lastNumber = "";
+  updateDisplay(numberStr);
+}
+
 function handleOperation(target) {
   if (target.id === "operation-equal") {
-    const number1 = Number(lastNumber);
-    const number2 = Number(numberStr);
-    numberStr = getResult(number1, number2, operation);
-    updateDisplay(numberStr);
+    printResult();
   } else {
+    if (lastNumber && numberStr) printResult();
     operation = target.textContent.trim();
     lastNumber = numberStr;
     numberStr = "";
