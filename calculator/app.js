@@ -56,10 +56,22 @@ function handleOperation(target) {
   }
 }
 
+function clearAll() {
+  numberStr = "";
+  lastNumber = "";
+  operation = "";
+  updateDisplay(0);
+}
+
+function handleClear(target) {
+  if (target.id === "clear-all") clearAll();
+}
+
 function handleClick(e) {
   const targetClasses = e.target.classList;
   if (targetClasses.contains("btn--digits")) handleDigits(e.target);
   if (targetClasses.contains("btn--operation")) handleOperation(e.target);
+  if (targetClasses.contains("btn--clear")) handleClear(e.target);
 }
 
 function listenButtons() {
