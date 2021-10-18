@@ -45,6 +45,7 @@ body {
   font-size: 1.5rem;
   font-variant: small-caps;
   letter-spacing: 1px;
+  text-align: center;
   text-shadow: 1px 1px 0 hsl(0, 0%, 65%), 2px 2px 2px hsl(0, 0%, 0%);
 }
 
