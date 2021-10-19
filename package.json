@@ -7,13 +7,13 @@
     "name": "Armand Philippot",
     "url": "https://www.armandphilippot.com"
   },
-  "homepage": "https://github.com/ap-training/js-small-apps#readme",
+  "homepage": "https://github.com/ArmandPhilippot/js-small-apps#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:ap-training/js-small-apps.git"
+    "url": "git+ssh://git@github.com:ArmandPhilippot/js-small-apps.git"
   },
   "bugs": {
-    "url": "https://github.com/ap-training/js-small-apps/issues"
+    "url": "https://github.com/ArmandPhilippot/js-small-apps/issues"
   },
   "private": true,
   "scripts": {
