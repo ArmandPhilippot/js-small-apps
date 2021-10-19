@@ -1,0 +1,75 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 100vh;
+  font-size: 16px;
+  font-size: 1rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.header,
+.app,
+.footer {
+  width: min(calc(100vw - 2rem), 800px);
+  margin: auto;
+}
+
+.header {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem 0;
+}
+
+.footer {
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 3rem;
+  padding: 2rem 0;
+}
+
+.app {
+  flex: 1;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 5vw, 3rem);
+}
+
+#date {
+  flex: 0 0 100%;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+#svg-clock {
+  width: 20rem;
+  height: 20rem;
+}
+
+#digital-clock {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0.5rem;
+  width: max-content;
+  padding: 2rem;
+  border: 5px solid #000;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+#text-clock {
+  flex: 0 0 100%;
+  text-align: center;
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>What time is it?</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1>What time is it?</h1>
+    </header>
+    <main class="app">
+      <div id="date"></div>
+      <svg
+        id="svg-clock"
+        viewBox="0 0 135.46667 135.46667"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          id="path846"
+          fill="#ffffff"
+          stroke="#000000"
+          stroke-width="2.5"
+          d="M 134.20638,67.73333 A 66.473045,66.473045 0 0 1 67.73333,134.20638 66.473045,66.473045 0 0 1 1.2602844,67.73333 66.473045,66.473045 0 0 1 67.73333,1.2602844 66.473045,66.473045 0 0 1 134.20638,67.73333 Z"
+        />
+        <path
+          d="m 71.242395,67.733337 a 3.509058,3.509058 0 0 1 -3.509058,3.509058 3.509058,3.509058 0 0 1 -3.509058,-3.509058 3.509058,3.509058 0 0 1 3.509058,-3.509058 3.509058,3.509058 0 0 1 3.509058,3.509058 z"
+        />
+        <path
+          id="svg-clock_seconds"
+          d="M 67.265175,4.7740932 H 68.20149 V 68.316688 h -0.936315 z"
+        />
+        <path
+          id="svg-clock_minutes"
+          d="m 66.797363,16.601835 h 1.871941 V 68.31669 h -1.871941 z"
+        />
+        <path
+          id="svg-clock_hours"
+          d="m 65.857079,29.393064 h 3.752515 V 68.31669 h -3.752515 z"
+        />
+        <path
+          id="path1522-7"
+          d="m 67.733338,127.0842 -3.736107,8.23531 h 7.472208 z"
+        />
+        <path
+          id="path1522-7-3"
+          d="M 8.3966895,67.733338 0.16137954,63.997231 v 7.472208 z"
+        />
+        <path
+          id="path1522-7-3-5"
+          d="m 127.04505,67.733338 8.23531,-3.736107 v 7.472208 z"
+        />
+        <path
+          id="path1522-7-5"
+          d="m 67.73333,8.4010979 -3.7361,-8.23531003 h 7.47221 z"
+        />
+      </svg>
+      <div id="digital-clock">
+        <div id="digital-clock_hours" class="digital-clock__value">00</div>
+        <div class="digital-clock__sep">:</div>
+        <div id="digital-clock_minutes" class="digital-clock__value">00</div>
+      </div>
+      <div id="text-clock"></div>
+    </main>
+    <footer class="footer">
+      What time is it?. MIT 2021. Armand Philippot.
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>
