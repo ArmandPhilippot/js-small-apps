@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors - Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="branding">
+      <h1 class="branding__title">Rock Paper Scissors</h1>
+    </header>
+    <main class="main">
+      <div class="register">
+        <form action="#" class="form form--register">
+          <fieldset class="form__fieldset">
+            <legend class="form__legend">Player 1</legend>
+            <div class="form__item">
+              <label class="form__label" for="player1-name">Name:</label>
+              <input
+                type="text"
+                id="player1-name"
+                name="player1-name"
+                placeholder="Pseudo"
+                class="form__input"
+              />
+            </div>
+            <div class="form__item">
+              <input
+                type="checkbox"
+                name="player1-ia"
+                id="player1-ia"
+                class="form__checkbox"
+              />
+              <label class="form__label form__label--checkbox" for="player1-ia"
+                >IA?</label
+              >
+            </div>
+          </fieldset>
+          <fieldset class="form__fieldset">
+            <legend class="form__legend">Player 2</legend>
+            <div class="form__item">
+              <label class="form__label" for="player2-name">Name:</label>
+              <input
+                type="text"
+                id="player2-name"
+                name="player2-name"
+                placeholder="Pseudo"
+                class="form__input"
+              />
+            </div>
+            <div class="form__item">
+              <input
+                type="checkbox"
+                name="player2-ia"
+                id="player2-ia"
+                class="form__checkbox"
+              />
+              <label class="form__label form__label--checkbox" for="player2-ia"
+                >IA?</label
+              >
+            </div>
+          </fieldset>
+          <fieldset class="form__fieldset">
+            <legend class="form__legend">Settings</legend>
+            <div class="form__item">
+              <label class="form__label" for="round-number"
+                >Number of rounds:</label
+              >
+              <input
+                type="number"
+                name="round-number"
+                id="round-number"
+                class="form__input"
+              />
+              <p class="form__hint">
+                Note: If empty or 0, your party will never end!
+              </p>
+            </div>
+          </fieldset>
+          <button type="submit" class="form__submit btn btn--register">
+            Play!
+          </button>
+        </form>
+        <div class="register__preview">
+          <div class="preview">
+            <div class="preview__content"></div>
+          </div>
+        </div>
+      </div>
+      <div class="game">
+        <div class="scoring-board">
+          <div class="scoring-board__item">
+            <div id="player1username" class="scoring-board__username">
+              Player1
+            </div>
+            <div id="player1score" class="scoring-board__score">0</div>
+          </div>
+          <div class="scoring-board__item">
+            <div id="player2username" class="scoring-board__username">
+              Player2
+            </div>
+            <div id="player2score" class="scoring-board__score">0</div>
+          </div>
+        </div>
+        <div class="message-board">Ready? Let's play!</div>
+        <div class="actions">
+          <button type="button" class="actions__body btn btn--action btn--rock">
+            <span class="actions__txt screen-reader-txt">Rock</span>
+            <span class="actions__icon">✊</span>
+          </button>
+          <button
+            type="button"
+            class="actions__body btn btn--action btn--paper"
+          >
+            <span class="actions__txt screen-reader-txt">Paper</span>
+            <span class="actions__icon">✋</span>
+          </button>
+          <button
+            type="button"
+            class="actions__body btn btn--action btn--scissors"
+          >
+            <span class="actions__txt screen-reader-txt">Scissors</span>
+            <span class="actions__icon">✌️</span>
+          </button>
+        </div>
+        <div class="settings">
+          <button type="reset" class="settings__body btn btn--new-game">
+            New Game?
+          </button>
+        </div>
+      </div>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">
+        Rock Paper Scissors. MIT 2021. Armand Philippot.
+      </p>
+    </footer>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
