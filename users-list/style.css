@@ -20,7 +20,7 @@ body {
 .header,
 .main,
 .footer {
-  width: min(calc(100vw - 2rem), 160ch);
+  width: min(calc(100vw - 2rem), 100ch);
   margin-left: auto;
   margin-right: auto;
 }
@@ -49,7 +49,7 @@ body {
 }
 
 .users {
-  flex: 1 1 40ch;
+  flex: 1 1 35ch;
   padding: 1rem 0;
 }
 
@@ -86,7 +86,7 @@ body {
 }
 
 .user-info {
-  flex: 1 1 80ch;
+  flex: 1 1 60ch;
   padding: 1rem;
 }
 
