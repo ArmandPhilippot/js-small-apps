@@ -121,6 +121,15 @@ async function printUserInfo(userId) {
 }
 
 /**
+ * Add a class "active" to a link.
+ * @param {Integer} linkId - The link id.
+ */
+function addActiveClassTo(linkId) {
+  const link = document.getElementById(linkId);
+  link.classList.add("active");
+}
+
+/**
  * Print the user info on click.
  * @param {MouseEvent} e - The click event.
  * @param {NodeList} links - The users links.
@@ -128,6 +137,7 @@ async function printUserInfo(userId) {
 function handleClick(e, links) {
   e.preventDefault();
   const userId = e.target.id.split("user-")[1];
+  const linkId = `user-${userId}`;
   history.pushState({ userId }, e.target.textContent, e.target.href);
   printUserInfo(userId);
 
@@ -135,7 +145,7 @@ function handleClick(e, links) {
     links[i].classList.remove("active");
   }
 
-  e.target.classList.add("active");
+  addActiveClassTo(linkId);
 }
 
 /**
@@ -157,7 +167,9 @@ function listenURL() {
   const isUserPage = currentURL.includes("user=");
   if (isUserPage) {
     const userId = currentURL.split("?user=")[1];
+    const linkId = `user-${userId}`;
     printUserInfo(userId);
+    addActiveClassTo(linkId);
   }
 }
 
