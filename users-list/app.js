@@ -43,41 +43,51 @@ function printUsersList(users) {
 }
 
 /**
+ * Create a description term element.
+ * @param {String} body - The description term body.
+ * @returns {HTMLElement} The description term element.
+ */
+function createUserInfoDt(body) {
+  const dt = document.createElement("dt");
+  dt.classList.add("user-info__label");
+  dt.textContent = body;
+  return dt;
+}
+
+/**
+ * Create a description details element.
+ * @param {String} body - The description details body.
+ * @param {Boolean} [hasHTML] - True if body contains HTML; false otherwise.
+ * @returns {HTMLElement} The description details element.
+ */
+function createUserInfoDd(body, hasHTML = false) {
+  const dd = document.createElement("dd");
+  dd.classList.add("user-info__content");
+  hasHTML ? (dd.innerHTML = body) : (dd.textContent = body);
+  return dd;
+}
+
+/**
  * Get the markup to display info for a given user.
  * @param {Object} user - An user with fullname, email address, phone & website.
  * @returns {Object} Two HTMLElement: title and body.
  */
 function getUserInfoTemplate(user) {
+  const userAddress = `${user.address.suite}<br />${user.address.street}<br />${user.address.zipcode} ${user.address.city}`;
+
   const fullName = document.createElement("h2");
   const userDetails = document.createElement("dl");
-  const emailLabel = document.createElement("dt");
-  const email = document.createElement("dd");
-  const addressLabel = document.createElement("dt");
-  const address = document.createElement("dd");
-  const phoneLabel = document.createElement("dt");
-  const phone = document.createElement("dd");
-  const websiteLabel = document.createElement("dt");
-  const website = document.createElement("dd");
+  const emailLabel = createUserInfoDt("Email");
+  const email = createUserInfoDd(user.email);
+  const addressLabel = createUserInfoDt("Address");
+  const address = createUserInfoDd(userAddress, true);
+  const phoneLabel = createUserInfoDt("Phone");
+  const phone = createUserInfoDd(user.phone);
+  const websiteLabel = createUserInfoDt("Website");
+  const website = createUserInfoDd(user.website);
 
   fullName.textContent = user.name;
-  emailLabel.textContent = "Email";
-  email.textContent = user.email;
-  addressLabel.textContent = "Address";
-  address.innerHTML = `${user.address.suite}<br />${user.address.street}<br />${user.address.zipcode} ${user.address.city}`;
-  phoneLabel.textContent = "Phone";
-  phone.textContent = user.phone;
-  websiteLabel.textContent = "Website";
-  website.textContent = user.website;
-
   fullName.classList.add("user-info__title");
-  emailLabel.classList.add("user-info__label");
-  email.classList.add("user-info__content");
-  addressLabel.classList.add("user-info__label");
-  address.classList.add("user-info__content");
-  phoneLabel.classList.add("user-info__label");
-  phone.classList.add("user-info__content");
-  websiteLabel.classList.add("user-info__label");
-  website.classList.add("user-info__content");
   userDetails.classList.add("user-info__body");
   userDetails.append(
     emailLabel,
