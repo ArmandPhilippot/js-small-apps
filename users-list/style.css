@@ -1,0 +1,62 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #fff;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.618;
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+.header,
+.main,
+.footer {
+  width: min(calc(100vw - 2rem), 160ch);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header,
+.footer {
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.branding {
+  color: hsl(219, 64%, 35%);
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1rem;
+  margin: 2rem auto;
+}
+
+.users,
+.user-info {
+  border: 2px solid hsl(219, 64%, 35%);
+  padding: 1rem;
+}
+
+.users {
+  flex: 1 1 40ch;
+}
+
+.user-info {
+  flex: 1 1 80ch;
+}
+
+.copyright {
+  font-size: 0.9rem;
+}
