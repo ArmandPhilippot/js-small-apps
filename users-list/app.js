@@ -128,6 +128,7 @@ async function printUserInfo(userId) {
 function handleClick(e, links) {
   e.preventDefault();
   const userId = e.target.id.split("user-")[1];
+  history.pushState({ userId }, e.target.textContent, e.target.href);
   printUserInfo(userId);
 
   for (let i = 0; i < links.length; i++) {
@@ -140,11 +141,23 @@ function handleClick(e, links) {
 /**
  * Listen all users links.
  */
-function listen() {
+function listenUsersLinks() {
   const usersLinks = document.querySelectorAll(".users-list__link");
   for (let i = 0; i < usersLinks.length; i++) {
     const link = usersLinks[i];
     link.addEventListener("click", (e) => handleClick(e, usersLinks));
+  }
+}
+
+/**
+ * Load user info when URL refers to an user page.
+ */
+function listenURL() {
+  const currentURL = window.location.href;
+  const isUserPage = currentURL.includes("user=");
+  if (isUserPage) {
+    const userId = currentURL.split("?user=")[1];
+    printUserInfo(userId);
   }
 }
 
@@ -155,7 +168,8 @@ async function init() {
   const api = "https://jsonplaceholder.typicode.com/users";
   const users = await fetchData(api).then((data) => data);
   printUsersList(users);
-  listen();
+  listenUsersLinks();
+  listenURL();
 }
 
 init();
