@@ -87,17 +87,23 @@ async function printUserInfo(userId) {
     : userInfo.append(userInfoTemplate.title, userInfoTemplate.body);
 }
 
-function handleClick(e) {
+function handleClick(e, links) {
   e.preventDefault();
   const userId = e.target.id.split("user-")[1];
   printUserInfo(userId);
+
+  for (let i = 0; i < links.length; i++) {
+    links[i].classList.remove("active");
+  }
+
+  e.target.classList.add("active");
 }
 
 function listen() {
   const usersLinks = document.querySelectorAll(".users-list__link");
   for (let i = 0; i < usersLinks.length; i++) {
     const link = usersLinks[i];
-    link.addEventListener("click", handleClick);
+    link.addEventListener("click", (e) => handleClick(e, usersLinks));
   }
 }
 
