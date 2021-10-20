@@ -1,3 +1,8 @@
+/**
+ * Retrieve data from an API.
+ * @param {String} api - The API url.
+ * @returns {Promise} The result from api fetching.
+ */
 async function fetchData(api) {
   const headers = new Headers();
   const init = {
@@ -11,6 +16,11 @@ async function fetchData(api) {
   return result;
 }
 
+/**
+ * Create a list item with a link.
+ * @param {Object} data - An object containing an id and an username.
+ * @returns {HTMLElement} A list item containing a link.
+ */
 function getListItem(data) {
   const item = document.createElement("li");
   const link = document.createElement("a");
@@ -23,11 +33,20 @@ function getListItem(data) {
   return item;
 }
 
+/**
+ * Print the users list.
+ * @param {Object[]} users - An array of user object.
+ */
 function printUsersList(users) {
   const list = document.querySelector(".users-list");
   users.map((user) => list.appendChild(getListItem(user)));
 }
 
+/**
+ * Get the markup to display info for a given user.
+ * @param {Object} user - An user with fullname, email address, phone & website.
+ * @returns {Object} Two HTMLElement: title and body.
+ */
 function getUserInfoTemplate(user) {
   const fullName = document.createElement("h2");
   const userDetails = document.createElement("dl");
@@ -77,6 +96,10 @@ function getUserInfoTemplate(user) {
   };
 }
 
+/**
+ * Print the info for a given user.
+ * @param {Integer} userId - The user id.
+ */
 async function printUserInfo(userId) {
   const api = `https://jsonplaceholder.typicode.com/users/${userId}`;
   const user = await fetchData(api).then((data) => data);
@@ -87,6 +110,11 @@ async function printUserInfo(userId) {
     : userInfo.append(userInfoTemplate.title, userInfoTemplate.body);
 }
 
+/**
+ * Print the user info on click.
+ * @param {MouseEvent} e - The click event.
+ * @param {NodeList} links - The users links.
+ */
 function handleClick(e, links) {
   e.preventDefault();
   const userId = e.target.id.split("user-")[1];
@@ -99,6 +127,9 @@ function handleClick(e, links) {
   e.target.classList.add("active");
 }
 
+/**
+ * Listen all users links.
+ */
 function listen() {
   const usersLinks = document.querySelectorAll(".users-list__link");
   for (let i = 0; i < usersLinks.length; i++) {
@@ -107,6 +138,9 @@ function listen() {
   }
 }
 
+/**
+ * Init the app.
+ */
 async function init() {
   const api = "https://jsonplaceholder.typicode.com/users";
   const users = await fetchData(api).then((data) => data);
