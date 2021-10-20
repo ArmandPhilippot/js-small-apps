@@ -46,15 +46,57 @@ body {
 .users,
 .user-info {
   border: 2px solid hsl(219, 64%, 35%);
-  padding: 1rem;
 }
 
 .users {
   flex: 1 1 40ch;
+  padding: 1rem 0;
+}
+
+.users__title,
+.users__instructions {
+  padding: 0 1rem;
+}
+
+.users-list {
+  list-style-type: none;
+  margin-top: 1rem;
+}
+
+.users-list__link {
+  display: block;
+  padding: 0.2rem 1rem;
+  color: hsl(219, 64%, 35%);
+}
+
+.users-list__link:hover,
+.users-list__link:focus {
+  background: hsl(219, 64%, 35%);
+  color: #fff;
+}
+
+.users-list__link:active {
+  text-decoration: none;
+}
+
+.users-list__link.active {
+  background: hsl(219, 64%, 25%);
+  color: #fff;
+  text-decoration: none;
 }
 
 .user-info {
   flex: 1 1 80ch;
+  padding: 1rem;
+}
+
+.user-info__title {
+  margin-bottom: 1rem;
+}
+
+.user-info__label {
+  font-weight: 600;
+  margin-top: 1rem;
 }
 
 .copyright {
