@@ -1,9 +1,10 @@
 let isRunning = false;
+let intervalId;
 
 function isHexFormat(value) {
   const hexSymbols = "0123456789ABCDEF";
   const hexArray = value.split("");
-  if (hexArray.length < 2) return false;
+  if (hexArray.length !== 2) return false;
   if (!hexSymbols.includes(hexArray[0].toUpperCase())) return false;
   if (!hexSymbols.includes(hexArray[1].toUpperCase())) return false;
   return true;
@@ -58,6 +59,25 @@ function setPreview(ui) {
   }
 }
 
+function* getColor(color, increment) {
+  let nextColor = color;
+  yield nextColor;
+
+  while (true) {
+    if (nextColor + increment > 255) {
+      nextColor = nextColor - 255 + increment;
+    } else {
+      nextColor = nextColor + increment;
+    }
+
+    yield nextColor;
+  }
+}
+
+function getNewColor(red, green, blue) {
+  return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
+}
+
 function start(ui) {
   const red = ui.colors.red.value;
   const green = ui.colors.green.value;
@@ -68,6 +88,22 @@ function start(ui) {
     ui.button.textContent = isRunning ? "Stop" : "Start";
   } else {
     notify("Colors are not correctly set.");
+  }
+
+  const redGenerator = getColor(parseInt(red, 16), 5);
+  const greenGenerator = getColor(parseInt(green, 16), 5);
+  const blueGenerator = getColor(parseInt(blue, 16), 5);
+
+  if (isRunning) {
+    intervalId = setInterval(() => {
+      const nextRed = redGenerator.next().value;
+      const nextGreen = greenGenerator.next().value;
+      const nextBlue = blueGenerator.next().value;
+      const newColor = getNewColor(nextRed, nextGreen, nextBlue);
+      updatePreviewColor(newColor);
+    }, 250);
+  } else {
+    clearInterval(intervalId);
   }
 }
 
