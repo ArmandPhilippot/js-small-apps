@@ -1,7 +1,7 @@
 let isRunning = false;
 let intervalId;
 
-function isHexFormat(value) {
+function isValidHex(value) {
   const hexSymbols = "0123456789ABCDEF";
   const hexArray = value.split("");
   if (hexArray.length !== 2) return false;
@@ -25,17 +25,17 @@ function notify(msg) {
 function areColorsReady(red, green, blue) {
   if (!red || !green || !blue) return false;
 
-  if (!isHexFormat(red)) {
+  if (!isValidHex(red)) {
     notify("Red is not hexadecimal.");
     return false;
   }
 
-  if (!isHexFormat(green)) {
+  if (!isValidHex(green)) {
     notify("Green is not hexadecimal.");
     return false;
   }
 
-  if (!isHexFormat(blue)) {
+  if (!isValidHex(blue)) {
     notify("Blue is not hexadecimal.");
     return false;
   }
@@ -74,7 +74,7 @@ function* getColor(color, increment) {
   }
 }
 
-function getNewColor(red, green, blue) {
+function getNexHexColor(red, green, blue) {
   return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
 }
 
@@ -102,7 +102,7 @@ function start(ui) {
       const nextRed = redGenerator.next().value;
       const nextGreen = greenGenerator.next().value;
       const nextBlue = blueGenerator.next().value;
-      const newColor = getNewColor(nextRed, nextGreen, nextBlue);
+      const newColor = getNexHexColor(nextRed, nextGreen, nextBlue);
       updatePreviewColor(newColor);
     }, 250);
   } else {
