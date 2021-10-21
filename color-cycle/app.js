@@ -78,6 +78,16 @@ function getNexHexColor(red, green, blue) {
   return `#${red.toString(16)}${green.toString(16)}${blue.toString(16)}`;
 }
 
+function toggleInputs(ui) {
+  ui.colors.red.disabled = isRunning;
+  ui.colors.green.disabled = isRunning;
+  ui.colors.blue.disabled = isRunning;
+  ui.increments.red.disabled = isRunning;
+  ui.increments.green.disabled = isRunning;
+  ui.increments.blue.disabled = isRunning;
+  ui.interval.disabled = isRunning;
+}
+
 function start(ui) {
   const red = ui.colors.red.value;
   const green = ui.colors.green.value;
@@ -99,6 +109,7 @@ function start(ui) {
   const timing = ui.interval.value;
 
   if (isRunning) {
+    toggleInputs(ui);
     intervalId = setInterval(() => {
       const nextRed = redGenerator.next().value;
       const nextGreen = greenGenerator.next().value;
@@ -107,6 +118,7 @@ function start(ui) {
       updatePreviewColor(newColor);
     }, timing);
   } else {
+    toggleInputs(ui);
     clearInterval(intervalId);
   }
 }
