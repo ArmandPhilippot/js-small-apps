@@ -90,9 +90,12 @@ function start(ui) {
     notify("Colors are not correctly set.");
   }
 
-  const redGenerator = getColor(parseInt(red, 16), 5);
-  const greenGenerator = getColor(parseInt(green, 16), 5);
-  const blueGenerator = getColor(parseInt(blue, 16), 5);
+  const redIncrement = Number(ui.increments.red.value);
+  const greenIncrement = Number(ui.increments.green.value);
+  const blueIncrement = Number(ui.increments.blue.value);
+  const redGenerator = getColor(parseInt(red, 16), redIncrement);
+  const greenGenerator = getColor(parseInt(green, 16), greenIncrement);
+  const blueGenerator = getColor(parseInt(blue, 16), blueIncrement);
 
   if (isRunning) {
     intervalId = setInterval(() => {
@@ -127,9 +130,9 @@ function init() {
       blue: document.getElementById("color-blue"),
     },
     increments: {
-      red: document.getElementById("color-red"),
-      green: document.getElementById("color-green"),
-      blue: document.getElementById("color-blue"),
+      red: document.getElementById("increment-red"),
+      green: document.getElementById("increment-green"),
+      blue: document.getElementById("increment-blue"),
     },
   };
 
