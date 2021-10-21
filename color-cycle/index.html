@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Cycle</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="body">
+    <header class="header">
+      <h1 class="branding">Color Cycle</h1>
+    </header>
+    <main class="main">
+      <div class="color-cycle">
+        <div class="color-cycle__preview">
+          <div class="preview"></div>
+          <button class="btn" type="button">Start</button>
+        </div>
+        <form action="" class="color-cycle__settings form">
+          <fieldset class="form__fieldset">
+            <legend class="form__legend">Hex Color</legend>
+            <div class="form__item">
+              <label for="color-red" class="form__label">Red</label
+              ><input
+                type="text"
+                name="color-red"
+                id="color-red"
+                class="form__input"
+                size="2"
+                value="FF"
+              />
+            </div>
+            <div class="form__item">
+              <label for="color-green" class="form__label">Green</label
+              ><input
+                type="text"
+                name="color-green"
+                id="color-green"
+                class="form__input"
+                size="2"
+                value="FF"
+              />
+            </div>
+            <div class="form__item">
+              <label for="color-blue" class="form__label">Blue</label
+              ><input
+                type="text"
+                name="color-blue"
+                id="color-blue"
+                class="form__input"
+                size="2"
+                value="FF"
+              />
+            </div>
+          </fieldset>
+          <fieldset class="form__fieldset">
+            <legend class="form__legend">Increment</legend>
+            <div class="form__item">
+              <label for="increment-red" class="form__label">Red</label
+              ><input
+                type="number"
+                name="increment-red"
+                id="increment-red"
+                class="form__input"
+                size="2"
+                value="0"
+              />
+            </div>
+            <div class="form__item">
+              <label for="increment-green" class="form__label">Green</label
+              ><input
+                type="number"
+                name="increment-green"
+                id="increment-green"
+                class="form__input"
+                size="2"
+                value="0"
+              />
+            </div>
+            <div class="form__item">
+              <label for="increment-blue" class="form__label">Blue</label
+              ><input
+                type="number"
+                name="increment-blue"
+                id="increment-blue"
+                class="form__input"
+                size="2"
+                value="0"
+              />
+            </div>
+          </fieldset>
+          <fieldset class="form__fieldset">
+            <legend class="form__legend">Time</legend>
+            <div class="form__item">
+              <label for="time-interval" class="form__label"
+                >Interval (ms)</label
+              >
+              <input
+                type="range"
+                name="time-interval"
+                id="time-interval"
+                min="1"
+                max="100"
+                value="25"
+              />
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </main>
+    <footer class="footer">
+      <p class="copyright">Color Cycle. MIT 2021. Armand Philippot.</p>
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>
