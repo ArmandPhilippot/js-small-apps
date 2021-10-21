@@ -96,6 +96,7 @@ function start(ui) {
   const redGenerator = getColor(parseInt(red, 16), redIncrement);
   const greenGenerator = getColor(parseInt(green, 16), greenIncrement);
   const blueGenerator = getColor(parseInt(blue, 16), blueIncrement);
+  const timing = ui.interval.value;
 
   if (isRunning) {
     intervalId = setInterval(() => {
@@ -104,7 +105,7 @@ function start(ui) {
       const nextBlue = blueGenerator.next().value;
       const newColor = getNexHexColor(nextRed, nextGreen, nextBlue);
       updatePreviewColor(newColor);
-    }, 250);
+    }, timing);
   } else {
     clearInterval(intervalId);
   }
@@ -134,6 +135,7 @@ function init() {
       green: document.getElementById("increment-green"),
       blue: document.getElementById("increment-blue"),
     },
+    interval: document.getElementById("time-interval"),
   };
 
   setPreview(ui);
