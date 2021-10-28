@@ -22,15 +22,15 @@ function getUserPreviewId(id) {
   return userId;
 }
 
-function fillPreview(event) {
-  const userId = getUserPreviewId(event.target.id);
+function fillPreview(target) {
+  const userId = getUserPreviewId(target.id);
   if (userId) {
     const dest = document.getElementById(userId);
-    dest.textContent = event.target.value;
+    dest.textContent = target.value;
   }
 }
 
-function handleIABadge(target) {
+function toggleIABadge(target) {
   const userId = getUserPreviewId(target.id);
   if (userId) {
     const dest = document.getElementById(userId);
@@ -76,20 +76,26 @@ function listen() {
   const checkboxP2IA = document.getElementById("player2-ia");
   const inputMaxRound = document.getElementById("round-number");
   const registerBtn = document.querySelector(".form__submit");
-  inputP1Name.addEventListener("change", fillPreview);
-  inputP2Name.addEventListener("change", fillPreview);
+
+  if (inputP1Name.value) fillPreview(inputP1Name);
+  if (inputP2Name.value) fillPreview(inputP2Name);
+  if (checkboxP1IA.checked) toggleIABadge(checkboxP1IA);
+  if (checkboxP2IA.checked) toggleIABadge(checkboxP2IA);
+
+  inputP1Name.addEventListener("keyup", (e) => fillPreview(e.target));
+  inputP2Name.addEventListener("keyup", (e) => fillPreview(e.target));
   checkboxP1IA.addEventListener("change", (event) => {
-    handleIABadge(event.target);
+    toggleIABadge(event.target);
     if (checkboxP2IA.checked && event.target.checked) {
       checkboxP2IA.checked = false;
-      handleIABadge(checkboxP2IA);
+      toggleIABadge(checkboxP2IA);
     }
   });
   checkboxP2IA.addEventListener("change", (event) => {
-    handleIABadge(event.target);
+    toggleIABadge(event.target);
     if (checkboxP1IA.checked && event.target.checked) {
       checkboxP1IA.checked = false;
-      handleIABadge(checkboxP1IA);
+      toggleIABadge(checkboxP1IA);
     }
   });
   registerBtn.addEventListener("click", (event) => {
