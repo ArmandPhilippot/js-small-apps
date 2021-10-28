@@ -1,129 +1,74 @@
-let numberStr = "";
-let lastNumber = "";
-let operation = "";
-let lastResult;
-let lastInput = [];
-const inputHistory = [];
-const operators = ["+", "-", "/", "*"];
+const appHistory = ["0"];
 
 /**
- * Check if the provided string is an operator.
- * @param {String} string - The string to test.
- * @returns True if it is an operator; false otherwise.
+ * Check if a value is numeric.
+ * @param {String} value - A value to test.
+ * @returns {Boolean} True if value is numeric; false otherwise.
  */
-function isOperator(string) {
-  const operatorIndex = operators.findIndex((operator) => operator === string);
-  return operatorIndex === -1 ? false : true;
+function isNumeric(value) {
+  return !isNaN(value);
 }
 
 /**
- * Check if the provided string represents a decimal number.
- * @param {String} string - The string to test.
- * @returns True if the string represents a decimal number.
+ * Check if a value is an operation (+, -, *, /, =).
+ * @param {String} value - A value to test.
+ * @returns {Boolean} True if value is an operation; false otherwise.
  */
-function isDecimal(string) {
-  const dotIndex = string.indexOf(".");
-  return dotIndex === -1 ? false : true;
+function isOperation(value) {
+  return "+-*/=".includes(value);
 }
 
 /**
- * Display a value in calculator display.
- * @param {String} value - The value to display in the DOM.
- */
-function updateDisplay(value) {
-  const display = document.querySelector(".calculator__display");
-  display.textContent = value;
-}
-
-/**
- * Check if the string exceeds the limit of 8 characters.
- * @param {String} string - The string to test.
+ * Check if the value exceeds the limit of 8 characters.
+ * @param {String} value - The value to test.
  * @returns True if the length is greater than 8; false otherwise.
  */
-function isDigitsLimitReached(string) {
-  const digitsPart = string.split(".")[0];
+function isDigitsLimitReached(value) {
+  const digitsPart = value.split(".")[0];
   return digitsPart?.length > 8 ? true : false;
 }
 
 /**
  * Check if the decimal part exceeds the limit of 3 characters.
- * @param {String} string - The string to test.
+ * @param {String} value - The value to test.
  * @returns True if the decimal part is greater than 3; false otherwise.
  */
-function isDecimalLimitReached(string) {
-  const decimalPart = string.split(".")[1];
+function isDecimalLimitReached(value) {
+  const decimalPart = value.split(".")[1];
   return decimalPart?.length > 3 ? true : false;
 }
 
 /**
- * Check if the clicked button represents the plus/minus sign.
- * @param {String} id - The button id.
- * @returns True if the clicked button represents plus/minus sign.
+ * Retrieve the last history value.
+ * @returns {String} The last history input.
  */
-function isNegativePositive(id) {
-  return id === "sign" ? true : false;
+function getLastHistoryInput() {
+  return appHistory.slice(-1)[0];
 }
 
 /**
- * Check if the string represents a negative number.
- * @param {String} string - The string to test.
- * @returns True if the string starts with a minus sign; false otherwise.
+ * Update the calculator display.
+ * @param {String} value - The value to print.
  */
-function isNegativeNumber(string) {
-  return string.startsWith("-");
-}
+function updateDisplay(value) {
+  const display = document.querySelector(".calculator__display");
 
-/**
- * Check if the represented number starts with a 0.
- * @param {String} string The string to test.
- * @returns True if the string starts with a 0; false otherwise.
- */
-function hasLeadingZero(string) {
-  if (isNegativeNumber(string) && string.charAt(1) === "0") return true;
-  if (string.startsWith("0")) return true;
-  return false;
-}
-
-/**
- * Compute the provided number.
- * @param {Object} target - The button target.
- * @returns {void}
- */
-function handleDigits(target) {
-  const isDecimalInput = target.textContent.trim() === ".";
-
-  if (isNegativeNumber(numberStr) && hasLeadingZero(numberStr)) {
-    numberStr = numberStr.replace("0", "");
-  }
-  if (isDecimalInput && isDecimal(numberStr)) return;
-  if (!numberStr && isDecimalInput) numberStr = 0;
-  if (isNegativePositive(target.id)) {
-    if (isNegativeNumber(numberStr)) {
-      numberStr = numberStr.replace("-", "");
-    } else {
-      numberStr = numberStr ? `-${numberStr}` : "-0";
-    }
+  if (isDigitsLimitReached(value) || isDecimalLimitReached(value)) {
+    display.textContent = "ERR";
   } else {
-    numberStr += target.textContent.trim();
+    display.textContent = value;
   }
-  if (isDigitsLimitReached(numberStr) || isDecimalLimitReached(numberStr)) {
-    numberStr = numberStr.slice(0, -1);
-  }
-  inputHistory.push(numberStr);
-  updateDisplay(numberStr);
 }
 
 /**
- * Calculate the operation between two numbers.
- * @param {Number} number1 - The left part of the operation.
- * @param {Number} number2 - The second part of the operation.
- * @param {String} operation - The current operation.
- * @returns {Number} The result.
+ * Calculate the result of an operation.
+ * @param {Number} number1 - The left number of operation.
+ * @param {Number} number2 - The right number of operation.
+ * @param {String} operation - An operation (+, -, *, /).
+ * @returns {Number} The operation result.
  */
 function calculate(number1, number2, operation) {
-  let result = 0;
-
-  if (!operation) return number2;
+  let result;
 
   switch (operation) {
     case "+":
@@ -132,12 +77,11 @@ function calculate(number1, number2, operation) {
     case "-":
       result = number1 - number2;
       break;
-    case "/":
-      result = number1 / number2;
-      break;
     case "*":
       result = number1 * number2;
       break;
+    case "/":
+      result = number1 / number2;
     default:
       break;
   }
@@ -146,104 +90,176 @@ function calculate(number1, number2, operation) {
 }
 
 /**
- * Print the operation result.
+ * Get the result of an operation.
+ * @returns {Number} The operation result.
  */
-function printResult() {
-  const number1 = Number(lastNumber);
-  const number2 = Number(numberStr);
-  numberStr = calculate(number1, number2, operation).toString();
-  lastResult = numberStr;
-  lastNumber = "";
-  isDigitsLimitReached(numberStr) || isDecimalLimitReached(numberStr)
-    ? updateDisplay("ERR")
-    : updateDisplay(numberStr);
+function getResult() {
+  const historyCopy = appHistory.slice(0);
+  const number2 = Number(historyCopy.pop());
+  const operation = historyCopy.pop();
+  const number1 = Number(historyCopy.pop());
+  const result = calculate(number1, number2, operation);
+
+  return result;
 }
 
 /**
- * Handle the different operations.
- * @param {Object} target - The button target.
+ * Handle digit input.
+ * @param {String} value - The digit value.
  */
-function handleOperation(target) {
-  inputHistory.push(target.textContent.trim());
-  if (target.id === "operation-equal") {
-    printResult();
+function handleDigits(value) {
+  const lastInput = getLastHistoryInput();
+  const beforeLastInput = appHistory.slice(-2)[0];
+  let newInput;
+
+  if (isNaN(lastInput) || beforeLastInput === "=") {
+    newInput = value;
   } else {
-    if (lastNumber && numberStr) printResult();
-    operation = target.textContent.trim();
-    lastNumber = numberStr;
+    appHistory.pop();
+    newInput = lastInput === "0" ? value : `${lastInput}${value}`;
   }
-  numberStr = "";
+
+  if (isDigitsLimitReached(newInput) || isDecimalLimitReached(newInput)) {
+    newInput = newInput.slice(0, -1);
+  }
+
+  appHistory.push(newInput);
+  updateDisplay(newInput);
+}
+
+/**
+ * Handle operation input.
+ * @param {String} value - The operation.
+ * @returns {void}
+ */
+function handleOperation(value) {
+  const lastInput = getLastHistoryInput();
+
+  if (isOperation(lastInput)) return;
+
+  const result = getResult();
+
+  if (result) {
+    appHistory.push("=");
+    appHistory.push(`${result}`);
+    updateDisplay(`${result}`);
+  }
+
+  if (value !== "=") appHistory.push(value);
+}
+
+/**
+ * Handle number sign.
+ * @returns {void}
+ */
+function handleNumberSign() {
+  const lastInput = getLastHistoryInput();
+  if (isNaN(lastInput)) return;
+
+  const sign = Math.sign(lastInput);
+  if (sign === 0) return;
+
+  appHistory.pop();
+  let newInput;
+
+  if (sign === 1) {
+    newInput = -Math.abs(lastInput);
+  } else if (sign === -1) {
+    newInput = Math.abs(lastInput);
+  }
+
+  appHistory.push(`${newInput}`);
+  updateDisplay(`${newInput}`);
+}
+
+/**
+ * Handle decimal.
+ */
+function handleDecimal() {
+  const lastInput = getLastHistoryInput();
+
+  if (lastInput.indexOf(".") === -1) {
+    appHistory.pop();
+    const newInput = `${lastInput}.`;
+    appHistory.push(newInput);
+    updateDisplay(newInput);
+  }
+}
+
+/**
+ * Clear the last input.
+ */
+function clear() {
+  appHistory.pop();
+
+  if (appHistory.length === 0) {
+    appHistory.push("0");
+    updateDisplay("0");
+  } else {
+    const reversedHistory = appHistory.slice(0).reverse();
+    const lastNumericInput = reversedHistory.find((input) => isNumeric(input));
+    updateDisplay(lastNumericInput);
+
+    let lastInput = getLastHistoryInput();
+
+    while (lastNumericInput !== lastInput) {
+      appHistory.pop();
+      lastInput = getLastHistoryInput();
+    }
+  }
 }
 
 /**
  * Reset the calculator.
  */
 function clearAll() {
-  numberStr = "";
-  lastNumber = "";
-  lastResult = undefined;
-  operation = "";
-  inputHistory.length = 0;
-  updateDisplay(0);
+  appHistory.length = 0;
+  appHistory.push("0");
+  updateDisplay("0");
 }
 
 /**
- * Undo the previous input.
+ * Dispatch the event to the right function.
+ * @param {MouseEvent} e - The click event.
  */
-function clear() {
-  const lastInput = inputHistory.pop();
-  if (isOperator(lastInput)) {
-    operation = "";
-    numberStr = lastResult ?? lastNumber;
-    lastNumber = "";
-    updateDisplay(numberStr);
-  } else if (lastInput === "=") {
-    clearAll();
-  } else {
-    if (lastNumber) {
-      numberStr = "";
-      updateDisplay(lastNumber);
-    } else if (lastResult) {
-      numberStr = lastResult;
-      lastResult = undefined;
-      updateDisplay(numberStr);
-    } else {
-      numberStr = "";
-      updateDisplay(0);
-    }
+function dispatch(e) {
+  const id = e.target.id;
+  const type = id.split("-")[0];
+  const value = e.target.textContent.trim();
+
+  switch (type) {
+    case "digit":
+      handleDigits(value);
+      break;
+    case "operation":
+      handleOperation(value);
+      break;
+    case "sign":
+      handleNumberSign();
+      break;
+    case "dot":
+      handleDecimal();
+      break;
+    case "clear":
+      clear();
+      break;
+    case "clearall":
+      clearAll();
+      break;
+    default:
+      break;
   }
 }
 
 /**
- * Determine wether clear all or clear is needed.
- * @param {Object} target - The button target.
+ * Listen all calculator buttons.
  */
-function handleClear(target) {
-  if (target.id === "clear-all") clearAll();
-  if (target.id === "clear") clear();
+function listen() {
+  const buttons = document.getElementsByClassName("btn");
+  const buttonsArray = Array.from(buttons);
+  buttonsArray.forEach((btn) => {
+    btn.addEventListener("click", dispatch);
+  });
 }
 
-/**
- * Determine which function to call on click.
- * @param {Object} e - The button event.
- */
-function handleClick(e) {
-  const targetClasses = e.target.classList;
-  if (targetClasses.contains("btn--digits")) handleDigits(e.target);
-  if (targetClasses.contains("btn--operation")) handleOperation(e.target);
-  if (targetClasses.contains("btn--clear")) handleClear(e.target);
-}
-
-/**
- * Listen the calculator buttons.
- */
-function listenButtons() {
-  const buttons = document.querySelectorAll(".btn");
-
-  for (let i = 0; i < buttons.length; i++) {
-    const button = buttons[i];
-    button.addEventListener("click", handleClick);
-  }
-}
-
-listenButtons();
+listen();
