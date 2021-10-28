@@ -1,13 +1,5 @@
 import RPSGame from "./lib/class-rps-game.js";
 
-const inputP1Name = document.getElementById("player1-name");
-const inputP2Name = document.getElementById("player2-name");
-const checkboxP1IA = document.getElementById("player1-ia");
-const checkboxP2IA = document.getElementById("player2-ia");
-const maxRound = document.getElementById("round-number");
-const registerBtn = document.querySelector(".form__submit");
-const players = [];
-
 function createPreview() {
   const preview = document.querySelector(".preview__content");
   const player1Wrapper = document.createElement("div");
@@ -20,53 +12,35 @@ function createPreview() {
   preview.append(player1Wrapper, vsWrapper, player2Wrapper);
 }
 
-function getDestId(id) {
-  let destID;
+function getUserPreviewId(id) {
+  let userId;
   if (id === "player1-name" || id === "player1-ia") {
-    destID = "player1Wrapper";
+    userId = "player1Wrapper";
   } else if (id === "player2-name" || id === "player2-ia") {
-    destID = "player2Wrapper";
+    userId = "player2Wrapper";
   }
-  return destID;
+  return userId;
 }
 
 function fillPreview(event) {
-  const destID = getDestId(event.target.id);
-  if (destID) {
-    const dest = document.getElementById(destID);
+  const userId = getUserPreviewId(event.target.id);
+  if (userId) {
+    const dest = document.getElementById(userId);
     dest.textContent = event.target.value;
   }
 }
 
 function handleIABadge(target) {
-  const destID = getDestId(target.id);
-  if (destID) {
-    const dest = document.getElementById(destID);
+  const userId = getUserPreviewId(target.id);
+  if (userId) {
+    const dest = document.getElementById(userId);
     target.checked
       ? dest.classList.add("ia-badge")
       : dest.classList.remove("ia-badge");
   }
 }
 
-createPreview();
-inputP1Name.addEventListener("change", fillPreview);
-inputP2Name.addEventListener("change", fillPreview);
-checkboxP1IA.addEventListener("change", (event) => {
-  handleIABadge(event.target);
-  if (checkboxP2IA.checked && event.target.checked) {
-    checkboxP2IA.checked = false;
-    handleIABadge(checkboxP2IA);
-  }
-});
-checkboxP2IA.addEventListener("change", (event) => {
-  handleIABadge(event.target);
-  if (checkboxP1IA.checked && event.target.checked) {
-    checkboxP1IA.checked = false;
-    handleIABadge(checkboxP1IA);
-  }
-});
-
-function initApp() {
+function startGame(player1, player2, maxRound) {
   const register = document.querySelector(".register");
   const game = document.querySelector(".game");
   const buttons = {
@@ -84,22 +58,52 @@ function initApp() {
     value: document.getElementById("player2score"),
   };
   const messages = document.querySelector(".message-board");
-  const maxRoundValue = maxRound.value;
-  const player1 = { username: inputP1Name.value, ia: checkboxP1IA };
-  const player2 = { username: inputP2Name.value, ia: checkboxP2IA };
+  const players = [];
   players.push(player1);
   players.push(player2);
 
   const app = new RPSGame(players, buttons, p1Scoring, p2Scoring, messages);
   app.init();
-  app.maxRound = maxRoundValue && maxRoundValue !== "0" ? maxRoundValue : "";
-  app.getPlayer(1).ia = checkboxP1IA.checked ? true : false;
-  app.getPlayer(2).ia = checkboxP2IA.checked ? true : false;
+  app.maxRound = maxRound && maxRound !== "0" ? maxRound : "";
   register.style.display = "none";
   game.style.display = "flex";
 }
 
-registerBtn.addEventListener("click", (event) => {
-  event.preventDefault();
-  initApp();
-});
+function listen() {
+  const inputP1Name = document.getElementById("player1-name");
+  const inputP2Name = document.getElementById("player2-name");
+  const checkboxP1IA = document.getElementById("player1-ia");
+  const checkboxP2IA = document.getElementById("player2-ia");
+  const inputMaxRound = document.getElementById("round-number");
+  const registerBtn = document.querySelector(".form__submit");
+  inputP1Name.addEventListener("change", fillPreview);
+  inputP2Name.addEventListener("change", fillPreview);
+  checkboxP1IA.addEventListener("change", (event) => {
+    handleIABadge(event.target);
+    if (checkboxP2IA.checked && event.target.checked) {
+      checkboxP2IA.checked = false;
+      handleIABadge(checkboxP2IA);
+    }
+  });
+  checkboxP2IA.addEventListener("change", (event) => {
+    handleIABadge(event.target);
+    if (checkboxP1IA.checked && event.target.checked) {
+      checkboxP1IA.checked = false;
+      handleIABadge(checkboxP1IA);
+    }
+  });
+  registerBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    const player1 = { username: inputP1Name.value, ia: checkboxP1IA.checked };
+    const player2 = { username: inputP2Name.value, ia: checkboxP2IA.checked };
+    const maxRound = inputMaxRound.value;
+    startGame(player1, player2, maxRound);
+  });
+}
+
+function init() {
+  createPreview();
+  listen();
+}
+
+init();
