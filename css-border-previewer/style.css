@@ -18,16 +18,21 @@ body {
 }
 
 .header,
-.preview,
-.settings,
-.result,
-.footer {
-  width: min(calc(100vw - 2rem), 80ch);
+.footer,
+.result {
+  width: min(calc(100vw - 2rem), calc(1200px - 2rem));
   margin-left: auto;
   margin-right: auto;
 }
 
-@media screen and (min-width: 1440px) {
+.preview,
+.settings {
+  width: min(calc(100vw - 2rem), calc(1200px / 2 - 2rem));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 1200px) {
   .preview {
     margin-right: 0;
   }
@@ -69,19 +74,21 @@ body {
 }
 
 .result {
-  flex: 0 0 min(calc(100vw - 2rem), 160ch);
   max-width: 100%;
 }
 
 .result__pre {
   background: #333;
   color: #fff;
-  width: min(calc(100vw - 2rem), calc(80ch - 4rem));
   min-height: 20rem;
   margin: 1rem auto;
   padding: 0 1rem;
   overflow-x: auto;
   tab-size: 4;
+}
+
+.result .btn {
+  margin: auto;
 }
 
 @media screen and (min-width: 1440px) {
